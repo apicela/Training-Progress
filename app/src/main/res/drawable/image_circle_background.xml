@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <corners android:radius="60dp" /> <!-- Ajuste o valor de radius para controlar o arredondamento -->
+    <solid android:color="@android:color/transparent" /> <!-- Cor de fundo do retângulo, substitua conforme necessário -->
+</shape>
