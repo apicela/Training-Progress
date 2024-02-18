@@ -91,6 +91,8 @@
 
 
         </LinearLayout>
+
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_back"
             android:layout_width="match_parent"
@@ -821,19 +823,24 @@ android:gravity="center"    >
         android:src="@drawable/home_button"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-></de.hdodenhof.circleimageview.CircleImageView>
+        android:background="@drawable/image_circle_background"
+        ></de.hdodenhof.circleimageview.CircleImageView>
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/exercise"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"></de.hdodenhof.circleimageview.CircleImageView>
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/image_circle_background"
+        ></de.hdodenhof.circleimageview.CircleImageView>
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/calendar"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"></de.hdodenhof.circleimageview.CircleImageView>
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/image_circle_background"
+        ></de.hdodenhof.circleimageview.CircleImageView>
 </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

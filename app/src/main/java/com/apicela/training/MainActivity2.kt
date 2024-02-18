@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import android.widget.ListView
-import java.util.Date
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
         calendarView = findViewById(R.id.calendarView)
         listView = findViewById(R.id.listView)
