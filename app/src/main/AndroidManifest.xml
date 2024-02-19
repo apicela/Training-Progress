@@ -16,7 +16,7 @@
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ExerciseActivity"
             android:exported="true">
             <!-- Removendo android:label para ocultar o nome do ícone de lançamento -->
             <intent-filter>

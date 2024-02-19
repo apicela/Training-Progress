@@ -56,8 +56,6 @@ class UtilsComponents {
             )
             layoutParams.marginEnd = context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
             layoutParams.marginStart = context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
-
-
             circleImageView.layoutParams = layoutParams
 
             // Set src and background using resources from style (for clarity)
@@ -68,7 +66,6 @@ class UtilsComponents {
         }
 
         fun createExerciseLine(context: Context, text: String) : LinearLayout{
-
             val linearLayout = createLinearLayoutForExercise(context)
              createCircleImageView(context, linearLayout)
             createTextView(context, text, linearLayout)

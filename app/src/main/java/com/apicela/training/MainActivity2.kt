@@ -1,7 +1,7 @@
 package com.apicela.training
 
 import androidx.appcompat.app.AppCompatActivity
-import  com.apicela.training.models.Exercises
+import  com.apicela.training.models.Exercise
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
@@ -25,7 +25,7 @@ class MainActivity2 : AppCompatActivity() {
         listView = findViewById(R.id.listView)
 
         // Inicializar a lista de itens
-        val items = mutableListOf<Exercises>()
+        val items = mutableListOf<Exercise>()
 
         // Configurar o adaptador da lista
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items.map { it.exerciseName })

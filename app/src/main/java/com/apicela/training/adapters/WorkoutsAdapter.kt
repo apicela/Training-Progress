@@ -3,15 +3,14 @@ package com.apicela.training.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.R
-import com.apicela.training.models.Exercises
+import com.apicela.training.models.Exercise
 
 class WorkoutsAdapter  : RecyclerView.Adapter<WorkoutsAdapter.MyViewHolder>() {
 
-    private var lista: List<Exercises> = ArrayList()
-    fun setList(newList: List<Exercises>) {
+    private var lista: List<Exercise> = ArrayList()
+    fun setList(newList: List<Exercise>) {
         this.lista = newList
     }
 
