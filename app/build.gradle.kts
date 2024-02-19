@@ -63,7 +63,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
@@ -76,5 +75,6 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0") // Verifique a versão mais recente no repositório do Glide
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("androidx.appcompat:appcompat")
 
 }

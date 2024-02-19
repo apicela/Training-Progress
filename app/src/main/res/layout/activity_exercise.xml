@@ -8,15 +8,26 @@
     android:background="@color/light_black"
     android:theme="@style/Theme.Training"
     >
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:queryHint="Pesquisar..."
+        android:iconifiedByDefault="false"
+        app:layout_constraintTop_toTopOf="@id/defaulwt"
+        />
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="685dp"
         android:layout_weight="0"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/default_bar"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         >
         <LinearLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

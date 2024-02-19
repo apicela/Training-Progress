@@ -19,13 +19,6 @@
             android:id="@+id/defaultLayout"
             style="@style/linearLayoutExercise"
             >
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:layout_width="45dp"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:background="@drawable/circle_bg"-->
-<!--                android:src="@drawable/muscle_group_abs"-->
-<!--               />-->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/supino_jgif"
                 style="@style/ImageViewExercise"
