@@ -8,6 +8,8 @@ import android.widget.TextView
 import com.apicela.training.R
 import com.apicela.training.models.Muscles
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -55,9 +57,6 @@ class UtilsComponents {
  var url = "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
 
         fun createCircleImageView(context: Context, container: LinearLayout, appearanceModel: ShapeAppearanceModel) {
-
-
-//            circleShapeImageView.imageView = shapeAppearanceModel
             val circleImageView = ShapeableImageView(context)
             val layoutParams = LinearLayout.LayoutParams(
                 context.resources.getDimensionPixelSize(R.dimen.circle_image_width),
@@ -69,10 +68,14 @@ class UtilsComponents {
 
             circleImageView.shapeAppearanceModel  = appearanceModel
 
+            circleImageView.setOnClickListener{
+
+                    Glide.with(context)
+                        .load(R.drawable.supino_reto_barra)
+                        .into(GifDrawableImageViewTarget(circleImageView, 1));
+            }
 //
-//            Glide.with(context)
-//                .load(url)
-//                .into(circleImageView)
+
             // Set src and background using resources from style (for clarity)
             circleImageView.setBackgroundResource(R.drawable.image_circle_background) // Assuming background is a drawable
             circleImageView.setImageResource(R.drawable.supino_reto_barra)
