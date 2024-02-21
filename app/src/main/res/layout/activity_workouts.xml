@@ -41,7 +41,7 @@
             android:paddingHorizontal="15dp"
             android:textColor="@color/amarelo_personalizado"
             android:text="Adicionar novo treinamento"
-            android:background="@drawable/yellow_button"
+            android:background="@drawable/semi_black_button"
             android:gravity="center"/>
     </LinearLayout>
 

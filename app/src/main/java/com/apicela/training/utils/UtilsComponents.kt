@@ -1,13 +1,17 @@
 package com.apicela.training.utils
 
 import android.content.Context
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.compose.ui.unit.dp
-import androidx.core.view.marginStart
+
 import com.apicela.training.R
+import com.apicela.training.models.Muscles
+import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.ShapeAppearanceModel
+
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -42,14 +46,19 @@ class UtilsComponents {
             return linearLayout
         }
 
-        fun createTextView(context: Context, text: String, container : LinearLayout) {
+        fun createTextView(context: Context, text: String, container : LinearLayout, muscleType : Muscles) {
             val textView = TextView(context, null, R.style.TextViewExercise, R.style.TextViewExercise)
             textView.text = text
+            textView.tag = muscleType
             container.addView(textView)
         }
+ var url = "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
 
-        fun createCircleImageView(context: Context, container: LinearLayout) {
-            val circleImageView = CircleImageView(context, null, R.style.ImageViewExercise )
+        fun createCircleImageView(context: Context, container: LinearLayout, appearanceModel: ShapeAppearanceModel) {
+
+
+//            circleShapeImageView.imageView = shapeAppearanceModel
+            val circleImageView = ShapeableImageView(context)
             val layoutParams = LinearLayout.LayoutParams(
                 context.resources.getDimensionPixelSize(R.dimen.circle_image_width),
                 context.resources.getDimensionPixelSize(R.dimen.circle_image_width)
@@ -58,17 +67,23 @@ class UtilsComponents {
             layoutParams.marginStart = context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
             circleImageView.layoutParams = layoutParams
 
+            circleImageView.shapeAppearanceModel  = appearanceModel
+
+//
+//            Glide.with(context)
+//                .load(url)
+//                .into(circleImageView)
             // Set src and background using resources from style (for clarity)
-            circleImageView.setImageResource(R.drawable.muscle_group_abs)
             circleImageView.setBackgroundResource(R.drawable.image_circle_background) // Assuming background is a drawable
+            circleImageView.setImageResource(R.drawable.supino_reto_barra)
 
             container.addView(circleImageView)
         }
 
-        fun createExerciseLine(context: Context, text: String) : LinearLayout{
+        fun createExerciseLine(context: Context, text: String, muscleType : Muscles, appearanceModel: ShapeAppearanceModel) : LinearLayout{
             val linearLayout = createLinearLayoutForExercise(context)
-             createCircleImageView(context, linearLayout)
-            createTextView(context, text, linearLayout)
+             createCircleImageView(context, linearLayout, appearanceModel)
+            createTextView(context, text, linearLayout, muscleType)
             return linearLayout
         }
     }
