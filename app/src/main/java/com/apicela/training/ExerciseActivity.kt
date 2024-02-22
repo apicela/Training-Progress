@@ -38,7 +38,6 @@ class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
-        var url = "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         val testLayout = findViewById<LinearLayout>(R.id.testLayout)
@@ -78,7 +77,7 @@ class ExerciseActivity : AppCompatActivity() {
 
 
         for (exercise in exercises) {
-            val exerciseItem = UtilsComponents.createExerciseLine(this, exercise.exerciseName, exercise.muscleType, appearanceModel)
+            val exerciseItem = UtilsComponents.createExerciseLine(this, exercise.exerciseName, exercise.muscleType, appearanceModel, exercise.image)
             when (exercise.muscleType) {
                 Muscles.BACK -> backLayout.addView(exerciseItem)
                 Muscles.CHEST -> chestLayout.addView(exerciseItem)

@@ -45,5 +45,10 @@
         <item name="android:textColor">#FDFDFD</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+  <!-- Base application theme. -->
+    <style name="Base.Theme.Training" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 
 </resources>

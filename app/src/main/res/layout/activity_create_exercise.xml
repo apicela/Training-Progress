@@ -1,0 +1,52 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/defaulwt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_black"
+    android:theme="@style/Theme.Training"
+    >
+    <LinearLayout
+        android:id="@+id/backLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/defaulwt"
+        >
+
+        <Button
+            android:id="@+id/button_voltar"
+            android:layout_width="63dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/arrow" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="-36dp"
+            android:layout_marginTop="-1.5dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Voltar"
+            android:textColor="@color/amarelo_personalizado"
+            android:textSize="14sp"></TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end">
+
+            <Button
+                android:id="@+id/edit_voltar"
+                android:layout_width="44dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:background="@null"
+                android:drawableLeft="@drawable/edit" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

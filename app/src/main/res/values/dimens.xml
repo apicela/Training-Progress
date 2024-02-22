@@ -3,5 +3,6 @@
     <dimen name="circle_image_width">45dp</dimen>
     <dimen name="circle_image_margin_start">20dp</dimen>
     <dimen name="some_corner_radius">50%</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

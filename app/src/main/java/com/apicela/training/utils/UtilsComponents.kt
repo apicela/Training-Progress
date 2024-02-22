@@ -1,9 +1,12 @@
 package com.apicela.training.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 
 import com.apicela.training.R
 import com.apicela.training.models.Muscles
@@ -56,7 +59,7 @@ class UtilsComponents {
         }
  var url = "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
 
-        fun createCircleImageView(context: Context, container: LinearLayout, appearanceModel: ShapeAppearanceModel) {
+        fun createCircleImageView(context: Context, container: LinearLayout, appearanceModel: ShapeAppearanceModel, image : String) {
             val circleImageView = ShapeableImageView(context)
             val layoutParams = LinearLayout.LayoutParams(
                 context.resources.getDimensionPixelSize(R.dimen.circle_image_width),
@@ -68,24 +71,47 @@ class UtilsComponents {
 
             circleImageView.shapeAppearanceModel  = appearanceModel
 
-            circleImageView.setOnClickListener{
+            val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
+            // recurso encontrado
+            if(resourceId != 0){
+                Glide.with(context)
+                    .asBitmap()
+                    .load(resourceId)
+                    .into(circleImageView);
 
+                circleImageView.setOnClickListener{
                     Glide.with(context)
-                        .load(R.drawable.supino_reto_barra)
+                        .load(resourceId)
                         .into(GifDrawableImageViewTarget(circleImageView, 1));
-            }
+                }
 //
+            }    else {
+                Glide.with(context)
+                    .asBitmap()
+                    .load(image)
+                    .into(circleImageView);
+
+                circleImageView.setOnClickListener{
+                    Glide.with(context)
+                        .load(image)
+                        .into(GifDrawableImageViewTarget(circleImageView, 1));
+                }
+//
+            }
+
+
+
+
 
             // Set src and background using resources from style (for clarity)
             circleImageView.setBackgroundResource(R.drawable.image_circle_background) // Assuming background is a drawable
-            circleImageView.setImageResource(R.drawable.supino_reto_barra)
 
             container.addView(circleImageView)
         }
 
-        fun createExerciseLine(context: Context, text: String, muscleType : Muscles, appearanceModel: ShapeAppearanceModel) : LinearLayout{
+        fun createExerciseLine(context: Context, text: String, muscleType : Muscles, appearanceModel: ShapeAppearanceModel, image : String) : LinearLayout{
             val linearLayout = createLinearLayoutForExercise(context)
-             createCircleImageView(context, linearLayout, appearanceModel)
+             createCircleImageView(context, linearLayout, appearanceModel, image)
             createTextView(context, text, linearLayout, muscleType)
             return linearLayout
         }
