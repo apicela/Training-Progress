@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SearchView
@@ -35,11 +36,13 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var absCardView : CardView
     private lateinit var othersCardView : CardView
     private lateinit var appearanceModel : ShapeAppearanceModel
+    private lateinit var plusButton : ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         // layouts
         containerLinearLayout = findViewById(R.id.container)
+        plusButton = findViewById(R.id.plus_button)
         val testLayout = findViewById<LinearLayout>(R.id.testLayout)
 
         val backLayout = findViewById<LinearLayout>(R.id.backLayout)
@@ -120,6 +123,9 @@ class ExerciseActivity : AppCompatActivity() {
         }
         )
 
+        plusButton.setOnClickListener{
+            Log.d("button", "clicked")
+        }
     }
 
 

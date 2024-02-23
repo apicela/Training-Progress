@@ -48,5 +48,84 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_cliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
+
+
+        <TextView
+            android:id="@+id/auto_complete_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/pedido_field"
+            android:gravity="center"
+            android:hint="Nome do exercicio"
+            android:textColorHint="@color/amarelo_personalizado"
+            android:paddingStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/cliente_image"
+            android:layout_width="66dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-56dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/light_black_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-17dp"
+            android:text="Exercicio"
+            android:textColor="@color/amarelo_personalizado"
+           ></TextView>
+
+
+
+
+        <EditText
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/pedido_field"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:hint="Descrição adicional do exercicio"
+            android:textColorHint="@color/amarelo_personalizado"
+            android:paddingStart="15dp"
+            />
+
+        <ImageView
+            android:id="@+id/data_image"
+            android:layout_width="72dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-45dp"
+            android:src="@drawable/light_black_image"
+            />
+
+        <TextView
+            android:id="@+id/data_entrega"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginTop="-19dp"
+            android:layout_marginStart="20dp"
+            android:text="Descrição"
+            android:textColor="@color/amarelo_personalizado"
+            ></TextView>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
