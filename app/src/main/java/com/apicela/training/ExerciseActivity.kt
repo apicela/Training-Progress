@@ -4,45 +4,45 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.view.marginStart
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
 import com.apicela.training.utils.UtilsComponents
-import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
-import de.hdodenhof.circleimageview.CircleImageView
 
 class ExerciseActivity : AppCompatActivity() {
 
     val exercises = Exercise.listaExercises
     private lateinit var containerLinearLayout: LinearLayout
-    private lateinit var chestCardView : CardView
-    private lateinit var backCardView : CardView
-    private lateinit var shoulderCardView : CardView
-    private lateinit var tricepsCardView : CardView
-    private lateinit var bicepsCardView : CardView
-    private lateinit var quadricepsCardView : CardView
-    private lateinit var hamstringCardView : CardView
-    private lateinit var glutesCalvesCardView : CardView
-    private lateinit var absCardView : CardView
-    private lateinit var othersCardView : CardView
-    private lateinit var appearanceModel : ShapeAppearanceModel
-    private lateinit var plusButton : ImageButton
+    private lateinit var chestCardView: CardView
+    private lateinit var backCardView: CardView
+    private lateinit var shoulderCardView: CardView
+    private lateinit var tricepsCardView: CardView
+    private lateinit var bicepsCardView: CardView
+    private lateinit var quadricepsCardView: CardView
+    private lateinit var hamstringCardView: CardView
+    private lateinit var glutesCalvesCardView: CardView
+    private lateinit var absCardView: CardView
+    private lateinit var othersCardView: CardView
+    private lateinit var appearanceModel: ShapeAppearanceModel
+    private lateinit var plusButton: ImageButton
+    private lateinit var backButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         plusButton = findViewById(R.id.plus_button)
+        backButton = findViewById(R.id.back_button)
         val testLayout = findViewById<LinearLayout>(R.id.testLayout)
 
         val backLayout = findViewById<LinearLayout>(R.id.backLayout)
@@ -67,20 +67,26 @@ class ExerciseActivity : AppCompatActivity() {
 
         // card views
 
-        chestCardView  = findViewById(R.id.cardView_chest)
-         backCardView = findViewById(R.id.cardView_back)
-         shoulderCardView = findViewById(R.id.cardView_shoulder)
-         tricepsCardView  = findViewById(R.id.cardView_triceps)
-         bicepsCardView  = findViewById(R.id.cardView_biceps)
-          quadricepsCardView  = findViewById(R.id.cardView_quadriceps)
-         hamstringCardView = findViewById(R.id.cardView_hamstring)
-         glutesCalvesCardView  = findViewById(R.id.cardView_glutes_calves)
-          absCardView = findViewById(R.id.cardView_abs)
-         othersCardView = findViewById(R.id.cardView_others)
+        chestCardView = findViewById(R.id.cardView_chest)
+        backCardView = findViewById(R.id.cardView_back)
+        shoulderCardView = findViewById(R.id.cardView_shoulder)
+        tricepsCardView = findViewById(R.id.cardView_triceps)
+        bicepsCardView = findViewById(R.id.cardView_biceps)
+        quadricepsCardView = findViewById(R.id.cardView_quadriceps)
+        hamstringCardView = findViewById(R.id.cardView_hamstring)
+        glutesCalvesCardView = findViewById(R.id.cardView_glutes_calves)
+        absCardView = findViewById(R.id.cardView_abs)
+        othersCardView = findViewById(R.id.cardView_others)
 
 
         for (exercise in exercises) {
-            val exerciseItem = UtilsComponents.createExerciseLine(this, exercise.exerciseName, exercise.muscleType, appearanceModel, exercise.image)
+            val exerciseItem = UtilsComponents.createExerciseLine(
+                this,
+                exercise.exerciseName,
+                exercise.muscleType,
+                appearanceModel,
+                exercise.image
+            )
             when (exercise.muscleType) {
                 Muscles.BACK -> backLayout.addView(exerciseItem)
                 Muscles.CHEST -> chestLayout.addView(exerciseItem)
@@ -123,8 +129,12 @@ class ExerciseActivity : AppCompatActivity() {
         }
         )
 
-        plusButton.setOnClickListener{
+        plusButton.setOnClickListener {
             Log.d("button", "clicked")
+        }
+
+        backButton.setOnClickListener {
+            finish()
         }
     }
 
@@ -143,8 +153,8 @@ class ExerciseActivity : AppCompatActivity() {
             absCardView to 0,
             othersCardView to 0
         )
-        if(query.isNullOrBlank()){
-            cardViewVisible.forEach { it to 1  }
+        if (query.isNullOrBlank()) {
+            cardViewVisible.forEach { it to 1 }
         }
 
         for (i in 0 until containerLinearLayout.childCount) {
@@ -162,16 +172,22 @@ class ExerciseActivity : AppCompatActivity() {
                             // Verificando se o filho é um TextView
                             if (view is TextView) {
                                 // Realize as ações desejadas com o TextView encontrado
-                                val textView = view as TextView
-                                if (textView.text.contains(query, ignoreCase = true) || query.isNullOrBlank()) {
+                                val textView = view
+                                if (textView.text.contains(
+                                        query,
+                                        ignoreCase = true
+                                    ) || query.isNullOrBlank()
+                                ) {
                                     innerLayout.visibility = LinearLayout.VISIBLE
-                                    when(textView.tag){
-                                        Muscles.CHEST ->  cardViewVisible[chestCardView] = 1
+                                    when (textView.tag) {
+                                        Muscles.CHEST -> cardViewVisible[chestCardView] = 1
                                         Muscles.BACK -> cardViewVisible[backCardView] = 1
                                         Muscles.SHOULDER -> cardViewVisible[shoulderCardView] = 1
-                                        Muscles.TRICEPS ->cardViewVisible[tricepsCardView] = 1
+                                        Muscles.TRICEPS -> cardViewVisible[tricepsCardView] = 1
                                         Muscles.BICEPS -> cardViewVisible[bicepsCardView] = 1
-                                        Muscles.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
+                                        Muscles.QUADRICEPS -> cardViewVisible[quadricepsCardView] =
+                                            1
+
                                         Muscles.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
                                         Muscles.ABDOMINAL -> cardViewVisible[absCardView] = 1
                                         Muscles.OTHER -> cardViewVisible[othersCardView] = 1
@@ -185,8 +201,8 @@ class ExerciseActivity : AppCompatActivity() {
                     }
                 }
                 // apos ler tudo
-                cardViewVisible.forEach{ (muscle, value ) ->
-                    if(value == 1) {
+                cardViewVisible.forEach { (muscle, value) ->
+                    if (value == 1) {
                         muscle.visibility = CardView.VISIBLE
                     } else {
                         muscle.visibility = CardView.GONE

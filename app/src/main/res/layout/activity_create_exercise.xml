@@ -1,12 +1,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/defaulwt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_black"
-    android:theme="@style/Theme.Training"
-    >
+    tools:context=".CreateExercise"
+    android:theme="@style/Theme.Training">
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         >
 
         <Button
-            android:id="@+id/button_voltar"
+            android:id="@+id/back_button"
             android:layout_width="63dp"
             android:layout_height="48dp"
             android:background="@null"
@@ -126,6 +127,13 @@
             android:textColor="@color/amarelo_personalizado"
             ></TextView>
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADICIONAR EXERCICIO"
+        android:textColor="@color/light_black"
+        android:background="@drawable/yellow_bordered_button"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
