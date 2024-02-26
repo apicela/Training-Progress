@@ -1,5 +1,6 @@
 package com.apicela.training
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
+import com.apicela.training.utils.DataManager
 import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.gson.Gson
 
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity() : AppCompatActivity() {
 
-    val exercises = Exercise.listaExercises
+    private lateinit var exerciseList : MutableList<Exercise>
+
+
+
     private lateinit var containerLinearLayout: LinearLayout
     private lateinit var chestCardView: CardView
     private lateinit var backCardView: CardView
@@ -39,6 +45,9 @@ class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
+
+        exerciseList = intent.getSerializableExtra("exercise_list") as MutableList<Exercise>
+        
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         plusButton = findViewById(R.id.plus_button)
@@ -79,7 +88,7 @@ class ExerciseActivity : AppCompatActivity() {
         othersCardView = findViewById(R.id.cardView_others)
 
 
-        for (exercise in exercises) {
+        for (exercise in exerciseList) {
             val exerciseItem = UtilsComponents.createExerciseLine(
                 this,
                 exercise.exerciseName,
@@ -130,7 +139,9 @@ class ExerciseActivity : AppCompatActivity() {
         )
 
         plusButton.setOnClickListener {
-            Log.d("button", "clicked")
+                val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+                startActivity(intent)
+
         }
 
         backButton.setOnClickListener {

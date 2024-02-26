@@ -2,14 +2,23 @@ package com.apicela.training.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Parcelable
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import java.io.Serializable
 
-class DataManager(private val context: Context) {
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+
+object DataManager {
+    private lateinit var context: Context
+    private lateinit var sharedPreferences: SharedPreferences
     private val gson = Gson()
+
+    fun initialize(context: Context) {
+        this.context = context.applicationContext
+        sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+    }
 
     fun saveExerciseItems(items: List<Exercise>) {
         val editor = sharedPreferences.edit()
@@ -18,10 +27,10 @@ class DataManager(private val context: Context) {
         editor.apply()
     }
 
-    fun loadExerciseItems(): List<Exercise> {
+    fun loadExerciseItems(): MutableList<Exercise> {
         val json = sharedPreferences.getString("exercise_items_list", "")
         return if (json.isNullOrEmpty()) {
-            listOf()
+            Exercise.listaExercises
         } else {
             val exeriseType = object : TypeToken<List<Exercise>>() {}.type
             gson.fromJson(json, exeriseType)
@@ -35,17 +44,16 @@ class DataManager(private val context: Context) {
         editor.apply()
     }
 
-    fun loadWorkout(): List<Workout> {
+    fun loadWorkout(): MutableList<Workout> {
         val json = sharedPreferences.getString("workout_list", "")
         return if (json.isNullOrEmpty()) {
-            listOf()
+            Workout.listaExercises
         } else {
             val workoutType = object : TypeToken<List<Workout>>() {}.type
             gson.fromJson(json, workoutType)
         }
     }
 }
-
 
 // Criar uma instância do DataManager
 //val dataManager = DataManager(context)

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
@@ -24,6 +25,11 @@ class UtilsComponents {
 
     companion object {
 
+        fun getSpinnerSelectedItem(spinner: Spinner) : String{
+            val selectedIndex = spinner.selectedItemPosition
+            val spinnerItem = spinner.getItemAtPosition(selectedIndex).toString()
+            return spinnerItem;
+        }
         fun checkChildsPedidoActivity(mainLinearLayout: LinearLayout) : ViewGroup.LayoutParams?{
             for (i in 0 until mainLinearLayout.childCount) {
                 val childView = mainLinearLayout.getChildAt(i)

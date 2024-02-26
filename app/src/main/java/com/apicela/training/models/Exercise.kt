@@ -1,6 +1,9 @@
 package com.apicela.training.models
 
-data class Exercise(var exerciseName : String, var image : String, var muscleType : Muscles)
+import java.io.Serializable
+
+data class Exercise(var exerciseName : String, var image : String, var muscleType : Muscles) :
+    Serializable
 
 {
     companion object {
