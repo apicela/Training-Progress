@@ -40,14 +40,14 @@ object DataManager {
         Log.d("teste", "exercise list loaded")
     }
 
-    fun saveWorkout(workout: List<String>) {
+    fun saveWorkoutItems(workout: List<Workout>) {
         val editor = sharedPreferences.edit()
         val json = gson.toJson(workout)
         editor.putString("workout_list", json)
         editor.apply()
     }
 
-    fun loadWorkout(): MutableList<Workout> {
+    fun loadWorkoutItems(): MutableList<Workout> {
         val json = sharedPreferences.getString("workout_list", "")
         return if (json.isNullOrEmpty()) {
             Workout.listaExercises

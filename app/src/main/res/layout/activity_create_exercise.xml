@@ -61,20 +61,21 @@
 
 
         <EditText
-            android:id="@+id/workoutName"
+            android:id="@+id/exerciseNameText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/pedido_field"
-            android:hint="Nome do treinamento"
+            android:hint="Nome do exercicio"
             android:textColorHint="@color/amarelo_personalizado"
             android:paddingStart="15dp"
             android:textColor="@color/white"
             android:textSize="15dp" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:id="@+id/cliente_image"
+            android:layout_width="66dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="-56dp"
@@ -86,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="-17dp"
-            android:text="Treino"
+            android:text="Exercicio"
             android:textColor="@color/amarelo_personalizado"
            ></TextView>
 
@@ -94,7 +95,7 @@
 
 
         <EditText
-            android:id="@+id/descricaoText"
+            android:id="@+id/imageUrlText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="38dp"
