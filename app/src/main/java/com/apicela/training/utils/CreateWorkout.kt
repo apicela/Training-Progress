@@ -1,21 +1,17 @@
-package com.apicela.training
+package com.apicela.training.utils
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
+import com.apicela.training.R
 import com.apicela.training.models.Muscles
 import com.apicela.training.services.ExerciseService
-import com.apicela.training.utils.Codes
-import com.apicela.training.utils.DataManager
-import com.apicela.training.utils.UtilsComponents
-import com.google.gson.Gson
 
-class CreateExercise : AppCompatActivity() {
+class CreateWorkout : AppCompatActivity() {
     private lateinit var backButton: Button
     private lateinit var concludeButton: Button
     private lateinit var exerciseService: ExerciseService

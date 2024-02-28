@@ -16,7 +16,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var exercisesButton: ImageButton
     private lateinit var calendarButton: ImageButton
-    private lateinit var dataManager : DataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +23,9 @@ class HomeActivity : AppCompatActivity() {
         DataManager.initialize(this)
         exercisesButton = findViewById(R.id.exercise_button)
         calendarButton = findViewById(R.id.calendar_button)
-        val listItems = DataManager.loadExerciseItems() as Serializable
+
         exercisesButton.setOnClickListener {
             val intent = Intent(this@HomeActivity, ExerciseActivity::class.java)
-            intent.putExtra("exercise_list", listItems)
             startActivity(intent)
         }
 
@@ -36,6 +34,4 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 }

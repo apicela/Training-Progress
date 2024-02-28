@@ -3,6 +3,7 @@ package com.apicela.training.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Parcelable
+import android.util.Log
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
@@ -25,6 +26,7 @@ object DataManager {
         val json = gson.toJson(items)
         editor.putString("exercise_items_list", json)
         editor.apply()
+        Log.d("teste", "exercise saved")
     }
 
     fun loadExerciseItems(): MutableList<Exercise> {
@@ -35,6 +37,7 @@ object DataManager {
             val exeriseType = object : TypeToken<List<Exercise>>() {}.type
             gson.fromJson(json, exeriseType)
         }
+        Log.d("teste", "exercise list loaded")
     }
 
     fun saveWorkout(workout: List<String>) {

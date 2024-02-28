@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
+import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
+import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
 import com.apicela.training.utils.DataManager
 import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
@@ -46,7 +48,7 @@ class ExerciseActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
 
-        exerciseList = intent.getSerializableExtra("exercise_list") as MutableList<Exercise>
+        exerciseList = DataManager.loadExerciseItems()
         
         // layouts
         containerLinearLayout = findViewById(R.id.container)
@@ -140,16 +142,22 @@ class ExerciseActivity() : AppCompatActivity() {
 
         plusButton.setOnClickListener {
                 val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
-                startActivity(intent)
-
+            startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
         }
 
         backButton.setOnClickListener {
             finish()
         }
+
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_CREATE_EXERCISE && resultCode == RESULT_CODE_EXERCISE_CREATED) {
 
+            recreate() // Isso reiniciará a Activity
+        }
+    }
     private fun filterTextViews(query: String) {
 
         val cardViewVisible = mutableMapOf(
