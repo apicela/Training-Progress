@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Training"
         tools:targetApi="31">
         <activity
-            android:name=".utils.CreateWorkout"
+            android:name=".CreateWorkout"
             android:exported="false" />
         <activity
             android:name=".CreateExercise"

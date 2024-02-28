@@ -2,7 +2,6 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -11,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.apicela.training.models.Muscles
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes
-import com.apicela.training.utils.DataManager
 import com.apicela.training.utils.UtilsComponents
-import com.google.gson.Gson
 
 class CreateExercise : AppCompatActivity() {
     private lateinit var backButton: Button
@@ -23,15 +20,15 @@ class CreateExercise : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_exercise)
-        val exerciseName : EditText = findViewById(R.id.exerciseNameText)
-        val imageUrl : EditText = findViewById(R.id.imageUrlText)
-        val muscleTypeSpinner : Spinner = findViewById(R.id.muscleTypeSpinner)
+        val exerciseName: EditText = findViewById(R.id.exerciseNameText)
+        val imageUrl: EditText = findViewById(R.id.imageUrlText)
+        val muscleTypeSpinner: Spinner = findViewById(R.id.muscleTypeSpinner)
         exerciseService = ExerciseService(this)
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
 
 
-        val items =  Muscles.getAsList()
+        val items = Muscles.getAsList()
 
         // Adaptador para o Spinner
         val adapter = ArrayAdapter(this, R.layout.transparent_layout, items)
@@ -44,7 +41,11 @@ class CreateExercise : AppCompatActivity() {
 
 
         concludeButton.setOnClickListener {
-            exerciseService.addExerciseToList(exerciseName.text.toString(), imageUrl.text.toString(), Muscles.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner)))
+            exerciseService.addExerciseToList(
+                exerciseName.text.toString(),
+                imageUrl.text.toString(),
+                Muscles.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
+            )
             val resultIntent = Intent()
             setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
             finish()

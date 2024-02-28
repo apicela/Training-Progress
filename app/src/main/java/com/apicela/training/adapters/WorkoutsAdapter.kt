@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.R
 import com.apicela.training.models.Exercise
 
-class WorkoutsAdapter  : RecyclerView.Adapter<WorkoutsAdapter.MyViewHolder>() {
+class WorkoutsAdapter : RecyclerView.Adapter<WorkoutsAdapter.MyViewHolder>() {
 
     private var lista: List<Exercise> = ArrayList()
     fun setList(newList: List<Exercise>) {

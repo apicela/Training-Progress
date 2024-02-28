@@ -1,23 +1,14 @@
 package com.apicela.training
 
-import androidx.appcompat.app.AppCompatActivity
-import  com.apicela.training.models.Exercise
 import android.os.Bundle
-import android.util.Log
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CalendarView
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 
 class CalendarActivity : AppCompatActivity() {
 
-//    private lateinit var calendarView: CalendarView
+    //    private lateinit var calendarView: CalendarView
 //    private lateinit var listView: ListView
-private lateinit var backButton: Button
+    private lateinit var backButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

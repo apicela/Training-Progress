@@ -3,7 +3,6 @@ package com.apicela.training
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -21,12 +20,10 @@ import com.apicela.training.utils.DataManager
 import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.google.gson.Gson
 
-class ExerciseActivity() : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseList : MutableList<Exercise>
-
+    private lateinit var exerciseList: MutableList<Exercise>
 
 
     private lateinit var containerLinearLayout: LinearLayout
@@ -49,7 +46,7 @@ class ExerciseActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_exercise)
 
         exerciseList = DataManager.loadExerciseItems()
-        
+
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         plusButton = findViewById(R.id.plus_button)
@@ -141,7 +138,7 @@ class ExerciseActivity() : AppCompatActivity() {
         )
 
         plusButton.setOnClickListener {
-                val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+            val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
             startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
         }
 
@@ -154,10 +151,10 @@ class ExerciseActivity() : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CREATE_EXERCISE && resultCode == RESULT_CODE_EXERCISE_CREATED) {
-
             recreate() // Isso reiniciará a Activity
         }
     }
+
     private fun filterTextViews(query: String) {
 
         val cardViewVisible = mutableMapOf(

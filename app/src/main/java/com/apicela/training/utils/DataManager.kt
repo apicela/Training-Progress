@@ -2,13 +2,11 @@ package com.apicela.training.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Parcelable
 import android.util.Log
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
-import java.io.Serializable
 
 
 object DataManager {

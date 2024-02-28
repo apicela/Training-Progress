@@ -1,7 +1,6 @@
 package com.apicela.training.utils;
 
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 

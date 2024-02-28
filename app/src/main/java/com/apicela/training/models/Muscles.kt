@@ -7,6 +7,8 @@ enum class Muscles {
 
 
     companion object {
-       fun getAsList() : List<Muscles> { return Muscles.values().toList() }
+        fun getAsList(): List<Muscles> {
+            return Muscles.values().toList()
+        }
     }
 }
