@@ -55,16 +55,27 @@ class UtilsComponents {
             return linearLayout
         }
 
+        fun createLinearLayoutForDivision(context: Context): LinearLayout {
+            // Criar LinearLayout
+            val linearLayout = LinearLayout(
+                context,
+                null,
+                R.style.linearLayoutDivision,
+                R.style.linearLayoutDivision
+            )
+            return linearLayout
+        }
+
         fun createTextView(
             context: Context,
             text: String,
             container: LinearLayout,
-            muscleType: Muscles
+            muscleType: Muscles?
         ) {
             val textView =
                 TextView(context, null, R.style.TextViewExercise, R.style.TextViewExercise)
             textView.text = text
-            textView.tag = muscleType
+            if(muscleType !== null) { textView.tag = muscleType }
             container.addView(textView)
         }
 
@@ -74,7 +85,7 @@ class UtilsComponents {
         fun createCircleImageView(
             context: Context,
             container: LinearLayout,
-            appearanceModel: ShapeAppearanceModel,
+            appearanceModel: ShapeAppearanceModel?,
             image: String
         ) {
             val circleImageView = ShapeableImageView(context)
@@ -87,8 +98,7 @@ class UtilsComponents {
             layoutParams.marginStart =
                 context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
             circleImageView.layoutParams = layoutParams
-
-            circleImageView.shapeAppearanceModel = appearanceModel
+            if(appearanceModel !== null) { circleImageView.shapeAppearanceModel = appearanceModel }
 
             val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
             // recurso encontrado
@@ -135,6 +145,17 @@ class UtilsComponents {
             val linearLayout = createLinearLayoutForExercise(context)
             createCircleImageView(context, linearLayout, appearanceModel, image)
             createTextView(context, text, linearLayout, muscleType)
+            return linearLayout
+        }
+
+        fun createDivisionLine(
+            context: Context,
+            text: String,
+            image: String
+        ): LinearLayout {
+            val linearLayout = createLinearLayoutForDivision(context)
+            createCircleImageView(context, linearLayout, null, image)
+            createTextView(context, text, linearLayout, null)
             return linearLayout
         }
     }

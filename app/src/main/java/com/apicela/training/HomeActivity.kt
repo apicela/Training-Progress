@@ -28,7 +28,9 @@ class HomeActivity : AppCompatActivity() {
         }
 
         calendarButton.setOnClickListener {
-            val intent = Intent(this@HomeActivity, CalendarActivity::class.java)
+//            val intent = Intent(this@HomeActivity, CalendarActivity::class.java)
+                val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
+
             startActivity(intent)
         }
 

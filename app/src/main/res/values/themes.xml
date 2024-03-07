@@ -32,6 +32,18 @@
         <item name="android:paddingTop">15dp</item>
     </style>
 
+    <style name="linearLayoutDivision">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+
+    </style>
+
     <style name="ImageViewExercise">
         <item name="android:layout_width">45dp</item>
         <item name="android:layout_marginStart">20dp</item>
