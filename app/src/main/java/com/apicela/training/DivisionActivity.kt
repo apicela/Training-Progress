@@ -11,9 +11,9 @@ class DivisionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_division)
             val container = findViewById<LinearLayout>(R.id.container)
-        val x = UtilsComponents.createDivisionLine(this, "A","division_a" )
+        val x = UtilsComponents.createDivisionLine(this, "A","division_a", null )
         container.addView(x)
-        val y = UtilsComponents.createDivisionLine(this, "B","division_b" )
+        val y = UtilsComponents.createDivisionLine(this, "B","division_b", null )
         container.addView(y)
 
     }

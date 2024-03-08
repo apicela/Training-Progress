@@ -33,7 +33,8 @@
             android:theme="@style/Theme.Training" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Training">
 
             <!-- Removendo android:label para ocultar o nome do ícone de lançamento -->
             <intent-filter>

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.apicela.training.R
 import com.apicela.training.models.Muscles
 import com.bumptech.glide.Glide
@@ -23,7 +25,7 @@ class UtilsComponents {
             return spinnerItem
         }
 
-        fun checkChildsPedidoActivity(mainLinearLayout: LinearLayout): ViewGroup.LayoutParams? {
+        fun checkChilds(mainLinearLayout: LinearLayout): ViewGroup.LayoutParams? {
             for (i in 0 until mainLinearLayout.childCount) {
                 val childView = mainLinearLayout.getChildAt(i)
                 if (childView is CircleImageView) {
@@ -66,74 +68,35 @@ class UtilsComponents {
             return linearLayout
         }
 
-        fun createTextView(
-            context: Context,
-            text: String,
-            container: LinearLayout,
-            muscleType: Muscles?
-        ) {
-            val textView =
-                TextView(context, null, R.style.TextViewExercise, R.style.TextViewExercise)
-            textView.text = text
-            if(muscleType !== null) { textView.tag = muscleType }
-            container.addView(textView)
-        }
+
+
 
         var url =
             "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
 
-        fun createCircleImageView(
-            context: Context,
-            container: LinearLayout,
-            appearanceModel: ShapeAppearanceModel?,
-            image: String
-        ) {
-            val circleImageView = ShapeableImageView(context)
-            val layoutParams = LinearLayout.LayoutParams(
-                context.resources.getDimensionPixelSize(R.dimen.circle_image_width),
-                context.resources.getDimensionPixelSize(R.dimen.circle_image_width)
+
+
+        fun createCardViewForWorkout(context: Context, text: String, tag: String?): CardView {
+            // Criando um novo CardView
+            val cardView = CardView(context, null, R.style.CardView_Workout)
+            // Definindo largura e altura do CardView
+            val params = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            layoutParams.marginEnd =
-                context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
-            layoutParams.marginStart =
-                context.resources.getDimensionPixelSize(R.dimen.circle_image_margin_start)
-            circleImageView.layoutParams = layoutParams
-            if(appearanceModel !== null) { circleImageView.shapeAppearanceModel = appearanceModel }
+            cardView.layoutParams = params
 
-            val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
-            // recurso encontrado
-            if (resourceId != 0) {
-                Glide.with(context)
-                    .asBitmap()
-                    .load(resourceId)
-                    .into(circleImageView)
+            cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.semi_black))
 
-                circleImageView.setOnClickListener {
-                    Glide.with(context)
-                        .load(resourceId)
-                        .into(GifDrawableImageViewTarget(circleImageView, 1))
-                }
-//
-            } else {
-                Glide.with(context)
-                    .asBitmap()
-                    .load(image)
-                    .into(circleImageView)
+            // Adicionando uma TextView dentro do CardView
+            var text = Text.createTextView(context, text, tag)
+            cardView.addView(text)
+            val img = Image.createCircleImageView(context, "muscle_group_chest", null,context.resources.getDimensionPixelSize(R.dimen.dp75))
+            cardView.addView(img)
 
-                circleImageView.setOnClickListener {
-                    Glide.with(context)
-                        .load(image)
-                        .into(GifDrawableImageViewTarget(circleImageView, 1))
-                }
-//
-            }
-
-
-            // Set src and background using resources from style (for clarity)
-            circleImageView.setBackgroundResource(R.drawable.image_circle_background) // Assuming background is a drawable
-
-            container.addView(circleImageView)
+            return cardView
         }
+
 
         fun createExerciseLine(
             context: Context,
@@ -143,19 +106,24 @@ class UtilsComponents {
             image: String
         ): LinearLayout {
             val linearLayout = createLinearLayoutForExercise(context)
-            createCircleImageView(context, linearLayout, appearanceModel, image)
-            createTextView(context, text, linearLayout, muscleType)
+            var img = Image.createCircleImageView(context ,image, appearanceModel,context.resources.getDimensionPixelSize(R.dimen.dp50))
+            linearLayout.addView(img)
+            var text = Text.createTextView(context, text, muscleType)
+            linearLayout.addView(text)
             return linearLayout
         }
 
         fun createDivisionLine(
             context: Context,
             text: String,
-            image: String
-        ): LinearLayout {
+            image: String,
+            appearanceModel: ShapeAppearanceModel?
+            ): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
-            createCircleImageView(context, linearLayout, null, image)
-            createTextView(context, text, linearLayout, null)
+            var img = Image.createCircleImageView(context ,image, appearanceModel, context.resources.getDimensionPixelSize(R.dimen.dp50))
+            linearLayout.addView(img)
+            var text = Text.createTextView(context, text, null)
+            linearLayout.addView(text)
             return linearLayout
         }
     }
