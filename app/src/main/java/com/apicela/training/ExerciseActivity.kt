@@ -12,6 +12,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
@@ -45,7 +46,15 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
 
-        exerciseList = DataManager.loadExerciseItems()
+        val bundle = intent.getBundleExtra("list_exercises")
+        val allExercises = intent.getBooleanExtra("allExercises", true)
+
+        if(!allExercises){
+            if(bundle != null) exerciseList = bundle.getSerializable("list_divisions") as MutableList<Exercise>
+            else exerciseList = mutableListOf()
+        } else {
+            exerciseList = DataManager.loadExerciseItems()
+        }
 
         // layouts
         containerLinearLayout = findViewById(R.id.container)

@@ -1,3 +1,5 @@
 package com.apicela.training.models
 
-data class Division(var divisionName: String, var listOfExercises: List<Exercise>, var image: String)
+import java.io.Serializable
+
+data class Division(var divisionName: String, var listOfExercises: List<Exercise>, var image: String) : Serializable

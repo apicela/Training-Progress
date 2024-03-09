@@ -55,16 +55,3 @@ object DataManager {
         }
     }
 }
-
-// Criar uma instância do DataManager
-//val dataManager = DataManager(context)
-//
-//// Salvando e carregando lista de itens
-//val itemList = listOf(Item("Item 1"), Item("Item 2"), Item("Item 3"))
-//dataManager.saveItems(itemList)
-//val loadedItemList = dataManager.loadItems()
-//
-//// Salvando e carregando lista de nomes
-//val nameList = listOf("Nome 1", "Nome 2", "Nome 3")
-//dataManager.saveNames(nameList)
-//val loadedNameList = dataManager.loadNames()

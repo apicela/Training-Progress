@@ -6,6 +6,8 @@ data class Workout(
     var listOfDivision: List<Division>
 ) {
     companion object {
-        val listaExercises: MutableList<Workout> by lazy { mutableListOf<Workout>() }
+        val listaExercises: MutableList<Workout> by lazy { mutableListOf<Workout>(
+//            Workout("Treino 01", "descricao", listOf())
+        ) }
     }
 }
