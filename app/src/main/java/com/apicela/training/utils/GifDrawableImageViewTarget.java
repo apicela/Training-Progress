@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.google.android.material.imageview.ShapeableImageView;
 
-class GifDrawableImageViewTarget extends ImageViewTarget<Drawable> {
+public class GifDrawableImageViewTarget extends ImageViewTarget<Drawable> {
 
     private int mLoopCount = GifDrawable.LOOP_FOREVER;
 

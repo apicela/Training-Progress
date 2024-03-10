@@ -1,9 +1,9 @@
-package com.apicela.training.utils
+package com.apicela.training.ui.utils
 
 import android.content.Context
 import android.widget.LinearLayout
-import androidx.cardview.widget.CardView
 import com.apicela.training.R
+import com.apicela.training.utils.GifDrawableImageViewTarget
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -14,8 +14,8 @@ class Image {
             context: Context,
             image: String,
             appearanceModel: ShapeAppearanceModel?,
-            size : Int
-        ) : ShapeableImageView{
+            size: Int
+        ): ShapeableImageView {
             val circleImageView = ShapeableImageView(context)
 
             val layoutParams = LinearLayout.LayoutParams(
@@ -53,12 +53,10 @@ class Image {
                         .load(image)
                         .into(GifDrawableImageViewTarget(circleImageView, 1))
                 }
-           }
-            if (appearanceModel !== null ) circleImageView.shapeAppearanceModel = appearanceModel
-            return circleImageView
             }
-
-
+            if (appearanceModel !== null) circleImageView.shapeAppearanceModel = appearanceModel
+            return circleImageView
+        }
 
 
 //        fun createCircleImageView(

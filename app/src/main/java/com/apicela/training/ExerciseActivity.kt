@@ -12,21 +12,19 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import com.apicela.training.models.Division
+import com.apicela.training.data.DataManager
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
+import com.apicela.training.ui.utils.ViewCreator
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
-import com.apicela.training.utils.DataManager
-import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+
 
 class ExerciseActivity : AppCompatActivity() {
 
     private lateinit var exerciseList: MutableList<Exercise>
-
-
     private lateinit var containerLinearLayout: LinearLayout
     private lateinit var chestCardView: CardView
     private lateinit var backCardView: CardView
@@ -41,6 +39,7 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var appearanceModel: ShapeAppearanceModel
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
+    private lateinit var cardViews: Array<CardView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +48,9 @@ class ExerciseActivity : AppCompatActivity() {
         val bundle = intent.getBundleExtra("list_exercises")
         val allExercises = intent.getBooleanExtra("allExercises", true)
 
-        if(!allExercises){
-            if(bundle != null) exerciseList = bundle.getSerializable("list_divisions") as MutableList<Exercise>
+        if (!allExercises) {
+            if (bundle != null) exerciseList =
+                bundle.getSerializable("list_divisions") as MutableList<Exercise>
             else exerciseList = mutableListOf()
         } else {
             exerciseList = DataManager.loadExerciseItems()
@@ -83,7 +83,6 @@ class ExerciseActivity : AppCompatActivity() {
 
 
         // card views
-
         chestCardView = findViewById(R.id.cardView_chest)
         backCardView = findViewById(R.id.cardView_back)
         shoulderCardView = findViewById(R.id.cardView_shoulder)
@@ -97,7 +96,7 @@ class ExerciseActivity : AppCompatActivity() {
 
 
         for (exercise in exerciseList) {
-            val exerciseItem = UtilsComponents.createExerciseLine(
+            val exerciseItem = ViewCreator.createExerciseLine(
                 this,
                 exercise.exerciseName,
                 exercise.muscleType,
@@ -116,7 +115,6 @@ class ExerciseActivity : AppCompatActivity() {
                 Muscles.GLUTES -> glutesCalvesLayout.addView(exerciseItem)
                 Muscles.ABDOMINAL -> absLayout.addView(exerciseItem)
                 else -> othersLayout.addView(exerciseItem)
-
             }
         }
 
@@ -150,7 +148,6 @@ class ExerciseActivity : AppCompatActivity() {
             val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
             startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
         }
-
         backButton.setOnClickListener {
             finish()
         }
@@ -210,9 +207,7 @@ class ExerciseActivity : AppCompatActivity() {
                                         Muscles.SHOULDER -> cardViewVisible[shoulderCardView] = 1
                                         Muscles.TRICEPS -> cardViewVisible[tricepsCardView] = 1
                                         Muscles.BICEPS -> cardViewVisible[bicepsCardView] = 1
-                                        Muscles.QUADRICEPS -> cardViewVisible[quadricepsCardView] =
-                                            1
-
+                                        Muscles.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
                                         Muscles.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
                                         Muscles.ABDOMINAL -> cardViewVisible[absCardView] = 1
                                         Muscles.OTHER -> cardViewVisible[othersCardView] = 1
@@ -235,5 +230,42 @@ class ExerciseActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun verifyCardViewVisibleOrNot(exerciseList: MutableList<Exercise>){
+        val cardViewVisible = mutableMapOf(
+            chestCardView to 0,
+            backCardView to 0,
+            shoulderCardView to 0,
+            tricepsCardView to 0,
+            bicepsCardView to 0,
+            quadricepsCardView to 0,
+            hamstringCardView to 0,
+            glutesCalvesCardView to 0,
+            absCardView to 0,
+            othersCardView to 0
+        )
+
+        Muscles.getAsList().forEach { muscle ->
+             val hasItemWithThisMuscle = exerciseList.find{ it.muscleType == muscle}
+            if(hasItemWithThisMuscle !== null){
+                when (hasItemWithThisMuscle.muscleType) {
+                    Muscles.BACK -> backCardView.visibility = CardView.VISIBLE
+                    Muscles.CHEST -> chestCardView.visibility = CardView.VISIBLE
+                    Muscles.SHOULDER -> shoulderCardView.visibility = CardView.VISIBLE
+                    Muscles.TRICEPS -> tricepsCardView.visibility = CardView.VISIBLE
+                    Muscles.BICEPS -> bicepsCardView.visibility = CardView.VISIBLE
+                    Muscles.QUADRICEPS -> quadricepsCardView.visibility = CardView.VISIBLE
+                    Muscles.HAMSTRING -> hamstringCardView.visibility = CardView.VISIBLE
+                    Muscles.CALVES -> glutesCalvesCardView.visibility = CardView.VISIBLE
+                    Muscles.GLUTES -> glutesCalvesCardView.visibility = CardView.VISIBLE
+                    Muscles.ABDOMINAL -> absCardView.visibility = CardView.VISIBLE
+                    else -> othersCardView.visibility = CardView.VISIBLE
+                }
+            }
+
+        }
+
+
     }
 }

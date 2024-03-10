@@ -1,20 +1,18 @@
-package com.apicela.training.utils
+package com.apicela.training.ui.utils
 
 import android.content.Context
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import com.apicela.training.R
 import com.apicela.training.models.Muscles
 
 class Text {
 
-    companion object{
+    companion object {
         fun createTextView(
             context: Context,
             text: String,
             tag: Any?
-        ) : TextView{
+        ): TextView {
             val textView =
                 TextView(context, null, R.style.TextViewCardWorkout, R.style.TextViewCardWorkout)
             textView.text = text

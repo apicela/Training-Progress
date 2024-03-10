@@ -1,4 +1,4 @@
-package com.apicela.training.utils
+package com.apicela.training.data
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,7 +15,7 @@ object DataManager {
     private val gson = Gson()
 
     fun initialize(context: Context) {
-        this.context = context.applicationContext
+        DataManager.context = context.applicationContext
         sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
     }
 

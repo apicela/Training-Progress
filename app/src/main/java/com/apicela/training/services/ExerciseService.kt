@@ -2,9 +2,9 @@ package com.apicela.training.services
 
 import android.content.Context
 import android.util.Log
+import com.apicela.training.data.DataManager
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscles
-import com.apicela.training.utils.DataManager
 
 class ExerciseService(context: Context) {
 
@@ -15,4 +15,6 @@ class ExerciseService(context: Context) {
         Log.d("teste", lista.toString())
         DataManager.saveExerciseItems(lista)
     }
+
+
 }
