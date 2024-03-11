@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.apicela.training.models.Muscles
+import com.apicela.training.models.Muscle
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes
 import com.apicela.training.utils.UtilsComponents
@@ -28,7 +28,7 @@ class CreateExercise : AppCompatActivity() {
         concludeButton = findViewById(R.id.concludeButton)
 
 
-        val items = Muscles.getAsList()
+        val items = Muscle.getAsList()
 
         // Adaptador para o Spinner
         val adapter = ArrayAdapter(this, R.layout.transparent_layout, items)
@@ -41,10 +41,10 @@ class CreateExercise : AppCompatActivity() {
 
 
         concludeButton.setOnClickListener {
-            exerciseService.addExerciseToList(
+            exerciseService.addExerciseToListOfExercises(
                 exerciseName.text.toString(),
                 imageUrl.text.toString(),
-                Muscles.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
+                Muscle.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
             )
             val resultIntent = Intent()
             setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)

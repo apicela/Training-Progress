@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.apicela.training.data.DataManager
 import com.apicela.training.models.Exercise
-import com.apicela.training.models.Muscles
+import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
@@ -44,7 +45,7 @@ class ExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
-
+        val listOfCheckBox : MutableList<CheckBox> = mutableListOf()
         val bundle = intent.getBundleExtra("list_exercises")
         val allExercises = intent.getBooleanExtra("allExercises", true)
 
@@ -94,26 +95,29 @@ class ExerciseActivity : AppCompatActivity() {
         absCardView = findViewById(R.id.cardView_abs)
         othersCardView = findViewById(R.id.cardView_others)
 
+        verifyCardViewVisibleOrNot(exerciseList)
+
 
         for (exercise in exerciseList) {
             val exerciseItem = ViewCreator.createExerciseLine(
                 this,
-                exercise.exerciseName,
-                exercise.muscleType,
-                appearanceModel,
-                exercise.image
+                exercise,
+                appearanceModel
             )
+
+            val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
+            listOfCheckBox.add(checkBox)
             when (exercise.muscleType) {
-                Muscles.BACK -> backLayout.addView(exerciseItem)
-                Muscles.CHEST -> chestLayout.addView(exerciseItem)
-                Muscles.SHOULDER -> shoulderLayout.addView(exerciseItem)
-                Muscles.TRICEPS -> tricepsLayout.addView(exerciseItem)
-                Muscles.BICEPS -> bicepsLayout.addView(exerciseItem)
-                Muscles.QUADRICEPS -> quadricepsLayout.addView(exerciseItem)
-                Muscles.HAMSTRING -> hamstringLayout.addView(exerciseItem)
-                Muscles.CALVES -> glutesCalvesLayout.addView(exerciseItem)
-                Muscles.GLUTES -> glutesCalvesLayout.addView(exerciseItem)
-                Muscles.ABDOMINAL -> absLayout.addView(exerciseItem)
+                Muscle.BACK -> backLayout.addView(exerciseItem)
+                Muscle.CHEST -> chestLayout.addView(exerciseItem)
+                Muscle.SHOULDER -> shoulderLayout.addView(exerciseItem)
+                Muscle.TRICEPS -> tricepsLayout.addView(exerciseItem)
+                Muscle.BICEPS -> bicepsLayout.addView(exerciseItem)
+                Muscle.QUADRICEPS -> quadricepsLayout.addView(exerciseItem)
+                Muscle.HAMSTRING -> hamstringLayout.addView(exerciseItem)
+                Muscle.CALVES -> glutesCalvesLayout.addView(exerciseItem)
+                Muscle.GLUTES -> glutesCalvesLayout.addView(exerciseItem)
+                Muscle.ABDOMINAL -> absLayout.addView(exerciseItem)
                 else -> othersLayout.addView(exerciseItem)
             }
         }
@@ -202,15 +206,15 @@ class ExerciseActivity : AppCompatActivity() {
                                 ) {
                                     innerLayout.visibility = LinearLayout.VISIBLE
                                     when (textView.tag) {
-                                        Muscles.CHEST -> cardViewVisible[chestCardView] = 1
-                                        Muscles.BACK -> cardViewVisible[backCardView] = 1
-                                        Muscles.SHOULDER -> cardViewVisible[shoulderCardView] = 1
-                                        Muscles.TRICEPS -> cardViewVisible[tricepsCardView] = 1
-                                        Muscles.BICEPS -> cardViewVisible[bicepsCardView] = 1
-                                        Muscles.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
-                                        Muscles.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
-                                        Muscles.ABDOMINAL -> cardViewVisible[absCardView] = 1
-                                        Muscles.OTHER -> cardViewVisible[othersCardView] = 1
+                                        Muscle.CHEST -> cardViewVisible[chestCardView] = 1
+                                        Muscle.BACK -> cardViewVisible[backCardView] = 1
+                                        Muscle.SHOULDER -> cardViewVisible[shoulderCardView] = 1
+                                        Muscle.TRICEPS -> cardViewVisible[tricepsCardView] = 1
+                                        Muscle.BICEPS -> cardViewVisible[bicepsCardView] = 1
+                                        Muscle.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
+                                        Muscle.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
+                                        Muscle.ABDOMINAL -> cardViewVisible[absCardView] = 1
+                                        Muscle.OTHER -> cardViewVisible[othersCardView] = 1
                                         else -> cardViewVisible[glutesCalvesCardView] = 1
                                     }
                                 } else {
@@ -233,39 +237,29 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     fun verifyCardViewVisibleOrNot(exerciseList: MutableList<Exercise>){
-        val cardViewVisible = mutableMapOf(
-            chestCardView to 0,
-            backCardView to 0,
-            shoulderCardView to 0,
-            tricepsCardView to 0,
-            bicepsCardView to 0,
-            quadricepsCardView to 0,
-            hamstringCardView to 0,
-            glutesCalvesCardView to 0,
-            absCardView to 0,
-            othersCardView to 0
-        )
-
-        Muscles.getAsList().forEach { muscle ->
-             val hasItemWithThisMuscle = exerciseList.find{ it.muscleType == muscle}
-            if(hasItemWithThisMuscle !== null){
-                when (hasItemWithThisMuscle.muscleType) {
-                    Muscles.BACK -> backCardView.visibility = CardView.VISIBLE
-                    Muscles.CHEST -> chestCardView.visibility = CardView.VISIBLE
-                    Muscles.SHOULDER -> shoulderCardView.visibility = CardView.VISIBLE
-                    Muscles.TRICEPS -> tricepsCardView.visibility = CardView.VISIBLE
-                    Muscles.BICEPS -> bicepsCardView.visibility = CardView.VISIBLE
-                    Muscles.QUADRICEPS -> quadricepsCardView.visibility = CardView.VISIBLE
-                    Muscles.HAMSTRING -> hamstringCardView.visibility = CardView.VISIBLE
-                    Muscles.CALVES -> glutesCalvesCardView.visibility = CardView.VISIBLE
-                    Muscles.GLUTES -> glutesCalvesCardView.visibility = CardView.VISIBLE
-                    Muscles.ABDOMINAL -> absCardView.visibility = CardView.VISIBLE
-                    else -> othersCardView.visibility = CardView.VISIBLE
-                }
-            }
-
+        val muscleLists : List<Muscle> = Muscle.getAsList()
+        val list : MutableList<Muscle> = mutableListOf()
+            muscleLists.forEach { muscle ->
+             if(exerciseList.any{ it.muscleType == muscle}){
+                 list.add(muscle)
+             }
         }
+        val muscleToViewGone: List<Muscle> = muscleLists.filter { muscle -> muscle !in list }
 
-
+        muscleToViewGone.forEach { muscle ->
+            when (muscle) {
+                Muscle.BACK -> backCardView.visibility = CardView.GONE
+                Muscle.CHEST -> chestCardView.visibility = CardView.GONE
+                Muscle.SHOULDER -> shoulderCardView.visibility = CardView.GONE
+                Muscle.TRICEPS -> tricepsCardView.visibility = CardView.GONE
+                Muscle.BICEPS -> bicepsCardView.visibility = CardView.GONE
+                Muscle.QUADRICEPS -> quadricepsCardView.visibility = CardView.GONE
+                Muscle.HAMSTRING -> hamstringCardView.visibility = CardView.GONE
+                Muscle.CALVES -> glutesCalvesCardView.visibility = CardView.GONE
+                Muscle.GLUTES -> glutesCalvesCardView.visibility = CardView.GONE
+                Muscle.ABDOMINAL -> absCardView.visibility = CardView.GONE
+                else -> othersCardView.visibility = CardView.GONE
+            }
+        }
     }
 }

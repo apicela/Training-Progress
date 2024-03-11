@@ -1,12 +1,16 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
+import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.apicela.training.R
-import com.apicela.training.models.Muscles
+import com.apicela.training.models.Exercise
+import com.apicela.training.models.Muscle
 import com.google.android.material.shape.ShapeAppearanceModel
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -14,7 +18,10 @@ import de.hdodenhof.circleimageview.CircleImageView
 class ViewCreator {
 
     companion object {
-
+        val defaultParam = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         fun checkChilds(mainLinearLayout: LinearLayout): ViewGroup.LayoutParams? {
             for (i in 0 until mainLinearLayout.childCount) {
                 val childView = mainLinearLayout.getChildAt(i)
@@ -67,11 +74,7 @@ class ViewCreator {
             // Criando um novo CardView
             val cardView = CardView(context, null, R.style.CardView_Workout)
             // Definindo largura e altura do CardView
-            val params = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            cardView.layoutParams = params
+            cardView.layoutParams = defaultParam
 
             cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.semi_black))
 
@@ -90,25 +93,68 @@ class ViewCreator {
         }
 
 
+//        fun createExerciseLine(
+//            context: Context,
+//            exercise : Exercise,
+//            appearanceModel: ShapeAppearanceModel
+//        ): LinearLayout {
+//            val linearLayout = createLinearLayoutForExercise(context)
+//            var img = Image.createCircleImageView(
+//                context,
+//                exercise.image,
+//                appearanceModel,
+//                context.resources.getDimensionPixelSize(R.dimen.dp50)
+//            )
+//            linearLayout.addView(img)
+//            var text = Text.createTextView(context, exercise.exerciseName, exercise.muscleType)
+//            text.textSize = 16f
+//            linearLayout.addView(text)
+//            val checkBox = CheckBox(context)
+//            linearLayout.addView(checkBox)
+//            return linearLayout
+//        }
+
         fun createExerciseLine(
             context: Context,
-            text: String,
-            muscleType: Muscles,
-            appearanceModel: ShapeAppearanceModel,
-            image: String
+            exercise: Exercise,
+            appearanceModel: ShapeAppearanceModel
         ): LinearLayout {
             val linearLayout = createLinearLayoutForExercise(context)
+            linearLayout.orientation = LinearLayout.HORIZONTAL
+
             var img = Image.createCircleImageView(
                 context,
-                image,
+                exercise.image,
                 appearanceModel,
                 context.resources.getDimensionPixelSize(R.dimen.dp50)
             )
             linearLayout.addView(img)
-            var text = Text.createTextView(context, text, muscleType)
+            val text = Text.createTextView(context, exercise.exerciseName, exercise.muscleType)
+            text.textSize = 16f
+            val textLayoutParams = LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                0.7f
+            )
+            text.layoutParams = textLayoutParams
             linearLayout.addView(text)
+
+            val checkBox = CheckBox(context)
+            val checkBoxLayoutParams = LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                0.1f
+            )
+            checkBox.layoutParams = checkBoxLayoutParams
+            checkBox.visibility = View.INVISIBLE
+            checkBox.tag = "exercise_checkbox"
+
+            linearLayout.addView(checkBox)
+
             return linearLayout
         }
+
+
 
         fun createDivisionLine(
             context: Context,
@@ -117,14 +163,15 @@ class ViewCreator {
             appearanceModel: ShapeAppearanceModel?
         ): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
-            var img = Image.createCircleImageView(
+            linearLayout.layoutParams = defaultParam
+            val img = Image.createCircleImageView(
                 context,
                 image,
                 appearanceModel,
                 context.resources.getDimensionPixelSize(R.dimen.dp50)
             )
             linearLayout.addView(img)
-            var text = Text.createTextView(context, text, null)
+            val text = Text.createTextView(context, text, null)
             linearLayout.addView(text)
             return linearLayout
         }
