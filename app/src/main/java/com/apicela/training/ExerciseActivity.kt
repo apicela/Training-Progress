@@ -74,14 +74,12 @@ class ExerciseActivity : AppCompatActivity() {
         val glutesCalvesLayout = findViewById<LinearLayout>(R.id.glutes_calvesLayout)
         val absLayout = findViewById<LinearLayout>(R.id.absLayout)
 
-
         for (i in 0 until testLayout.childCount) {
             val child = testLayout.getChildAt(i)
             if (child is ShapeableImageView) {
                 appearanceModel = child.shapeAppearanceModel
             }
         }
-
 
         // card views
         chestCardView = findViewById(R.id.cardView_chest)
@@ -238,8 +236,8 @@ class ExerciseActivity : AppCompatActivity() {
 
     fun verifyCardViewVisibleOrNot(exerciseList: MutableList<Exercise>){
         val muscleLists : List<Muscle> = Muscle.getAsList()
-        val list : MutableList<Muscle> = mutableListOf()
-            muscleLists.forEach { muscle ->
+        val list : MutableList<Muscle> = mutableListOf();
+        muscleLists.forEach { muscle ->
              if(exerciseList.any{ it.muscleType == muscle}){
                  list.add(muscle)
              }
