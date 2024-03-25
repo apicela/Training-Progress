@@ -42,7 +42,7 @@
             android:layout_gravity="end">
 
             <Button
-                android:id="@+id/edit_voltar"
+                android:id="@+id/edit_button"
                 android:layout_width="44dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"

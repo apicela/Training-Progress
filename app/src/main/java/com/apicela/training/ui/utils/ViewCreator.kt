@@ -176,4 +176,5 @@ class ViewCreator {
             return linearLayout
         }
     }
+
 }

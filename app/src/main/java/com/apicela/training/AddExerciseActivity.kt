@@ -1,5 +1,6 @@
 package com.apicela.training
 
+
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -24,7 +25,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
 
 
-class ExerciseActivity : AppCompatActivity() {
+class AddExerciseActivity : AppCompatActivity() {
 
     private lateinit var exerciseList: MutableList<Exercise>
     private lateinit var containerLinearLayout: LinearLayout
@@ -42,7 +43,6 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
     private lateinit var editButton: Button
-    private lateinit var cardViews: Array<CardView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -150,16 +150,13 @@ class ExerciseActivity : AppCompatActivity() {
         )
 
         plusButton.setOnClickListener {
-            val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+            val intent = Intent(this@AddExerciseActivity, CreateExercise::class.java)
             startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
         }
         backButton.setOnClickListener {
             finish()
         }
 
-        editButton.setOnClickListener{
-            UtilsComponents.turnListOfViewVisible(listOfCheckBox)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -244,9 +241,9 @@ class ExerciseActivity : AppCompatActivity() {
         val muscleLists : List<Muscle> = Muscle.getAsList()
         val list : MutableList<Muscle> = mutableListOf();
         muscleLists.forEach { muscle ->
-             if(exerciseList.any{ it.muscleType == muscle}){
-                 list.add(muscle)
-             }
+            if(exerciseList.any{ it.muscleType == muscle}){
+                list.add(muscle)
+            }
         }
         val muscleToViewGone: List<Muscle> = muscleLists.filter { muscle -> muscle !in list }
 
@@ -266,4 +263,5 @@ class ExerciseActivity : AppCompatActivity() {
             }
         }
     }
+
 }

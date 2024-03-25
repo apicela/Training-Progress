@@ -3,6 +3,7 @@ package com.apicela.training
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.apicela.training.models.Division
@@ -10,10 +11,13 @@ import com.apicela.training.models.Exercise
 import com.apicela.training.ui.utils.ViewCreator
 
 class DivisionActivity : AppCompatActivity() {
+    private lateinit var backButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_division)
         val container = findViewById<LinearLayout>(R.id.container)
+        backButton = findViewById(R.id.back_button)
         val bundle = intent.getBundleExtra("list_bundle")
         if (bundle != null) {
             val listOfDivisions: List<Division>? =
@@ -33,5 +37,10 @@ class DivisionActivity : AppCompatActivity() {
                 container.addView(item)
             }
         }
+        backButton.setOnClickListener {
+            finish()
+        }
     }
+
+
 }
