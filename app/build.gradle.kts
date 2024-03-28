@@ -1,13 +1,15 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.apicela.training"
     compileSdk = 34
-
+    kapt {
+        generateStubs = true
+    }
     defaultConfig {
         applicationId = "com.apicela.training"
         minSdk = 24
@@ -80,7 +82,8 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.google.code.gson:gson:2.10.1")
-
+    implementation ("androidx.room:room-runtime:2.4.0")
+    kapt ("androidx.room:room-compiler:2.4.0")
     implementation ("androidx.appcompat:appcompat")
 
 }

@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
-import com.apicela.training.data.DataManager
+import com.apicela.training.dao.ExerciseDao
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
@@ -28,7 +28,6 @@ import com.google.android.material.shape.ShapeAppearanceModel
 
 class AddExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseList: MutableList<Exercise>
     private lateinit var containerLinearLayout: LinearLayout
     private lateinit var chestCardView: CardView
     private lateinit var backCardView: CardView
@@ -43,13 +42,14 @@ class AddExerciseActivity : AppCompatActivity() {
     private lateinit var appearanceModel: ShapeAppearanceModel
     private lateinit var backButton: Button
     private lateinit var addExerciseToWorkoutButton: AppCompatButton
+    private lateinit var exerciseDao: ExerciseDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise)
         val listOfCheckBox : MutableList<CheckBox> = mutableListOf()
         val listOfExercisesToAdd : MutableList<Exercise> = mutableListOf()
-        exerciseList = DataManager.loadExerciseItems()
+        val exerciseList = exerciseDao.getAllExercises()
         var checkedItems : Int = 0;
 
         // layouts
@@ -243,7 +243,7 @@ class AddExerciseActivity : AppCompatActivity() {
         }
     }
 
-    fun verifyCardViewVisibleOrNot(exerciseList: MutableList<Exercise>){
+    fun verifyCardViewVisibleOrNot(exerciseList: List<Exercise>){
         val muscleLists : List<Muscle> = Muscle.getAsList()
         val list : MutableList<Muscle> = mutableListOf();
         muscleLists.forEach { muscle ->

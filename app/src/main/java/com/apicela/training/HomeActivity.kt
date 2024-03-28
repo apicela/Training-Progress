@@ -6,13 +6,16 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.room.Room
 import com.apicela.training.data.DataManager
-import com.apicela.training.models.Division
-import com.apicela.training.ui.utils.ViewCreator
+import com.apicela.training.interfaces.Database
 import com.apicela.training.utils.Codes
 
 class HomeActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var database: Database
+    }
     private lateinit var exercisesButton: ImageButton
     private lateinit var calendarButton: ImageButton
     private lateinit var newWorkoutButton: AppCompatButton
@@ -21,28 +24,29 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        DataManager.initialize(this)
+        database = DataManager.getDatabase(this)
+
         exercisesButton = findViewById(R.id.exercise_button)
         calendarButton = findViewById(R.id.calendar_button)
         newWorkoutButton = findViewById(R.id.new_workout_button)
         containerWorkout = findViewById(R.id.containerWorkout)
 
-        DataManager.loadWorkoutItems().forEach { workout ->
-            val cardWorkout =
-                ViewCreator.createCardViewForWorkout(this, workout.workoutName, workout.workoutName)
-            cardWorkout.setOnClickListener {
-                val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
-                val bundle = Bundle()
-                bundle.putSerializable(
-                    "list_divisions",
-                    workout.listOfDivision as ArrayList<Division>
-                )
-                intent.putExtra("list_bundle", bundle)
-                intent.putExtra("description", workout.descricao)
-                startActivity(intent)
-            }
-            containerWorkout.addView(cardWorkout)
-        }
+//        DataManager.loadWorkoutItems().forEach { workout ->
+//            val cardWorkout =
+//                ViewCreator.createCardViewForWorkout(this, workout.workoutName, workout.workoutName)
+//            cardWorkout.setOnClickListener {
+//                val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
+//                val bundle = Bundle()
+//                bundle.putSerializable(
+//                    "list_divisions",
+//                    workout.listOfDivision as ArrayList<Division>
+//                )
+//                intent.putExtra("list_bundle", bundle)
+//                intent.putExtra("description", workout.descricao)
+//                startActivity(intent)
+//            }
+//            containerWorkout.addView(cardWorkout)
+//        }
 
 
         exercisesButton.setOnClickListener {
