@@ -6,12 +6,13 @@ import com.apicela.training.models.Division
 import com.apicela.training.models.Workout
 
 class WorkoutService(context: Context) {
+    val divisionService : DivisionService = DivisionService()
     fun addWorkoutToList(workoutName: String, descricao: String) {
         val workoutItem = Workout(
             workoutName, descricao, listOf(
-                Division("A", listOf(), "divisionA"),
-                Division("B", listOf(), "divisionB"),
-                Division("C", listOf(), "divisionC")
+                divisionService.createDivision("A","divisionA"),
+                divisionService.createDivision("B","divisionA"),
+                divisionService.createDivision("C","divisionA"),
             )
         )
         val lista = DataManager.loadWorkoutItems()
