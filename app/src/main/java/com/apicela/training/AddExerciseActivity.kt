@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import com.apicela.training.data.DataManager
 import com.apicela.training.models.Exercise
@@ -40,30 +41,22 @@ class AddExerciseActivity : AppCompatActivity() {
     private lateinit var absCardView: CardView
     private lateinit var othersCardView: CardView
     private lateinit var appearanceModel: ShapeAppearanceModel
-    private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
-    private lateinit var editButton: Button
+    private lateinit var addExerciseToWorkoutButton: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_exercise)
+        setContentView(R.layout.activity_add_exercise)
         val listOfCheckBox : MutableList<CheckBox> = mutableListOf()
-        val bundle = intent.getBundleExtra("list_exercises")
-        val allExercises = intent.getBooleanExtra("allExercises", true)
-
-        if (!allExercises) {
-            if (bundle != null) exerciseList =
-                bundle.getSerializable("list_divisions") as MutableList<Exercise>
-            else exerciseList = mutableListOf()
-        } else {
-            exerciseList = DataManager.loadExerciseItems()
-        }
+        val listOfExercisesToAdd : MutableList<Exercise> = mutableListOf()
+        exerciseList = DataManager.loadExerciseItems()
+        var checkedItems : Int = 0;
 
         // layouts
         containerLinearLayout = findViewById(R.id.container)
-        plusButton = findViewById(R.id.plus_button)
         backButton = findViewById(R.id.back_button)
-        editButton = findViewById(R.id.edit_button)
+        addExerciseToWorkoutButton = findViewById(R.id.add_exercise_to_workout)
+
         val testLayout = findViewById<LinearLayout>(R.id.testLayout)
 
         val backLayout = findViewById<LinearLayout>(R.id.backLayout)
@@ -103,10 +96,23 @@ class AddExerciseActivity : AppCompatActivity() {
             val exerciseItem = ViewCreator.createExerciseLine(
                 this,
                 exercise,
-                appearanceModel
+                appearanceModel,
+                true
             )
 
             val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
+            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    checkedItems++;
+                    listOfExercisesToAdd.add(exercise)
+                    addExerciseToWorkoutButton.text = "Adicionar exercícios (${checkedItems})"
+                } else {
+                    checkedItems--;
+                    listOfExercisesToAdd.remove(exercise)
+                    addExerciseToWorkoutButton.text = "Adicionar exercícios (${checkedItems})"
+                }
+            }
+
             listOfCheckBox.add(checkBox)
             when (exercise.muscleType) {
                 Muscle.BACK -> backLayout.addView(exerciseItem)
@@ -149,12 +155,12 @@ class AddExerciseActivity : AppCompatActivity() {
         }
         )
 
-        plusButton.setOnClickListener {
-            val intent = Intent(this@AddExerciseActivity, CreateExercise::class.java)
-            startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
-        }
         backButton.setOnClickListener {
             finish()
+        }
+
+        addExerciseToWorkoutButton.setOnClickListener{
+
         }
 
     }

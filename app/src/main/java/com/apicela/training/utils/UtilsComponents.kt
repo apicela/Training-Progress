@@ -18,5 +18,17 @@ class UtilsComponents {
             }
         }
 
+//        fun countCheckBox(listOfCheckBox : List<CheckBox>) : Int{
+//            var checkedCount = 0
+//                for (checkBox in listOfCheckBox) {
+//                    if (checkBox.isChecked) {
+//                        checkedCount++
+//                    }
+//                }
+//            return checkedCount
+//        }
+
+
+
     }
 }

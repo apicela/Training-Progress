@@ -103,7 +103,8 @@ class ExerciseActivity : AppCompatActivity() {
             val exerciseItem = ViewCreator.createExerciseLine(
                 this,
                 exercise,
-                appearanceModel
+                appearanceModel,
+                false
             )
 
             val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
@@ -150,7 +151,7 @@ class ExerciseActivity : AppCompatActivity() {
         )
 
         plusButton.setOnClickListener {
-            val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+            val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
         }
         backButton.setOnClickListener {

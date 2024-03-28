@@ -51,7 +51,7 @@
     android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@id/searchView"
-    app:layout_constraintHeight_percent="0.886"
+    app:layout_constraintHeight_percent="0.80"
     >
     >
     <LinearLayout
@@ -492,4 +492,25 @@
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/newTrainingButtonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_exercise_to_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingHorizontal="15dp"
+            android:textColor="@color/amarelo_personalizado"
+            android:text="Adicionar exercícios (0)"
+            android:background="@drawable/semi_black_button"
+            android:gravity="center"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

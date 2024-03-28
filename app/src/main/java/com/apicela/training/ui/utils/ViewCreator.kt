@@ -117,7 +117,8 @@ class ViewCreator {
         fun createExerciseLine(
             context: Context,
             exercise: Exercise,
-            appearanceModel: ShapeAppearanceModel
+            appearanceModel: ShapeAppearanceModel,
+            checkboxVisible : Boolean
         ): LinearLayout {
             val linearLayout = createLinearLayoutForExercise(context)
             linearLayout.orientation = LinearLayout.HORIZONTAL
@@ -146,7 +147,7 @@ class ViewCreator {
                 0.1f
             )
             checkBox.layoutParams = checkBoxLayoutParams
-            checkBox.visibility = View.INVISIBLE
+            if(!checkboxVisible) { checkBox.visibility = View.INVISIBLE }
             checkBox.tag = "exercise_checkbox"
 
             linearLayout.addView(checkBox)
