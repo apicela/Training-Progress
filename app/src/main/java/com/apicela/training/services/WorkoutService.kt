@@ -10,13 +10,13 @@ class WorkoutService(context: Context) {
     fun addWorkoutToList(workoutName: String, descricao: String) {
         val workoutItem = Workout(
             workoutName, descricao, listOf(
-                divisionService.createDivision("A","divisionA"),
-                divisionService.createDivision("B","divisionA"),
-                divisionService.createDivision("C","divisionA"),
+                DivisionService.createDivision("A","divisionA"),
+                DivisionService.createDivision("B","divisionA"),
+                DivisionService.createDivision("C","divisionA"),
             )
         )
-        val lista = DataManager.loadWorkoutItems()
-        lista.add(workoutItem)
-        DataManager.saveWorkoutItems(lista)
+//        val lista = DataManager.loadWorkoutItems()
+//        lista.add(workoutItem)
+//        DataManager.saveWorkoutItems(lista)
     }
 }

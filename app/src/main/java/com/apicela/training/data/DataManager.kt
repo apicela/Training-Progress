@@ -2,7 +2,8 @@ package com.apicela.training.data
 
 import android.content.Context
 import androidx.room.Room
-import com.apicela.training.interfaces.Database
+import com.apicela.training.models.Exercise
+import com.apicela.training.services.ExerciseService
 
 
 object DataManager {

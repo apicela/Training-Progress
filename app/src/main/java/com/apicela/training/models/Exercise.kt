@@ -1,13 +1,17 @@
 package com.apicela.training.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.UUID
 
 @Entity
-data class Exercise(@PrimaryKey val id: String = UUID.randomUUID().toString(), var exerciseName: String, var image: String, var muscleType: Muscle) :
+data class Exercise(@PrimaryKey var id: String , var exerciseName: String, var image: String, var muscleType: Muscle) :
     Serializable {
+    @Ignore
+    constructor( exerciseName: String,  image: String,  muscleType: Muscle) :
+            this(UUID.randomUUID().toString(), exerciseName, image, muscleType)
     companion object {
         val listaExercises: MutableList<Exercise> by lazy {
             mutableListOf<Exercise>(

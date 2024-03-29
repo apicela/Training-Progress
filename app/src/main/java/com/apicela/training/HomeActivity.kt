@@ -6,10 +6,14 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.room.Room
 import com.apicela.training.data.DataManager
-import com.apicela.training.interfaces.Database
+import com.apicela.training.data.Database
+import com.apicela.training.preferences.SharedPreferencesHelper
 import com.apicela.training.utils.Codes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity() {
 
@@ -24,7 +28,12 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        database = DataManager.getDatabase(this)
+        CoroutineScope(Dispatchers.Main).launch {
+            database = DataManager.getDatabase(applicationContext)
+            val sharedPreferencesHelper = SharedPreferencesHelper()
+            sharedPreferencesHelper.initializeOnce(applicationContext, database)
+        }
+
 
         exercisesButton = findViewById(R.id.exercise_button)
         calendarButton = findViewById(R.id.calendar_button)

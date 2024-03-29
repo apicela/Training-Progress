@@ -1,16 +1,20 @@
 package com.apicela.training.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.UUID
 
 @Entity
 data class Workout(
-    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey var id: String,
     var workoutName: String,
     var descricao: String,
     var listOfDivision: List<Division>
 ) {
+    @Ignore
+    constructor( exerciseName: String,  descricao: String,  listOfDivision: List<Division>) :
+            this(UUID.randomUUID().toString(), exerciseName, descricao, listOfDivision)
     companion object {
         val listaExercises: MutableList<Workout> by lazy {
             mutableListOf<Workout>(

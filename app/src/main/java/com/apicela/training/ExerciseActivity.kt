@@ -3,6 +3,7 @@ package com.apicela.training
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.apicela.training.data.DataManager
+import com.apicela.training.data.Database
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
@@ -22,11 +24,15 @@ import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
 import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseList: MutableList<Exercise>
+    private lateinit var exerciseList: List<Exercise>
     private lateinit var containerLinearLayout: LinearLayout
     private lateinit var chestCardView: CardView
     private lateinit var backCardView: CardView
@@ -43,21 +49,13 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var backButton: Button
     private lateinit var editButton: Button
     private lateinit var cardViews: Array<CardView>
+    private lateinit var db : Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
-        val listOfCheckBox : MutableList<CheckBox> = mutableListOf()
-        val bundle = intent.getBundleExtra("list_exercises")
-        val allExercises = intent.getBooleanExtra("allExercises", true)
-
-        if (!allExercises) {
-            if (bundle != null) exerciseList =
-                bundle.getSerializable("list_divisions") as MutableList<Exercise>
-            else exerciseList = mutableListOf()
-        } else {
-            exerciseList = DataManager.loadExerciseItems()
-        }
+        val listOfCheckBox: MutableList<CheckBox> = mutableListOf()
+        exerciseList = listOf()
 
         // layouts
         containerLinearLayout = findViewById(R.id.container)
@@ -76,6 +74,52 @@ class ExerciseActivity : AppCompatActivity() {
         val hamstringLayout = findViewById<LinearLayout>(R.id.hamstringLayout)
         val glutesCalvesLayout = findViewById<LinearLayout>(R.id.glutes_calvesLayout)
         val absLayout = findViewById<LinearLayout>(R.id.absLayout)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            db = DataManager.getDatabase(applicationContext)
+
+            // Now you can access the database safely
+            val bundle = intent.getBundleExtra("list_exercises")
+            val allExercises = intent.getBooleanExtra("allExercises", true)
+
+            exerciseList = if (!allExercises) {
+                bundle?.getSerializable("list_divisions") as MutableList<Exercise>? ?: mutableListOf()
+            } else {
+                db.exerciseDao().getAllExercises()
+            }
+
+            // Perform UI updates on the main thread
+            withContext(Dispatchers.Main) {
+                verifyCardViewVisibleOrNot(exerciseList)
+
+                for (exercise in exerciseList) {
+                    val exerciseItem = ViewCreator.createExerciseLine(
+                        applicationContext,
+                        exercise,
+                        appearanceModel,
+                        false
+                    )
+
+                    val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
+                    listOfCheckBox.add(checkBox)
+                    when (exercise.muscleType) {
+                        Muscle.BACK -> backLayout.addView(exerciseItem)
+                        Muscle.CHEST -> chestLayout.addView(exerciseItem)
+                        Muscle.SHOULDER -> shoulderLayout.addView(exerciseItem)
+                        Muscle.TRICEPS -> tricepsLayout.addView(exerciseItem)
+                        Muscle.BICEPS -> bicepsLayout.addView(exerciseItem)
+                        Muscle.QUADRICEPS -> quadricepsLayout.addView(exerciseItem)
+                        Muscle.HAMSTRING -> hamstringLayout.addView(exerciseItem)
+                        Muscle.CALVES -> glutesCalvesLayout.addView(exerciseItem)
+                        Muscle.GLUTES -> glutesCalvesLayout.addView(exerciseItem)
+                        Muscle.ABDOMINAL -> absLayout.addView(exerciseItem)
+                        else -> othersLayout.addView(exerciseItem)
+                    }
+                }
+                // Update UI with exerciseList
+                Log.d("teste", exerciseList.toString())
+            }
+        }
 
         for (i in 0 until testLayout.childCount) {
             val child = testLayout.getChildAt(i)
@@ -96,33 +140,8 @@ class ExerciseActivity : AppCompatActivity() {
         absCardView = findViewById(R.id.cardView_abs)
         othersCardView = findViewById(R.id.cardView_others)
 
-        verifyCardViewVisibleOrNot(exerciseList)
 
 
-        for (exercise in exerciseList) {
-            val exerciseItem = ViewCreator.createExerciseLine(
-                this,
-                exercise,
-                appearanceModel,
-                false
-            )
-
-            val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
-            listOfCheckBox.add(checkBox)
-            when (exercise.muscleType) {
-                Muscle.BACK -> backLayout.addView(exerciseItem)
-                Muscle.CHEST -> chestLayout.addView(exerciseItem)
-                Muscle.SHOULDER -> shoulderLayout.addView(exerciseItem)
-                Muscle.TRICEPS -> tricepsLayout.addView(exerciseItem)
-                Muscle.BICEPS -> bicepsLayout.addView(exerciseItem)
-                Muscle.QUADRICEPS -> quadricepsLayout.addView(exerciseItem)
-                Muscle.HAMSTRING -> hamstringLayout.addView(exerciseItem)
-                Muscle.CALVES -> glutesCalvesLayout.addView(exerciseItem)
-                Muscle.GLUTES -> glutesCalvesLayout.addView(exerciseItem)
-                Muscle.ABDOMINAL -> absLayout.addView(exerciseItem)
-                else -> othersLayout.addView(exerciseItem)
-            }
-        }
 
         val searchView = findViewById<SearchView>(R.id.searchView)
         val searchEditText = searchView.findViewById<View>(
@@ -241,7 +260,7 @@ class ExerciseActivity : AppCompatActivity() {
         }
     }
 
-    fun verifyCardViewVisibleOrNot(exerciseList: MutableList<Exercise>){
+    fun verifyCardViewVisibleOrNot(exerciseList: List<Exercise>){
         val muscleLists : List<Muscle> = Muscle.getAsList()
         val list : MutableList<Muscle> = mutableListOf();
         muscleLists.forEach { muscle ->
