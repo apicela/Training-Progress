@@ -1,22 +1,27 @@
 package com.apicela.training.services
 
 import android.content.Context
+import com.apicela.training.HomeActivity
 import com.apicela.training.data.DataManager
-import com.apicela.training.models.Division
+import com.apicela.training.data.Database
 import com.apicela.training.models.Workout
+import com.apicela.training.preferences.SharedPreferencesHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class WorkoutService(context: Context) {
-    val divisionService : DivisionService = DivisionService()
-    fun addWorkoutToList(workoutName: String, descricao: String) {
+class WorkoutService(private val db: Database) {
+    val divisionService : DivisionService = DivisionService(db)
+
+    suspend fun addWorkout(workoutName: String, descricao: String) {
         val workoutItem = Workout(
             workoutName, descricao, listOf(
-                DivisionService.createDivision("A","divisionA"),
-                DivisionService.createDivision("B","divisionA"),
-                DivisionService.createDivision("C","divisionA"),
+                divisionService.createDivision("A","divisionA"),
+                divisionService.createDivision("B","divisionA"),
+                divisionService.createDivision("C","divisionA"),
             )
         )
-//        val lista = DataManager.loadWorkoutItems()
-//        lista.add(workoutItem)
-//        DataManager.saveWorkoutItems(lista)
+        withContext(Dispatchers.IO) {
+            db.workoutDao().insert(workoutItem)
+        }
     }
 }

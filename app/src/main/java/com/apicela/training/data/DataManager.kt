@@ -9,6 +9,7 @@ import com.apicela.training.services.ExerciseService
 object DataManager {
     private var database: Database? = null
 
+
     fun getDatabase(context: Context): Database {
         if (database == null) {
             synchronized(Database::class.java) {

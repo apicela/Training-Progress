@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
+import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
@@ -55,8 +56,6 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         val listOfCheckBox: MutableList<CheckBox> = mutableListOf()
-        exerciseList = listOf()
-
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         plusButton = findViewById(R.id.plus_button)
@@ -74,24 +73,22 @@ class ExerciseActivity : AppCompatActivity() {
         val hamstringLayout = findViewById<LinearLayout>(R.id.hamstringLayout)
         val glutesCalvesLayout = findViewById<LinearLayout>(R.id.glutes_calvesLayout)
         val absLayout = findViewById<LinearLayout>(R.id.absLayout)
+        val allExercises = intent.getBooleanExtra("allExercises", true)
+        val division_id = intent.getStringExtra("division_id")
 
         CoroutineScope(Dispatchers.IO).launch {
             db = DataManager.getDatabase(applicationContext)
-
             // Now you can access the database safely
-            val bundle = intent.getBundleExtra("list_exercises")
-            val allExercises = intent.getBooleanExtra("allExercises", true)
-
+            val division: Division? = db.divisionDao().getDivisionById(division_id!!)
+            Log.d("teste", "division id: ${division_id!!}")
             exerciseList = if (!allExercises) {
-                bundle?.getSerializable("list_divisions") as MutableList<Exercise>? ?: mutableListOf()
-            } else {
+               division?.listOfExercises ?: emptyList()
+            } else{
                 db.exerciseDao().getAllExercises()
             }
 
             // Perform UI updates on the main thread
             withContext(Dispatchers.Main) {
-                verifyCardViewVisibleOrNot(exerciseList)
-
                 for (exercise in exerciseList) {
                     val exerciseItem = ViewCreator.createExerciseLine(
                         applicationContext,
@@ -116,8 +113,9 @@ class ExerciseActivity : AppCompatActivity() {
                         else -> othersLayout.addView(exerciseItem)
                     }
                 }
-                // Update UI with exerciseList
-                Log.d("teste", exerciseList.toString())
+
+                verifyCardViewVisibleOrNot(exerciseList)
+
             }
         }
 
@@ -164,14 +162,17 @@ class ExerciseActivity : AppCompatActivity() {
                 filterTextViews(newText)
                 return true
             }
-
-
         }
         )
 
         plusButton.setOnClickListener {
-            val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
+            if(!allExercises){
+                val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
+                intent.putExtra("division_id", division_id)
+                startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
+            } else{
+                val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+            }
         }
         backButton.setOnClickListener {
             finish()
@@ -190,75 +191,78 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun filterTextViews(query: String) {
+            val cardViewVisible = mutableMapOf(
+                chestCardView to 0,
+                backCardView to 0,
+                shoulderCardView to 0,
+                tricepsCardView to 0,
+                bicepsCardView to 0,
+                quadricepsCardView to 0,
+                hamstringCardView to 0,
+                glutesCalvesCardView to 0,
+                absCardView to 0,
+                othersCardView to 0
+            )
+            if (query.isNullOrBlank()) {
+                cardViewVisible.forEach { it to 1 }
+            }
 
-        val cardViewVisible = mutableMapOf(
-            chestCardView to 0,
-            backCardView to 0,
-            shoulderCardView to 0,
-            tricepsCardView to 0,
-            bicepsCardView to 0,
-            quadricepsCardView to 0,
-            hamstringCardView to 0,
-            glutesCalvesCardView to 0,
-            absCardView to 0,
-            othersCardView to 0
-        )
-        if (query.isNullOrBlank()) {
-            cardViewVisible.forEach { it to 1 }
-        }
+            for (i in 0 until containerLinearLayout.childCount) {
+                val linearLayout = containerLinearLayout.getChildAt(i) as? LinearLayout
+                // Verificando se o filho é um LinearLayout
+                linearLayout?.let {
+                    // Iterando sobre os filhos do LinearLayout interno
+                    for (j in 0 until it.childCount) {
+                        val innerLinearLayout = it.getChildAt(j) as? LinearLayout
+                        // Verificando se o filho do LinearLayout interno é um LinearLayout
+                        innerLinearLayout?.let { innerLayout ->
+                            // Iterando sobre os filhos do LinearLayout interno
+                            for (k in 0 until innerLayout.childCount) {
+                                val view = innerLayout.getChildAt(k)
+                                // Verificando se o filho é um TextView
+                                if (view is TextView && view !is CheckBox) {
+                                    // Realize as ações desejadas com o TextView encontrado
+                                    if (view.text.contains(
+                                            query,
+                                            ignoreCase = true
+                                        ) || query.isNullOrBlank()
+                                    ) {
+                                        view.visibility = LinearLayout.VISIBLE
+                                        when (view.tag) {
+                                            Muscle.CHEST -> cardViewVisible[chestCardView] = 1
+                                            Muscle.BACK -> cardViewVisible[backCardView] = 1
+                                            Muscle.SHOULDER -> cardViewVisible[shoulderCardView] = 1
+                                            Muscle.TRICEPS -> cardViewVisible[tricepsCardView] = 1
+                                            Muscle.BICEPS -> cardViewVisible[bicepsCardView] = 1
+                                            Muscle.QUADRICEPS -> cardViewVisible[quadricepsCardView] =
+                                                1
 
-        for (i in 0 until containerLinearLayout.childCount) {
-            val linearLayout = containerLinearLayout.getChildAt(i) as? LinearLayout
-            // Verificando se o filho é um LinearLayout
-            linearLayout?.let {
-                // Iterando sobre os filhos do LinearLayout interno
-                for (j in 0 until it.childCount) {
-                    val innerLinearLayout = it.getChildAt(j) as? LinearLayout
-                    // Verificando se o filho do LinearLayout interno é um LinearLayout
-                    innerLinearLayout?.let { innerLayout ->
-                        // Iterando sobre os filhos do LinearLayout interno
-                        for (k in 0 until innerLayout.childCount) {
-                            val view = innerLayout.getChildAt(k)
-                            // Verificando se o filho é um TextView
-                            if (view is TextView) {
-                                // Realize as ações desejadas com o TextView encontrado
-                                val textView = view
-                                if (textView.text.contains(
-                                        query,
-                                        ignoreCase = true
-                                    ) || query.isNullOrBlank()
-                                ) {
-                                    innerLayout.visibility = LinearLayout.VISIBLE
-                                    when (textView.tag) {
-                                        Muscle.CHEST -> cardViewVisible[chestCardView] = 1
-                                        Muscle.BACK -> cardViewVisible[backCardView] = 1
-                                        Muscle.SHOULDER -> cardViewVisible[shoulderCardView] = 1
-                                        Muscle.TRICEPS -> cardViewVisible[tricepsCardView] = 1
-                                        Muscle.BICEPS -> cardViewVisible[bicepsCardView] = 1
-                                        Muscle.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
-                                        Muscle.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
-                                        Muscle.ABDOMINAL -> cardViewVisible[absCardView] = 1
-                                        Muscle.OTHER -> cardViewVisible[othersCardView] = 1
-                                        else -> cardViewVisible[glutesCalvesCardView] = 1
+                                            Muscle.HAMSTRING -> cardViewVisible[hamstringCardView] =
+                                                1
+
+                                            Muscle.ABDOMINAL -> cardViewVisible[absCardView] = 1
+                                            Muscle.OTHER -> cardViewVisible[othersCardView] = 1
+                                            else -> cardViewVisible[glutesCalvesCardView] = 1
+                                        }
+                                    } else {
+                                        view.visibility = LinearLayout.GONE
                                     }
-                                } else {
-                                    innerLayout.visibility = LinearLayout.GONE
                                 }
                             }
                         }
                     }
-                }
-                // apos ler tudo
-                cardViewVisible.forEach { (muscle, value) ->
-                    if (value == 1) {
-                        muscle.visibility = CardView.VISIBLE
-                    } else {
-                        muscle.visibility = CardView.GONE
-                    }
+                    // apos ler tudo
+//                    cardViewVisible.forEach { (muscle, value) ->
+//                        if (value == 1) {
+//                            muscle.visibility = CardView.VISIBLE
+//                        } else {
+//                            muscle.visibility = CardView.GONE
+//                        }
+//                    }
                 }
             }
         }
-    }
+
 
     fun verifyCardViewVisibleOrNot(exerciseList: List<Exercise>){
         val muscleLists : List<Muscle> = Muscle.getAsList()

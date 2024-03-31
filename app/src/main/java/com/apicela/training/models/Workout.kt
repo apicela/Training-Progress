@@ -13,8 +13,8 @@ data class Workout(
     var listOfDivision: List<Division>
 ) {
     @Ignore
-    constructor( exerciseName: String,  descricao: String,  listOfDivision: List<Division>) :
-            this(UUID.randomUUID().toString(), exerciseName, descricao, listOfDivision)
+    constructor( workoutName: String,  descricao: String,  listOfDivision: List<Division>) :
+            this(UUID.randomUUID().toString(), workoutName, descricao, listOfDivision)
     companion object {
         val listaExercises: MutableList<Workout> by lazy {
             mutableListOf<Workout>(

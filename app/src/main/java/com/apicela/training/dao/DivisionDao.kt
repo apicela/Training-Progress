@@ -17,7 +17,6 @@ interface DivisionDao {
     @Query("SELECT * FROM division WHERE id = :divisionId")
     fun getDivisionById(divisionId: String): Division?
 
-
     @Update
     fun update(division: Division)
 }

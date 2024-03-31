@@ -19,17 +19,16 @@ class DivisionActivity : AppCompatActivity() {
         val container = findViewById<LinearLayout>(R.id.container)
         backButton = findViewById(R.id.back_button)
         val bundle = intent.getBundleExtra("list_bundle")
+        val workout_id = intent.getStringExtra("workout_id")
+        Log.d("teste", "workout     id: ${workout_id!!}")
         if (bundle != null) {
             val listOfDivisions: List<Division>? =
                 bundle.getSerializable("list_divisions") as? List<Division>
             listOfDivisions?.forEach { division ->
                 val item = ViewCreator.createDivisionLine(this, division.divisionName, "division_a", null)
                 item.setOnClickListener {
-//                    Log.d("divisionActivity", division.divisionName + " started")
                     val intent = Intent(this@DivisionActivity, ExerciseActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putSerializable("list_exercises", division.listOfExercises as ArrayList<Exercise>)
-                    intent.putExtra("list_bundle", bundle)
+                    intent.putExtra("division_id", division.id)
                     intent.putExtra("allExercises", false)
                     startActivity(intent)
                 }
