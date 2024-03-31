@@ -10,10 +10,8 @@ import java.util.UUID
 data class Division(
     @PrimaryKey var id: String,
     var divisionName: String,
-    var listOfExercises: List<Exercise>,
-    var image: String
-) : Serializable{
+    var listOfExercises: List<Exercise>) : Serializable{
     @Ignore
-        constructor(divisionName: String, listOfExercises: List<Exercise>, image: String) :
-                this(UUID.randomUUID().toString(), divisionName, listOfExercises, image)
+        constructor(divisionName: String, listOfExercises: List<Exercise>) :
+                this(UUID.randomUUID().toString(), divisionName, listOfExercises)
     }

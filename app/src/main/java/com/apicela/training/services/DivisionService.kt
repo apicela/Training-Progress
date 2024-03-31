@@ -9,20 +9,20 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 class DivisionService(private val db: Database){
-    fun createDivision( divisionName: String,
-                        image: String) : Division {
-        val division = Division( divisionName, listOf(), image)
+    fun createDivision( divisionName: String) : Division {
+        val division = Division( divisionName, listOf())
         CoroutineScope(Dispatchers.IO).launch {
             db.divisionDao().insert(division)
         }
         return division
     }
 
-//    fun changeListExercisesOfDivision( divisionID : String,
-//                                       newList : List<Exercise>){
-//        val division =
-//
-//    }
-
+    fun addDivisionToWorkout(division: Division, workout_id : String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var workout = db.workoutDao().getWorkoutById(workout_id)
+            workout?.listOfDivision = workout!!.listOfDivision + division
+            db.workoutDao().update(workout)
+        }
+    }
 
 }

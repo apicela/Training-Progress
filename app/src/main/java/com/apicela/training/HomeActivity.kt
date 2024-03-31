@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
 
         newWorkoutButton.setOnClickListener {
             val intent = Intent(this@HomeActivity, CreateWorkout::class.java)
-            startActivityForResult(intent, Codes.REQUEST_CODE_CREATE_EXERCISE)
+            startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
         }
 
 
@@ -79,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Codes.REQUEST_CODE_CREATE_EXERCISE && resultCode == Codes.RESULT_CODE_EXERCISE_CREATED) {
+        if (requestCode == Codes.REQUEST_CODE_CREATED && resultCode == Codes.RESULT_CODE_EXERCISE_CREATED) {
             recreate() // Isso reiniciará a Activity
         }
     }

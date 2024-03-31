@@ -9,23 +9,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
-import com.apicela.training.dao.ExerciseDao
 import com.apicela.training.data.Database
 import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
 import com.apicela.training.utils.Codes
-import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
+import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
-import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
 import kotlinx.coroutines.CoroutineScope
@@ -193,7 +190,7 @@ class AddExerciseActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_CREATE_EXERCISE && resultCode == RESULT_CODE_EXERCISE_CREATED) {
+        if (requestCode == REQUEST_CODE_CREATED && resultCode == RESULT_CODE_EXERCISE_CREATED) {
             recreate() // Isso reiniciará a Activity
         }
     }

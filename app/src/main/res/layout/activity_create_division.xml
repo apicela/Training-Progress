@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_black"
-    tools:context=".CreateExercise"
+    tools:context=".CreateDivision"
     android:theme="@style/Theme.Training">
     <LinearLayout
         android:id="@+id/backLinearLayout"
@@ -60,15 +60,14 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
 
-
         <EditText
-            android:id="@+id/exerciseNameText"
+            android:id="@+id/divisionNameText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/pedido_field"
-            android:hint="Nome do exercicio"
+            android:hint="Nome da divisão"
             android:textColorHint="@color/amarelo_personalizado"
             android:paddingStart="15dp"
             android:textColor="@color/white"
@@ -76,7 +75,7 @@
 
         <ImageView
             android:id="@+id/cliente_image"
-            android:layout_width="66dp"
+            android:layout_width="56dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="-56dp"
@@ -88,70 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="-17dp"
-            android:text="Exercicio"
-            android:textColor="@color/amarelo_personalizado"
-           ></TextView>
-
-
-
-
-        <EditText
-            android:id="@+id/imageUrlText"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="38dp"
-            android:background="@drawable/pedido_field"
-            android:textSize="15dp"
-            android:hint="URL da imagem/GIF"
-            android:textColor="@color/white"
-            android:textColorHint="@color/amarelo_personalizado"
-            android:paddingStart="15dp"
-            />
-
-        <ImageView
-            android:layout_width="87dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="-45dp"
-            android:src="@drawable/light_black_image"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="17dp"
-            android:layout_marginTop="-19dp"
-            android:layout_marginStart="20dp"
-            android:text="Imagem/GIF"
-            android:textColor="@color/amarelo_personalizado"
-            ></TextView>
-
-        <Spinner
-            android:id="@+id/muscleTypeSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="38dp"
-            android:background="@drawable/pedido_field"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:textColor="@color/amarelo_personalizado"
-            android:textColorHint="@color/amarelo_personalizado"
-            android:paddingStart="15dp"
-            />
-
-        <ImageView
-            android:layout_width="109dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="-45dp"
-            android:src="@drawable/light_black_image"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="17dp"
-            android:layout_marginTop="-19dp"
-            android:layout_marginStart="20dp"
-            android:text="Grupo muscular"
+            android:text="Divisão"
             android:textColor="@color/amarelo_personalizado"
             ></TextView>
     </LinearLayout>
@@ -162,13 +98,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="68dp"
         android:background="@drawable/yellow_bordered_button"
-        android:text="ADICIONAR EXERCÍCIO"
+        android:text="CRIAR DIVISÃO"
         android:textColor="@color/light_black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 

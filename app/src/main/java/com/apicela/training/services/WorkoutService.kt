@@ -15,9 +15,9 @@ class WorkoutService(private val db: Database) {
     suspend fun addWorkout(workoutName: String, descricao: String) {
         val workoutItem = Workout(
             workoutName, descricao, listOf(
-                divisionService.createDivision("A","divisionA"),
-                divisionService.createDivision("B","divisionA"),
-                divisionService.createDivision("C","divisionA"),
+                divisionService.createDivision("A"),
+                divisionService.createDivision("B"),
+                divisionService.createDivision("C"),
             )
         )
         withContext(Dispatchers.IO) {

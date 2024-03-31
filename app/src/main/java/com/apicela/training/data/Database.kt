@@ -12,7 +12,7 @@ import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 
-@Database(entities = [Division::class, Exercise::class, Workout::class], version = 1)
+@Database(entities = [Division::class, Exercise::class, Workout::class], version = 2)
 @TypeConverters(
     ExerciseListConverter::class,  DivisionListConverter::class                    )
 abstract class Database : RoomDatabase() {

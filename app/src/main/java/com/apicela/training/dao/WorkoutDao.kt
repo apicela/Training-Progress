@@ -3,6 +3,7 @@ package com.apicela.training.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.apicela.training.models.Division
 import com.apicela.training.models.Workout
 
@@ -15,4 +16,7 @@ interface WorkoutDao {
     fun getWorkoutById(workoutId: String): Workout?
     @Insert
     fun insert(workout: Workout)
+
+    @Update
+    fun update(workout: Workout)
 }

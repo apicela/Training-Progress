@@ -118,7 +118,8 @@ class ViewCreator {
             context: Context,
             exercise: Exercise,
             appearanceModel: ShapeAppearanceModel,
-            checkboxVisible : Boolean
+            checkboxVisible : Boolean,
+            isDivision : Boolean
         ): LinearLayout {
             val linearLayout = createLinearLayoutForExercise(context)
             linearLayout.orientation = LinearLayout.HORIZONTAL
@@ -149,7 +150,11 @@ class ViewCreator {
             checkBox.layoutParams = checkBoxLayoutParams
             if(!checkboxVisible) { checkBox.visibility = View.INVISIBLE }
             checkBox.tag = "exercise_checkbox"
-
+            if(isDivision){
+                linearLayout.setOnClickListener{
+                    
+                }
+            }
             linearLayout.addView(checkBox)
 
             return linearLayout
@@ -159,19 +164,16 @@ class ViewCreator {
 
         fun createDivisionLine(
             context: Context,
-            text: String,
-            image: String,
-            appearanceModel: ShapeAppearanceModel?
-        ): LinearLayout {
+            text: String): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
             linearLayout.layoutParams = defaultParam
-            val img = Image.createCircleImageView(
-                context,
-                image,
-                appearanceModel,
-                context.resources.getDimensionPixelSize(R.dimen.dp50)
-            )
-            linearLayout.addView(img)
+//            val img = Image.createCircleImageView(
+//                context,
+//                image,
+//                appearanceModel,
+//                context.resources.getDimensionPixelSize(R.dimen.dp50)
+//            )
+//            linearLayout.addView(img)
             val text = Text.createTextView(context, text, null)
             linearLayout.addView(text)
             return linearLayout

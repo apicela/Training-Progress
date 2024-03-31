@@ -20,7 +20,7 @@ import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
-import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATE_EXERCISE
+import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
 import com.apicela.training.utils.UtilsComponents
 import com.google.android.material.imageview.ShapeableImageView
@@ -73,15 +73,15 @@ class ExerciseActivity : AppCompatActivity() {
         val hamstringLayout = findViewById<LinearLayout>(R.id.hamstringLayout)
         val glutesCalvesLayout = findViewById<LinearLayout>(R.id.glutes_calvesLayout)
         val absLayout = findViewById<LinearLayout>(R.id.absLayout)
-        val allExercises = intent.getBooleanExtra("allExercises", true)
+        val isDivision = intent.getBooleanExtra("allExercises", true)
         val division_id = intent.getStringExtra("division_id")
 
         CoroutineScope(Dispatchers.IO).launch {
             db = DataManager.getDatabase(applicationContext)
             // Now you can access the database safely
-            val division: Division? = db.divisionDao().getDivisionById(division_id!!)
-            Log.d("teste", "division id: ${division_id!!}")
-            exerciseList = if (!allExercises) {
+            exerciseList = if (isDivision) {
+                val division: Division? = db.divisionDao().getDivisionById(division_id!!)
+                Log.d("teste", "division id: ${division_id!!}")
                division?.listOfExercises ?: emptyList()
             } else{
                 db.exerciseDao().getAllExercises()
@@ -94,7 +94,8 @@ class ExerciseActivity : AppCompatActivity() {
                         applicationContext,
                         exercise,
                         appearanceModel,
-                        false
+                        false,
+                        isDivision
                     )
 
                     val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
@@ -166,10 +167,10 @@ class ExerciseActivity : AppCompatActivity() {
         )
 
         plusButton.setOnClickListener {
-            if(!allExercises){
+            if(isDivision){
                 val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
                 intent.putExtra("division_id", division_id)
-                startActivityForResult(intent, REQUEST_CODE_CREATE_EXERCISE)
+                startActivityForResult(intent, REQUEST_CODE_CREATED)
             } else{
                 val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
             }
@@ -185,7 +186,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_CREATE_EXERCISE && resultCode == RESULT_CODE_EXERCISE_CREATED) {
+        if (requestCode == REQUEST_CODE_CREATED && resultCode == RESULT_CODE_EXERCISE_CREATED) {
             recreate() // Isso reiniciará a Activity
         }
     }

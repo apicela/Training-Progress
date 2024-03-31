@@ -11,6 +11,8 @@ object DataManager {
 
 
     fun getDatabase(context: Context): Database {
+
+
         if (database == null) {
             synchronized(Database::class.java) {
                 if (database == null) {

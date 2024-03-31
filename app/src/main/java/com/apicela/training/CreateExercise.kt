@@ -55,7 +55,8 @@ class CreateExercise : AppCompatActivity() {
         }
             val resultIntent = Intent()
             setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
-            finish()}
+            finish()
+        }
 
         backButton.setOnClickListener {
             finish()
