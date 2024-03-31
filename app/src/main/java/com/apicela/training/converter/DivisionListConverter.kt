@@ -2,7 +2,6 @@ package com.apicela.training.converter
 
 import androidx.room.TypeConverter
 import com.apicela.training.models.Division
-import com.apicela.training.models.Exercise
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

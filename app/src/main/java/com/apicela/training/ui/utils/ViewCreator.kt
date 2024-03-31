@@ -1,7 +1,6 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -10,7 +9,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.apicela.training.R
 import com.apicela.training.models.Exercise
-import com.apicela.training.models.Muscle
 import com.google.android.material.shape.ShapeAppearanceModel
 import de.hdodenhof.circleimageview.CircleImageView
 

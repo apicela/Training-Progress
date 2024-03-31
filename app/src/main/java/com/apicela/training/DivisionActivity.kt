@@ -2,12 +2,10 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
 import com.apicela.training.models.Division
 import com.apicela.training.ui.utils.ViewCreator

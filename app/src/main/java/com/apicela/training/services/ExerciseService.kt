@@ -1,11 +1,8 @@
 package com.apicela.training.services
 
-import android.content.Context
 import android.util.Log
-import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
 import com.apicela.training.models.Exercise
-import com.apicela.training.models.Muscle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
