@@ -9,7 +9,7 @@ import java.util.UUID
 data class Workout(
     @PrimaryKey var id: String,
     var workoutName: String,
-    var descricao: String,
+    var description: String,
     var listOfDivision: List<Division>
 ) {
     @Ignore

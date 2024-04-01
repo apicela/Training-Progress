@@ -105,7 +105,8 @@ class AddExerciseActivity : AppCompatActivity() {
                         applicationContext,
                         exercise,
                         appearanceModel,
-                        true
+                        true,
+                        false
                     )
 
                     val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")

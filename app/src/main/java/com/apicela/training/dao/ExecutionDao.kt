@@ -1,10 +1,11 @@
 package com.apicela.training.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.apicela.training.models.Execution
-
+@Dao
 interface ExecutionDao {
     @Query("SELECT * FROM execution WHERE date = :date")
     fun getAllExecutionFromDate(date : String): List<Execution>

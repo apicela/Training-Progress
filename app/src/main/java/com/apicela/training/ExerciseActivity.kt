@@ -73,7 +73,7 @@ class ExerciseActivity : AppCompatActivity() {
         val hamstringLayout = findViewById<LinearLayout>(R.id.hamstringLayout)
         val glutesCalvesLayout = findViewById<LinearLayout>(R.id.glutes_calvesLayout)
         val absLayout = findViewById<LinearLayout>(R.id.absLayout)
-        val isDivision = intent.getBooleanExtra("allExercises", true)
+        val isDivision = intent.getBooleanExtra("isDivision", false)
         val division_id = intent.getStringExtra("division_id")
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -173,6 +173,7 @@ class ExerciseActivity : AppCompatActivity() {
                 startActivityForResult(intent, REQUEST_CODE_CREATED)
             } else{
                 val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
+                startActivityForResult(intent, REQUEST_CODE_CREATED)
             }
         }
         backButton.setOnClickListener {

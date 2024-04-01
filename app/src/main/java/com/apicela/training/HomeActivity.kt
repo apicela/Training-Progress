@@ -40,10 +40,6 @@ class HomeActivity : AppCompatActivity() {
                     val cardWorkout = ViewCreator.createCardViewForWorkout(applicationContext, workout.workoutName, workout.workoutName)
                     cardWorkout.setOnClickListener {
                         val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
-                        val bundle = Bundle()
-                        bundle.putSerializable("list_divisions", workout.listOfDivision as ArrayList<Division>)
-                        intent.putExtra("list_bundle", bundle)
-                        intent.putExtra("description", workout.descricao)
                         intent.putExtra("workout_id", workout.id)
                         startActivity(intent)
                     }

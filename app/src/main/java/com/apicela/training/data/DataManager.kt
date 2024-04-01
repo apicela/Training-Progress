@@ -9,7 +9,8 @@ object DataManager {
 
 
     fun getDatabase(context: Context): Database {
-
+//        context.deleteDatabase("my_database")
+//        database = null // Reinicializar a instância do banco de dados
 
         if (database == null) {
             synchronized(Database::class.java) {
