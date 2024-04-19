@@ -1,6 +1,7 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -9,8 +10,11 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.marginTop
+import com.apicela.training.ExerciseActivity
 import com.apicela.training.R
+import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.google.android.material.shape.ShapeAppearanceModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -167,11 +171,7 @@ class ViewCreator {
             checkBox.layoutParams = checkBoxLayoutParams
             if(!checkboxVisible) { checkBox.visibility = View.INVISIBLE }
             checkBox.tag = "exercise_checkbox"
-            if(isDivision){
-                linearLayout.setOnClickListener{
-                    
-                }
-            }
+
             linearLayout.addView(checkBox)
 
             return linearLayout

@@ -85,5 +85,6 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.4.0")
     kapt ("androidx.room:room-compiler:2.4.0")
     implementation ("androidx.appcompat:appcompat")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
 
 }

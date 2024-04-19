@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
 import com.apicela.training.models.Division
+import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator
@@ -53,6 +54,7 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var db : Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("activity", "exercise started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         val listOfCheckBox: MutableList<CheckBox> = mutableListOf()
@@ -98,6 +100,11 @@ class ExerciseActivity : AppCompatActivity() {
                         isDivision
                     )
 
+                    exerciseItem.setOnClickListener{
+                        val intent = Intent( this@ExerciseActivity, ExecutionActivity::class.java)
+                        intent.putExtra("exercise_id", exercise.id)
+                        startActivity(intent)
+                    }
                     val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
                     listOfCheckBox.add(checkBox)
                     when (exercise.muscleType) {

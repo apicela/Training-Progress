@@ -2,6 +2,7 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -23,6 +24,7 @@ class DivisionActivity : AppCompatActivity() {
     private lateinit var descriptionText : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("activity", "division started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_division)
         val container = findViewById<LinearLayout>(R.id.container)

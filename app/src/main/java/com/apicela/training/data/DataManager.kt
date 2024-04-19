@@ -18,7 +18,7 @@ object DataManager {
                     database = Room.databaseBuilder(
                         context.applicationContext,
                         Database::class.java,
-                        "my_database"
+                        "db_app_training"
                     ).build()
                 }
             }

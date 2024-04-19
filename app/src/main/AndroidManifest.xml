@@ -22,6 +22,7 @@
         <activity
             android:name=".AddExerciseActivity"
             android:exported="false" />
+
         <activity
             android:name=".DivisionActivity"
             android:exported="false" />
