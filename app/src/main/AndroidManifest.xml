@@ -17,7 +17,7 @@
             android:name=".ExecutionActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateDivision"
+            android:name=".createActivity.CreateDivision"
             android:exported="false" />
         <activity
             android:name=".AddExerciseActivity"
@@ -27,10 +27,10 @@
             android:name=".DivisionActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateWorkout"
+            android:name=".createActivity.CreateWorkout"
             android:exported="false" />
         <activity
-            android:name=".CreateExercise"
+            android:name=".createActivity.CreateExercise"
             android:exported="true"
             android:label="@string/title_activity_create_exercise"
             android:theme="@style/Theme.Training" />

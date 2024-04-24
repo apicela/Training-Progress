@@ -6,9 +6,9 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.apicela.training.createActivity.CreateWorkout
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
-import com.apicela.training.models.Division
 import com.apicela.training.preferences.SharedPreferencesHelper
 import com.apicela.training.ui.utils.ViewCreator
 import com.apicela.training.utils.Codes

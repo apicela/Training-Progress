@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.createActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.apicela.training.HomeActivity
+import com.apicela.training.R
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.services.ExerciseService

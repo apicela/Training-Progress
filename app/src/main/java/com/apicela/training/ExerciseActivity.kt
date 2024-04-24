@@ -14,10 +14,10 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.apicela.training.createActivity.CreateExercise
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
 import com.apicela.training.models.Division
-import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
 import com.apicela.training.ui.utils.ViewCreator

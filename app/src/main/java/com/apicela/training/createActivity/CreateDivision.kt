@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.createActivity
 
 
 import android.content.Intent
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.apicela.training.HomeActivity
+import com.apicela.training.R
 import com.apicela.training.services.DivisionService
 import com.apicela.training.utils.Codes
 import kotlinx.coroutines.CoroutineScope
