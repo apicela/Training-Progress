@@ -15,7 +15,7 @@ import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 
-@Database(entities = [Division::class, Exercise::class, Workout::class, Execution::class], version = 1, exportSchema = false)
+@Database(entities = [Division::class, Exercise::class, Workout::class, Execution::class], version = 2, exportSchema = false)
 @TypeConverters(
     ExerciseListConverter::class,  DivisionListConverter::class, Converter::class )
 abstract class Database : RoomDatabase() {

@@ -1,6 +1,7 @@
 package com.apicela.training.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,33 +9,44 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.R
 import com.apicela.training.models.Execution
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
-class ExecutionAdapter(private val context: Context, private val executionGroups: List<Pair<Date, List<Execution>>>) :
+
+class ExecutionAdapter(private var executionMap: Map<String, List<Execution>>) :
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
 
+    inner class ExecutionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val dateTextView: TextView = itemView.findViewById(R.id.textViewDate)
+        val repetitionsTextView: TextView = itemView.findViewById(R.id.textViewRepetitions)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExecutionViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_execution, parent, false)
-        return ExecutionViewHolder(view)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_execution, parent, false)
+        return ExecutionViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ExecutionViewHolder, position: Int) {
-        val executionGroup = executionGroups[position]
-        holder.bind(executionGroup)
-    }
+        val date = executionMap.keys.toList()[position]
+        val executions = executionMap[date]
 
-    override fun getItemCount(): Int {
-        return executionGroups.size
-    }
+        holder.dateTextView.text = date
 
-    inner class ExecutionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val dateTextView: TextView = itemView.findViewById(R.id.textViewDate)
-        private val repetitionsTextView: TextView = itemView.findViewById(R.id.textViewRepetitions)
-
-        fun bind(executionGroup: Pair<Date, List<Execution>>) {
-            val executions = executionGroup.second
-            dateTextView.text = executionGroup.first.toString()
-            repetitionsTextView.text = executions.joinToString(separator = "\n") { it.repetitions.toString() }
+        val executionsText = StringBuilder()
+        executions?.forEach { execution ->
+            executionsText.append("${execution.repetitions} reps - ${execution.kg} kg\n")
         }
+
+        holder.repetitionsTextView.text = executionsText.toString()
+    }
+
+    fun updateData(newExecutionMap: Map<String, List<Execution>>) {
+        executionMap = newExecutionMap
+        notifyDataSetChanged()
+    }
+    override fun getItemCount(): Int {
+        return executionMap.size
     }
 }

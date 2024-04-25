@@ -7,11 +7,7 @@ import androidx.room.Room
 object DataManager {
     private var database: Database? = null
 
-
     fun getDatabase(context: Context): Database {
-//        context.deleteDatabase("my_database")
-//        database = null // Reinicializar a instância do banco de dados
-
         if (database == null) {
             synchronized(Database::class.java) {
                 if (database == null) {
@@ -19,7 +15,10 @@ object DataManager {
                         context.applicationContext,
                         Database::class.java,
                         "db_app_training"
-                    ).build()
+                    )
+                        // Habilitar migração automática
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
         }

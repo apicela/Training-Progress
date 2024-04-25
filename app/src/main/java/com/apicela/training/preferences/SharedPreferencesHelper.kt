@@ -9,17 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SharedPreferencesHelper() {
-    private val PREF_NAME = "MyPrefs"
-    private val PREF_INITIALIZED = "started"
+    private val PREF_NAME = "user_prefs"
+    private val PREF_INITIALIZED = "startedDB"
 
     suspend fun initializeOnce(context: Context, db : Database) {
         withContext(Dispatchers.IO) {
-//            Log.d("teste", "called initialize")
             val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val initialized = prefs.getBoolean(PREF_INITIALIZED, false)
             if (!initialized) {
-//                Log.d("teste", "called !initialized")
-
                 val exerciseService: ExerciseService = ExerciseService(db)
                 Exercise.listaExercises.forEach {
                     exerciseService.addExerciseToDatabase(it)
