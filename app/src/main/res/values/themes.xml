@@ -24,6 +24,13 @@
         <item name="android:textSize">15dp</item>
     </style>
 
+    <style name="DatePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/semi_black</item>
+        <item name="android:textColorPrimary">@color/amarelo_personalizado</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:colorAccent">@color/semi_black</item>
+    </style>
+
     <style name="TextViewCardWorkout">
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_width">match_parent</item>

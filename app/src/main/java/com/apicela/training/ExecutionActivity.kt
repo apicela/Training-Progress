@@ -54,7 +54,7 @@ class ExecutionActivity : AppCompatActivity() {
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
         plusButton.setOnClickListener {
-            val dialog = RegisterExecutionDialog(exercise_id)
+            val dialog = RegisterExecutionDialog(exercise_id, this)
             dialog.show(supportFragmentManager, "RegistrarExercicioDialog")
             dialog.onDismissListener = {
                 executionAdapter.updateData(executionListToMap(exercise_id))
