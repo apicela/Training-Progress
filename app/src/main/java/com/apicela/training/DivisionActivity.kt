@@ -42,7 +42,7 @@ class DivisionActivity : AppCompatActivity() {
             val listOfDivisions: List<Division>? = workout?.listOfDivision
             withContext(Dispatchers.Main) {
                 listOfDivisions?.forEach { division ->
-                    val item = ViewCreator.createDivisionLine(applicationContext, division.divisionName)
+                    val item = ViewCreator.createDivisionLine(applicationContext, division.image, division.divisionName)
                     item.setOnClickListener {
                         val intent = Intent(this@DivisionActivity, ExerciseActivity::class.java)
                         intent.putExtra("division_id", division.id)

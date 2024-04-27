@@ -90,6 +90,36 @@
             android:text="Divisão"
             android:textColor="@color/amarelo_personalizado"
             ></TextView>
+
+        <EditText
+            android:id="@+id/imageUrlText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/pedido_field"
+            android:textSize="15dp"
+            android:hint="URL da imagem/GIF"
+            android:textColor="@color/white"
+            android:textColorHint="@color/amarelo_personalizado"
+            android:paddingStart="15dp"
+            />
+
+        <ImageView
+            android:layout_width="87dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-45dp"
+            android:src="@drawable/light_black_image"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginTop="-19dp"
+            android:layout_marginStart="20dp"
+            android:text="Imagem/GIF"
+            android:textColor="@color/amarelo_personalizado"
+            ></TextView>
     </LinearLayout>
 
     <Button

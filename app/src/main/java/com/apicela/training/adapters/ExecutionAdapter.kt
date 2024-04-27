@@ -1,7 +1,5 @@
 package com.apicela.training.adapters
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.R
 import com.apicela.training.models.Execution
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 
 class ExecutionAdapter(private var executionMap: Map<String, List<Execution>>) :

@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/newTrainingButtonLayout"
-        android:padding="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="   MEUS TREINAMENTOS"
+            android:gravity="center"
+            android:text="MEUS TREINAMENTOS"
             android:textSize="30dp"
             ></TextView>
     </LinearLayout>
@@ -69,12 +69,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"    >
+        android:gravity="center"
+        android:paddingBottom="10dp">
         <ImageButton
             android:id="@+id/home_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/home_button"
+            android:src="@drawable/statistics"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toBottomOf="@id/scrollView"
             android:layout_marginStart="20dp"

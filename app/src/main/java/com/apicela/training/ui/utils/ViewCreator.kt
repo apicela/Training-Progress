@@ -1,20 +1,13 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.marginTop
-import com.apicela.training.ExerciseActivity
 import com.apicela.training.R
-import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.google.android.material.shape.ShapeAppearanceModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -98,12 +91,13 @@ class ViewCreator {
             cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.semi_black))
 
             // Adicionando uma TextView dentro do CardView
-            var text = Text.createTextView(context, text, tag)
+            var text = Text.createTextView(context, text, "cardViewWorkout",tag)
 
 
             val img = Image.createCircleImageView(
                 context,
                 "muscle_group_chest",
+                false,
                 null,
                 context.resources.getDimensionPixelSize(R.dimen.dp75)
             )
@@ -148,11 +142,12 @@ class ViewCreator {
             var img = Image.createCircleImageView(
                 context,
                 exercise.image,
+                true,
                 appearanceModel,
                 context.resources.getDimensionPixelSize(R.dimen.dp50)
             )
             linearLayout.addView(img)
-            val text = Text.createTextView(context, exercise.exerciseName, exercise.muscleType)
+            val text = Text.createTextView(context, exercise.exerciseName, "cardViewWorkout",exercise.muscleType)
             text.textSize = 16f
             val textLayoutParams = LinearLayout.LayoutParams(
                 0,
@@ -181,17 +176,19 @@ class ViewCreator {
 
         fun createDivisionLine(
             context: Context,
+            image : String,
             text: String): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
             linearLayout.layoutParams = defaultParam
-//            val img = Image.createCircleImageView(
-//                context,
-//                image,
-//                appearanceModel,
-//                context.resources.getDimensionPixelSize(R.dimen.dp50)
-//            )
-//            linearLayout.addView(img)
-            val text = Text.createTextView(context, text, null)
+            val img = Image.createCircleImageView(
+                context,
+                image,
+                false,
+                null,
+                context.resources.getDimensionPixelSize(R.dimen.dp50)
+            )
+            linearLayout.addView(img)
+            val text = Text.createTextView(context, text, "TextViewDivision",null)
             linearLayout.addView(text)
             return linearLayout
         }

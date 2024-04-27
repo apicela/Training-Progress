@@ -38,8 +38,17 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="TextViewDivision">
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:textColor">@color/amarelo_personalizado</item>
+    </style>
 
     <style name="linearLayoutExercise">
         <item name="android:orientation">horizontal</item>
@@ -74,8 +83,6 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:paddingTop">15dp</item>
-        <item name="android:layout_marginStart">20dp</item>
-
     </style>
 
     <style name="ImageViewExercise">

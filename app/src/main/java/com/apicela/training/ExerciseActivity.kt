@@ -103,6 +103,8 @@ class ExerciseActivity : AppCompatActivity() {
                     exerciseItem.setOnClickListener{
                         val intent = Intent( this@ExerciseActivity, ExecutionActivity::class.java)
                         intent.putExtra("exercise_id", exercise.id)
+                        intent.putExtra("exercise_image", exercise.image)
+                        intent.putExtra("exercise_name", exercise.exerciseName)
                         startActivity(intent)
                     }
                     val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")

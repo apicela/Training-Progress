@@ -24,6 +24,8 @@ class CreateDivision : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_division)
         val divisionName: EditText = findViewById(R.id.divisionNameText)
+        val image: EditText = findViewById(R.id.imageUrlText)
+
         divisionService = DivisionService(HomeActivity.database)
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
@@ -31,7 +33,7 @@ class CreateDivision : AppCompatActivity() {
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                val division = divisionService.createDivision(divisionName.text.toString())
+                val division = divisionService.createDivision(divisionName.text.toString(), image.text.toString())
                 divisionService.addDivisionToWorkout(division, workout_id!!)
             }
             val resultIntent = Intent()

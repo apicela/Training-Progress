@@ -11,16 +11,12 @@ import androidx.fragment.app.DialogFragment
 import com.apicela.training.HomeActivity
 import com.apicela.training.R
 import com.apicela.training.models.Execution
-import com.apicela.training.services.DivisionService
 import com.apicela.training.services.ExecutionService
 import com.apicela.training.ui.utils.Components
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -39,7 +35,7 @@ class RegisterExecutionDialog(private val exerciseId : String, private val conte
         val editTextRepeticoes = view.findViewById<EditText>(R.id.editTextRepeticoes)
         val buttonConfirmar = view.findViewById<Button>(R.id.buttonConfirmar)
         val buttonCancelar = view.findViewById<Button>(R.id.buttonCancelar)
-        val date = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
+        var date = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         editTextDate.setText(date as String)
         editTextDate.setOnClickListener{
@@ -49,12 +45,12 @@ class RegisterExecutionDialog(private val exerciseId : String, private val conte
         buttonConfirmar.setOnClickListener {
             // Aqui você pode obter os valores dos EditTexts e fazer o que quiser com eles
             val kg = editTextKG.text.toString().toFloatOrNull() ?: 0f
-            val repetitions = editTextRepeticoes.text.toString().toIntOrNull() ?: 0
+            val repetitions = editTextRepeticoes.text.toString().toFloatOrNull() ?: 0f
 //            val dateString = "22/04/2024"
             val format = SimpleDateFormat("dd/MM/yyyy")
-
             // Faça o que precisar com os valores
-            val execution = Execution(repetitions, kg,exerciseId,  format.parse(date) as Date)
+            Log.d("date", editTextDate.text.toString())
+            val execution = Execution(repetitions, kg,exerciseId,  format.parse(editTextDate.text.toString()) as Date)
             GlobalScope.launch {
                 executionService.addExecutionToDatabase(execution)
             }

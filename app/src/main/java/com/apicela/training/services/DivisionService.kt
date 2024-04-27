@@ -7,8 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DivisionService(private val db: Database){
-    fun createDivision( divisionName: String) : Division {
-        val division = Division( divisionName, listOf())
+    fun createDivision(divisionName: String, image : String) : Division {
+        val division = Division( divisionName, image,listOf())
         CoroutineScope(Dispatchers.IO).launch {
             db.divisionDao().insert(division)
         }

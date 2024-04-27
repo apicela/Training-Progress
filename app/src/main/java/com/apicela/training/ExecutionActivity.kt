@@ -1,12 +1,5 @@
 package com.apicela.training
 
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-
 //class ExecutionActivity : AppCompatActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -14,20 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 //    }
 //}
 
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.ExecutionAdapter
 import com.apicela.training.dialog.RegisterExecutionDialog
 import com.apicela.training.models.Execution
-import com.apicela.training.services.DivisionService
 import com.apicela.training.services.ExecutionService
-import com.apicela.training.utils.Codes
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.apicela.training.ui.utils.Image
+import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -38,6 +32,10 @@ class ExecutionActivity : AppCompatActivity() {
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
     private lateinit var executionService : ExecutionService
+    private lateinit var nameText: TextView
+    private lateinit var imageExercise: ShapeableImageView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("activity", "execution started")
@@ -47,7 +45,15 @@ class ExecutionActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_button)
         recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
         plusButton = findViewById(R.id.plus_button)
+        nameText = findViewById(R.id.name)
+        imageExercise = findViewById(R.id.image)
+
+
         val exercise_id = intent.getStringExtra("exercise_id") as String
+        nameText.text = intent.getStringExtra("exercise_name") as String
+        val exercise_image = intent.getStringExtra("exercise_image") as String
+
+       Image.setImageToImageView(this,imageExercise, exercise_image)
 
         val executionMap = executionListToMap(exercise_id)
         executionAdapter = ExecutionAdapter(executionMap)

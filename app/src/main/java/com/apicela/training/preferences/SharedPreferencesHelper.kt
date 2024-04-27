@@ -1,7 +1,6 @@
 package com.apicela.training.preferences
 
 import android.content.Context
-import android.util.Log
 import com.apicela.training.data.Database
 import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService

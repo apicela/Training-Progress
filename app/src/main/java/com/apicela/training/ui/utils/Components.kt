@@ -3,12 +3,10 @@ package com.apicela.training.ui.utils
 import android.app.DatePickerDialog
 import android.content.Context
 import android.util.Log
-import android.widget.DatePicker
 import android.widget.EditText
 import com.apicela.training.R
 import java.time.LocalDate
 import java.util.Calendar
-import java.util.Date
 
 class Components {
     companion object{
@@ -31,7 +29,7 @@ class Components {
                         "${selectedMonth + 1}"
                     }
                     val selectedDateTime = "$selectedDay/$formattedMonth/$selectedYear"
-
+                    Log.d("date", " selected  :  ${selectedDateTime}")
                     dateTimeText.setText(selectedDateTime)
                 },
                 year,
@@ -39,8 +37,8 @@ class Components {
                 day
             )
 
-                    // Show the DatePickerDialog
-                datePickerDialog.show()
+            // Show the DatePickerDialog
+            datePickerDialog.show()
         }
 
 

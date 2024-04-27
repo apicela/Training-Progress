@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-
+        android:inputType="number"
         android:textColor="@color/amarelo_personalizado"
         android:textColorHint="@color/amarelo_personalizado"
         android:hint="kg"/>
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-
+        android:inputType="number"
         android:textColor="@color/amarelo_personalizado"
         android:textColorHint="@color/amarelo_personalizado"
         android:hint="Repetições"/>

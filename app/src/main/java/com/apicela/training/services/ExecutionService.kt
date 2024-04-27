@@ -2,12 +2,8 @@ package com.apicela.training.services
 
 import android.util.Log
 import com.apicela.training.data.Database
-import com.apicela.training.models.Division
 import com.apicela.training.models.Execution
-import com.apicela.training.models.Exercise
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ExecutionService(private val db: Database) {
