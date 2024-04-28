@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 
 class SharedPreferencesHelper() {
     private val PREF_NAME = "user_prefs"
-    private val PREF_INITIALIZED = "startedDB"
+    private val PREF_INITIALIZED = "started2DB"
 
     suspend fun initializeOnce(context: Context, db : Database) {
         withContext(Dispatchers.IO) {

@@ -27,15 +27,22 @@ data class Exercise(@PrimaryKey var id: String , var exerciseName: String, var i
 //            Exercise("SUPINO MÁQUINA", "someUrl1",Muscles.CHEST),
                 // BACK
                 Exercise(UUID.randomUUID().toString(),"PUXADOR PULLEY", "puxador_pulley", Muscle.BACK),
+                Exercise(UUID.randomUUID().toString(),"BARRA FIXA", "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/costas-barra-fixa-pegada-aberta-palma-para-frente-chinup.gif", Muscle.BACK),
                 Exercise(UUID.randomUUID().toString(),"REMADA CURVADA", "remada_curvada", Muscle.BACK),
+                Exercise(UUID.randomUUID().toString(),"REMADA BAIXA", "https://www.mundoboaforma.com.br/wp-content/uploads/2021/09/remada-sentado-com-cabos-e-triangulo-para-costas.gif", Muscle.BACK),
+
 
                 // SHOULDER
                 Exercise(UUID.randomUUID().toString(),"LEVANTAMENTO LATERAL", "levantamento_lateral", Muscle.SHOULDER),
+                Exercise(UUID.randomUUID().toString(),"DESENVOLVIMENTO MÁQUINA", "https://karoldeliberato.com.br/wp-content/uploads/2023/04/image70.gif", Muscle.SHOULDER),
+                Exercise(UUID.randomUUID().toString(),"DESENVOLVIMENTO HALTERES", "https://karoldeliberato.com.br/wp-content/uploads/2023/04/image36-1.gif", Muscle.SHOULDER),
 
                 // TRICEPS
                 Exercise(UUID.randomUUID().toString(),"TRÍCEPS CORDA", "triceps_corda", Muscle.TRICEPS),
                 Exercise(UUID.randomUUID().toString(),"TRÍCEPS BARRA RETA", "triceps_pulley", Muscle.TRICEPS),
+                Exercise(UUID.randomUUID().toString(),"TRÍCEPS FRANCES", "https://www.hipertrofia.org/blog/wp-content/uploads/2023/10/dumbbell-seated-triceps-extension.gif", Muscle.TRICEPS),
                 Exercise(UUID.randomUUID().toString(),"TRÍCEPS TESTA", "triceps_testa", Muscle.TRICEPS),
+
                 // BICEPS
                 Exercise(UUID.randomUUID().toString(),"ROSCA MARTELO", "rosca_martelo", Muscle.BICEPS),
                 Exercise(UUID.randomUUID().toString(),"ROSCA DIRETA COM A BARRA", "rosca_direta_barra", Muscle.BICEPS),

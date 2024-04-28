@@ -16,6 +16,12 @@ class ExerciseService(private val db: Database) {
         Log.d("Exercise", "Exercise added to database")
     }
 
+    suspend fun getExerciseById(id : String) : Exercise{
+       return withContext(Dispatchers.IO) {
+             db.exerciseDao().getExerciseById(id)
+        }
+    }
+
 //    fun addExerciseToDivision(exerciseName: String, image: String, muscleType: Muscle) {
 //        val exerciseItem = Exercise(exerciseName, image, muscleType)
 //        val lista = DataManager.loadExerciseItems()

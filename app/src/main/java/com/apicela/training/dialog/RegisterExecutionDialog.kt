@@ -45,12 +45,12 @@ class RegisterExecutionDialog(private val exerciseId : String, private val conte
         buttonConfirmar.setOnClickListener {
             // Aqui você pode obter os valores dos EditTexts e fazer o que quiser com eles
             val kg = editTextKG.text.toString().toFloatOrNull() ?: 0f
-            val repetitions = editTextRepeticoes.text.toString().toFloatOrNull() ?: 0f
+            val repetitions = editTextRepeticoes.text.toString().toIntOrNull() ?: 0
 //            val dateString = "22/04/2024"
             val format = SimpleDateFormat("dd/MM/yyyy")
-            // Faça o que precisar com os valores
-            Log.d("date", editTextDate.text.toString())
-            val execution = Execution(repetitions, kg,exerciseId,  format.parse(editTextDate.text.toString()) as Date)
+            val formattedDate = format.parse(editTextDate.text.toString()) as Date
+
+            val execution = Execution(repetitions, kg,exerciseId, formattedDate )
             GlobalScope.launch {
                 executionService.addExecutionToDatabase(execution)
             }

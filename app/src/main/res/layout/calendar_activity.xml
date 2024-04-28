@@ -5,7 +5,9 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarActivity">
+    tools:context=".CalendarActivity"
+    android:background="@color/light_black">
+
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
@@ -35,7 +37,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="end">
 
             <Button
@@ -48,19 +49,29 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+<LinearLayout
+    android:id="@+id/layoutCalendar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/backLinearLayout"
+    >
     <CalendarView
         android:id="@+id/calendarView"
-        app:layout_constraintTop_toBottomOf="@id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
+</LinearLayout>
 
-<!--    <ListView-->
-<!--        android:id="@+id/listView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/calendarView"-->
-<!--        android:layout_marginTop="8dp"/>-->
-
+    <LinearLayout
+        android:id="@+id/layoutList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutCalendar"
+        >
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
