@@ -38,10 +38,10 @@ data class Exercise(@PrimaryKey var id: String , var exerciseName: String, var i
                 Exercise(UUID.randomUUID().toString(),"DESENVOLVIMENTO HALTERES", "https://karoldeliberato.com.br/wp-content/uploads/2023/04/image36-1.gif", Muscle.SHOULDER),
 
                 // TRICEPS
-                Exercise(UUID.randomUUID().toString(),"TRÍCEPS CORDA", "triceps_corda", Muscle.TRICEPS),
-                Exercise(UUID.randomUUID().toString(),"TRÍCEPS BARRA RETA", "triceps_pulley", Muscle.TRICEPS),
-                Exercise(UUID.randomUUID().toString(),"TRÍCEPS FRANCES", "https://www.hipertrofia.org/blog/wp-content/uploads/2023/10/dumbbell-seated-triceps-extension.gif", Muscle.TRICEPS),
-                Exercise(UUID.randomUUID().toString(),"TRÍCEPS TESTA", "triceps_testa", Muscle.TRICEPS),
+                Exercise(UUID.randomUUID().toString(),"TRICEPS CORDA", "triceps_corda", Muscle.TRICEPS),
+                Exercise(UUID.randomUUID().toString(),"TRICEPS BARRA RETA", "triceps_pulley", Muscle.TRICEPS),
+                Exercise(UUID.randomUUID().toString(),"TRICEPS FRANCES", "https://www.hipertrofia.org/blog/wp-content/uploads/2023/10/dumbbell-seated-triceps-extension.gif", Muscle.TRICEPS),
+                Exercise(UUID.randomUUID().toString(),"TRICEPS TESTA", "triceps_testa", Muscle.TRICEPS),
 
                 // BICEPS
                 Exercise(UUID.randomUUID().toString(),"ROSCA MARTELO", "rosca_martelo", Muscle.BICEPS),

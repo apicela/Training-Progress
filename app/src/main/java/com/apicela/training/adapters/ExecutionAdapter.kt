@@ -31,7 +31,7 @@ class ExecutionAdapter(private var executionMap: Map<String, List<Execution>>) :
 
         val executionsText = StringBuilder()
         executions?.forEach { execution ->
-            executionsText.append("${execution.repetitions} reps - ${execution.kg} kg\n")
+            executionsText.append("${execution.kg} kg x ${execution.repetitions}\n")
         }
 
         holder.repetitionsTextView.text = executionsText.toString()

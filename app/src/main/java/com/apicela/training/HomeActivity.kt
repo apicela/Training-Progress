@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
             val divisions = database.workoutDao().getAllWorkouts()
             withContext(Dispatchers.Main) {
                 divisions.forEach { workout ->
-                    val cardWorkout = ViewCreator.createCardViewForWorkout(applicationContext, workout.workoutName, workout.workoutName)
+                    val cardWorkout = ViewCreator.createCardViewForWorkout(applicationContext, workout.workoutName, workout.workoutName, workout.image)
                     cardWorkout.setOnClickListener {
                         val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
                         intent.putExtra("workout_id", workout.id)

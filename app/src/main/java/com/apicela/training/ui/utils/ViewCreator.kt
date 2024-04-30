@@ -68,12 +68,7 @@ class ViewCreator {
             return linearLayout
         }
 
-
-        var url =
-            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/5eeea355389655.59822ff824b72.gif"
-
-
-        fun createCardViewForWorkout(context: Context, text: String, tag: String?): CardView {
+        fun createCardViewForWorkout(context: Context, text: String, tag: String?, image : String): CardView {
             val linearLayout = createLinearLayoutForExercise(context)
             // Criando um novo CardView
             val cardView = CardView(context, null, R.style.CardView_Workout)
@@ -96,7 +91,7 @@ class ViewCreator {
 
             val img = Image.createCircleImageView(
                 context,
-                "muscle_group_chest",
+                image,
                 false,
                 null,
                 context.resources.getDimensionPixelSize(R.dimen.dp75)

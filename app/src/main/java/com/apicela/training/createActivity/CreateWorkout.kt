@@ -30,9 +30,10 @@ class CreateWorkout : AppCompatActivity() {
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
+                var image = listOf("simpsons","simpsons2", "bobsponja").random()
             workoutService.addWorkout(
                 workouteName.text.toString(),
-                descricaoText.text.toString()
+                descricaoText.text.toString(), image
             )
             val resultIntent = Intent()
             setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)

@@ -12,9 +12,12 @@ class UtilsComponents {
             return spinnerItem
         }
 
-        fun <T> turnListOfViewVisible(listOfView: List<T>) {
+        fun <T> turnListOfViewVisible(listOfView: List<T>, visible : Boolean) {
             if (listOfView.all { it is CheckBox }) {
-                listOfView.forEach { (it as CheckBox).visibility = View.VISIBLE }
+                if(visible){
+                listOfView.forEach { (it as CheckBox).visibility = View.VISIBLE }}
+                else {
+                    listOfView.forEach { (it as CheckBox).visibility = View.INVISIBLE }}
             }
         }
 

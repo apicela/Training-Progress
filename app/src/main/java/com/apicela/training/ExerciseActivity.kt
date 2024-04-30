@@ -58,6 +58,7 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         val listOfCheckBox: MutableList<CheckBox> = mutableListOf()
+        var checkBoxVisible = false;
         // layouts
         containerLinearLayout = findViewById(R.id.container)
         plusButton = findViewById(R.id.plus_button)
@@ -99,14 +100,15 @@ class ExerciseActivity : AppCompatActivity() {
                         false,
                         isDivision
                     )
-
+                    if(isDivision){
                     exerciseItem.setOnClickListener{
                         val intent = Intent( this@ExerciseActivity, ExecutionActivity::class.java)
                         intent.putExtra("exercise_id", exercise.id)
                         intent.putExtra("exercise_image", exercise.image)
                         intent.putExtra("exercise_name", exercise.exerciseName)
                         startActivity(intent)
-                    }
+                    }}
+
                     val checkBox = exerciseItem.findViewWithTag<CheckBox>("exercise_checkbox")
                     listOfCheckBox.add(checkBox)
                     when (exercise.muscleType) {
@@ -190,7 +192,8 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         editButton.setOnClickListener{
-            UtilsComponents.turnListOfViewVisible(listOfCheckBox)
+            UtilsComponents.turnListOfViewVisible(listOfCheckBox, checkBoxVisible)
+            checkBoxVisible = !checkBoxVisible;
         }
     }
 
@@ -225,8 +228,10 @@ class ExerciseActivity : AppCompatActivity() {
                     // Iterando sobre os filhos do LinearLayout interno
                     for (j in 0 until it.childCount) {
                         val innerLinearLayout = it.getChildAt(j) as? LinearLayout
+//                        innerLinearLayout?.visibility = LinearLayout.GONE
                         // Verificando se o filho do LinearLayout interno é um LinearLayout
                         innerLinearLayout?.let { innerLayout ->
+                            innerLinearLayout.visibility = LinearLayout.GONE
                             // Iterando sobre os filhos do LinearLayout interno
                             for (k in 0 until innerLayout.childCount) {
                                 val view = innerLayout.getChildAt(k)
@@ -235,41 +240,35 @@ class ExerciseActivity : AppCompatActivity() {
                                     // Realize as ações desejadas com o TextView encontrado
                                     if (view.text.contains(
                                             query,
-                                            ignoreCase = true
+                                            ignoreCase = true,
                                         ) || query.isNullOrBlank()
                                     ) {
-                                        view.visibility = LinearLayout.VISIBLE
+                                        innerLinearLayout.visibility = LinearLayout.VISIBLE
                                         when (view.tag) {
                                             Muscle.CHEST -> cardViewVisible[chestCardView] = 1
                                             Muscle.BACK -> cardViewVisible[backCardView] = 1
                                             Muscle.SHOULDER -> cardViewVisible[shoulderCardView] = 1
                                             Muscle.TRICEPS -> cardViewVisible[tricepsCardView] = 1
                                             Muscle.BICEPS -> cardViewVisible[bicepsCardView] = 1
-                                            Muscle.QUADRICEPS -> cardViewVisible[quadricepsCardView] =
-                                                1
-
-                                            Muscle.HAMSTRING -> cardViewVisible[hamstringCardView] =
-                                                1
-
+                                            Muscle.QUADRICEPS -> cardViewVisible[quadricepsCardView] = 1
+                                            Muscle.HAMSTRING -> cardViewVisible[hamstringCardView] = 1
                                             Muscle.ABDOMINAL -> cardViewVisible[absCardView] = 1
                                             Muscle.OTHER -> cardViewVisible[othersCardView] = 1
                                             else -> cardViewVisible[glutesCalvesCardView] = 1
                                         }
-                                    } else {
-                                        view.visibility = LinearLayout.GONE
                                     }
                                 }
                             }
                         }
                     }
                     // apos ler tudo
-//                    cardViewVisible.forEach { (muscle, value) ->
-//                        if (value == 1) {
-//                            muscle.visibility = CardView.VISIBLE
-//                        } else {
-//                            muscle.visibility = CardView.GONE
-//                        }
-//                    }
+                    cardViewVisible.forEach { (muscle, value) ->
+                        if (value == 1) {
+                            muscle.visibility = CardView.VISIBLE
+                        } else {
+                            muscle.visibility = CardView.GONE
+                        }
+                    }
                 }
             }
         }

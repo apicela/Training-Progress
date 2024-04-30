@@ -221,22 +221,23 @@ class AddExerciseActivity : AppCompatActivity() {
                 // Iterando sobre os filhos do LinearLayout interno
                 for (j in 0 until it.childCount) {
                     val innerLinearLayout = it.getChildAt(j) as? LinearLayout
+//                        innerLinearLayout?.visibility = LinearLayout.GONE
                     // Verificando se o filho do LinearLayout interno é um LinearLayout
                     innerLinearLayout?.let { innerLayout ->
+                        innerLinearLayout.visibility = LinearLayout.GONE
                         // Iterando sobre os filhos do LinearLayout interno
                         for (k in 0 until innerLayout.childCount) {
                             val view = innerLayout.getChildAt(k)
                             // Verificando se o filho é um TextView
-                            if (view is TextView) {
+                            if (view is TextView && view !is CheckBox) {
                                 // Realize as ações desejadas com o TextView encontrado
-                                val textView = view
-                                if (textView.text.contains(
+                                if (view.text.contains(
                                         query,
-                                        ignoreCase = true
+                                        ignoreCase = true,
                                     ) || query.isNullOrBlank()
                                 ) {
-                                    innerLayout.visibility = LinearLayout.VISIBLE
-                                    when (textView.tag) {
+                                    innerLinearLayout.visibility = LinearLayout.VISIBLE
+                                    when (view.tag) {
                                         Muscle.CHEST -> cardViewVisible[chestCardView] = 1
                                         Muscle.BACK -> cardViewVisible[backCardView] = 1
                                         Muscle.SHOULDER -> cardViewVisible[shoulderCardView] = 1
@@ -248,8 +249,6 @@ class AddExerciseActivity : AppCompatActivity() {
                                         Muscle.OTHER -> cardViewVisible[othersCardView] = 1
                                         else -> cardViewVisible[glutesCalvesCardView] = 1
                                     }
-                                } else {
-                                    innerLayout.visibility = LinearLayout.GONE
                                 }
                             }
                         }

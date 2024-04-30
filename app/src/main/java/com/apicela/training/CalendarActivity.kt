@@ -32,29 +32,22 @@ class CalendarActivity : AppCompatActivity() {
         calendarView = findViewById(R.id.calendarView)
         listView = findViewById(R.id.listView)
 
-
-        val listOfExecutions = mutableListOf("");
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listOfExecutions)
+        val today = Date()
+//        val items = runBlocking{ executionService.findExecutionsListByDate(today) }
+        val listOfExecutions = runBlocking { executionService.groupExercisesExecutionByDateIntoString(today) }
+        val adapter = ArrayAdapter(this, R.layout.simple_list_item, listOfExecutions)
+        listView.adapter = adapter
 
         // Configurar o ouvinte de clique no calendário
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            listOfExecutions.clear()
+            adapter.clear()
             val clickedDate = Calendar.getInstance()
             clickedDate.set(year, month, dayOfMonth)
             val date : Date = (clickedDate.time)
-            val items = runBlocking{ executionService.findExecutionsListByDate(date) }
-            val groupedItems = items.groupBy { it.exercise_id }
-            for (exerciseId in groupedItems.keys) {
-                val exerciseName = runBlocking { exerciseService.getExerciseById(exerciseId).exerciseName }
-                listOfExecutions.add("${exerciseName} : ${executionService.joinExerciseListToString(groupedItems[exerciseId]!!)}")
-            }
-            Log.d("calendar","${listOfExecutions}")
-            adapter.clear()
+            val listOfExecutions = runBlocking { executionService.groupExercisesExecutionByDateIntoString(date) }
             adapter.addAll(listOfExecutions)
+            adapter.notifyDataSetChanged()
         }
-            // Configurar o adaptador da lista
-            // Atualizar a lista da interface do usuário
-
         }
 
 

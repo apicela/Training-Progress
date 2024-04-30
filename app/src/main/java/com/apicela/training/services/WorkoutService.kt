@@ -8,9 +8,9 @@ import kotlinx.coroutines.withContext
 class WorkoutService(private val db: Database) {
     val divisionService : DivisionService = DivisionService(db)
 
-    suspend fun addWorkout(workoutName: String, descricao: String) {
+    suspend fun addWorkout(workoutName: String, descricao: String, image : String) {
         val workoutItem = Workout(
-            workoutName, descricao, listOf(
+            workoutName, descricao, image, listOf(
                 divisionService.createDivision("A", "division_a"),
                 divisionService.createDivision("B","division_b"),
                 divisionService.createDivision("C","division_c"),
