@@ -31,6 +31,7 @@ class ExecutionActivity : AppCompatActivity() {
     private lateinit var recyclerViewExecutions: RecyclerView // Add this line
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
+    private lateinit var edit: Button
     private lateinit var executionService : ExecutionService
     private lateinit var nameText: TextView
     private lateinit var imageExercise: ShapeableImageView
@@ -43,40 +44,38 @@ class ExecutionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_execution)
         executionService = ExecutionService(HomeActivity.database)
         backButton = findViewById(R.id.back_button)
+        edit = findViewById(R.id.edit)
         recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
         plusButton = findViewById(R.id.plus_button)
         nameText = findViewById(R.id.name)
         imageExercise = findViewById(R.id.image)
 
-
+        var editMode = true;
         val exercise_id = intent.getStringExtra("exercise_id") as String
         nameText.text = intent.getStringExtra("exercise_name") as String
         val exercise_image = intent.getStringExtra("exercise_image") as String
 
        Image.setImageToImageView(this,imageExercise, exercise_image)
 
-        val executionMap = executionListToMap(exercise_id)
+        val executionMap = executionService.executionListToMap(exercise_id)
         Log.d("Execution","${executionMap}")
         executionAdapter = ExecutionAdapter(this,executionMap)
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
         plusButton.setOnClickListener {
-            val dialog = RegisterExecutionDialog(exercise_id, this)
+            val dialog = RegisterExecutionDialog(exercise_id, null, this)
             dialog.show(supportFragmentManager, "RegistrarExercicioDialog")
             dialog.onDismissListener = {
-                executionAdapter.updateData(executionListToMap(exercise_id))
+                executionAdapter.updateData(executionService.executionListToMap(exercise_id))
             }
         }
         backButton.setOnClickListener {
             finish()
         }
-    }
-    fun executionListToMap(exercise_id : String) : Map<String, List<Execution>>{
-        val executionList = runBlocking { executionService.findExecutionsListByExerciseId(exercise_id) }
-        return executionList.groupBy { execution ->
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(execution.date)
+        edit.setOnClickListener {
+            executionAdapter.setEditing(editMode)
+            editMode = !editMode
         }
     }
-
 }
 

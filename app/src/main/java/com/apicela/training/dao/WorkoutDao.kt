@@ -16,6 +16,9 @@ interface WorkoutDao {
     @Insert
     fun insert(workout: Workout)
 
+    @Query("DELETE FROM workout WHERE id = :id")
+    fun deleteById(id: String)
+
     @Update
     fun update(workout: Workout)
 }

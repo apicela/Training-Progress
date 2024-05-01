@@ -7,10 +7,12 @@ import com.apicela.training.models.Execution
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class ExecutionService(private val db: Database) {
-    val exerciseService : ExerciseService = ExerciseService(HomeActivity.database)
+    val exerciseService : ExerciseService = ExerciseService(db)
 
     suspend fun addExecutionToDatabase(execution: Execution) {
         withContext(Dispatchers.IO) {
@@ -19,7 +21,13 @@ class ExecutionService(private val db: Database) {
         Log.d("Exercise", "Exercise added to database")
     }
 
-     suspend fun findExecutionsListByExerciseId( exerciseId: String) : List<Execution> {
+    suspend fun deleteById(id : String) {
+        withContext(Dispatchers.IO) {
+            db.executionDao().deleteById(id)
+        }
+    }
+
+    suspend fun findExecutionsListByExerciseId( exerciseId: String) : List<Execution> {
          return withContext(Dispatchers.IO) {
              db.executionDao().getAllExecutionFromExercise(exerciseId)
          }
@@ -44,9 +52,34 @@ class ExecutionService(private val db: Database) {
         }
         return listOfExecutions
     }
+
+     fun executionListToMap(exercise_id : String) : Map<String, List<Execution>>{
+        val executionList = runBlocking { findExecutionsListByExerciseId(exercise_id) }
+        return executionList.groupBy { execution ->
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(execution.date)
+        }
+    }
     suspend fun getAll() : List<Execution> {
         return withContext(Dispatchers.IO) {
             db.executionDao().getAllExecution()
+        }
+    }
+
+    suspend fun updateExecutionObject(execution: Execution){
+        withContext(Dispatchers.IO) {
+            db.executionDao().update(execution)
+        }
+    }
+
+    suspend fun getLastInsertedExecution(id : String) : Execution? {
+        Log.d("execution","get last Inserted ")
+        return withContext(Dispatchers.IO) {
+            db.executionDao().getLastInsertedExecution(id)
+        }
+    }
+    suspend fun getExecutionById(id : String) : Execution? {
+        return withContext(Dispatchers.IO) {
+            db.executionDao().getExecutionById(id)
         }
     }
 

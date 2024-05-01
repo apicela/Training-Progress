@@ -20,4 +20,15 @@ class WorkoutService(private val db: Database) {
             db.workoutDao().insert(workoutItem)
         }
     }
+
+    suspend fun getAllWorkouts() : List<Workout>{
+        return  withContext(Dispatchers.IO) {
+            db.workoutDao().getAllWorkouts()
+        }
+    }
+
+    suspend fun deleteById(id : String){
+         withContext(Dispatchers.IO) {
+            db.workoutDao().deleteById(id)
+        }    }
 }
