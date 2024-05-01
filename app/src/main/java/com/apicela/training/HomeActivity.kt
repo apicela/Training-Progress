@@ -2,22 +2,20 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.adapters.WorkoutAdapter
 import com.apicela.training.createActivity.CreateWorkout
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
-import com.apicela.training.dialog.DeleteItemDialog
 import com.apicela.training.preferences.SharedPreferencesHelper
 import com.apicela.training.services.WorkoutService
-import com.apicela.training.ui.utils.ViewCreator
 import com.apicela.training.utils.Codes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.NonCancellable.isCancelled
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -27,49 +25,37 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         lateinit var database: Database
     }
+    private lateinit var workoutAdapter: WorkoutAdapter
     private lateinit var exercisesButton: ImageButton
     private lateinit var calendarButton: ImageButton
     private lateinit var newWorkoutButton: AppCompatButton
-    private lateinit var containerWorkout: LinearLayout
+    private lateinit var recyclerView: RecyclerView // Add this line
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        database = DataManager.getDatabase(applicationContext)
+        val workoutService : WorkoutService = WorkoutService(database)
+
+        val workouts = runBlocking { workoutService.getAllWorkouts() }
+
+        recyclerView = findViewById(R.id.recyclerView)
+        workoutAdapter = WorkoutAdapter(this, workouts, workoutService)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = workoutAdapter
         CoroutineScope(Dispatchers.IO).launch {
-            database = DataManager.getDatabase(applicationContext)
-            val workoutService : WorkoutService = WorkoutService(database)
             val sharedPreferencesHelper = SharedPreferencesHelper()
             sharedPreferencesHelper.initializeOnce(applicationContext, database)
-            val divisions = workoutService.getAllWorkouts()
             withContext(Dispatchers.Main) {
-                divisions.forEach { workout ->
-                    val cardWorkout = ViewCreator.createCardViewForWorkout(applicationContext, workout.workoutName, workout.workoutName, workout.image)
-                    cardWorkout.setOnClickListener {
-                        val intent = Intent(this@HomeActivity, DivisionActivity::class.java)
-                        intent.putExtra("workout_id", workout.id)
-                        startActivity(intent)
-                    }
-                    cardWorkout.setOnLongClickListener{
-                        val dialog = DeleteItemDialog("HAHAHA")
-                        dialog.show(supportFragmentManager, "DeleteItemDialog") // Exibe o DialogFragment
 
-                        dialog.onDismissListener = { // Configura o listener para saber da dismiss do diálogo
-                            val confirmDelete = dialog.confirmed // Verifica se o diálogo foi cancelado (clique em "Cancelar")
-                            if (confirmDelete) {
-                                runBlocking { workoutService.deleteById(workout.id)}
-                            }
-                        }
-                        true
-                    }
-                    containerWorkout.addView(cardWorkout)
                 }
             }
-        }
+
 
         exercisesButton = findViewById(R.id.exercise_button)
         calendarButton = findViewById(R.id.calendar_button)
         newWorkoutButton = findViewById(R.id.new_workout_button)
-        containerWorkout = findViewById(R.id.containerWorkout)
 
 
 
@@ -90,6 +76,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

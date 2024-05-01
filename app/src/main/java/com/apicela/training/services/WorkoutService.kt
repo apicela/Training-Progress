@@ -21,9 +21,9 @@ class WorkoutService(private val db: Database) {
         }
     }
 
-    suspend fun getAllWorkouts() : List<Workout>{
+     suspend fun getAllWorkouts() : List<Workout>{
         return  withContext(Dispatchers.IO) {
-            db.workoutDao().getAllWorkouts()
+             db.workoutDao().getAllWorkouts()
         }
     }
 

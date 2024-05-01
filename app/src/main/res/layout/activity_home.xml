@@ -53,13 +53,14 @@
         app:layout_constraintTop_toBottomOf="@id/newTrainingButtonLayout"
         app:layout_constraintBottom_toTopOf="@id/default_bar"
         >
-        <LinearLayout
-            android:id="@+id/containerWorkout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
-        </LinearLayout>
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintTop_toBottomOf="@+id/newTrainingButtonLayout"
+            />
     </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/default_bar"
