@@ -56,7 +56,8 @@ class ExecutionActivity : AppCompatActivity() {
        Image.setImageToImageView(this,imageExercise, exercise_image)
 
         val executionMap = executionListToMap(exercise_id)
-        executionAdapter = ExecutionAdapter(executionMap)
+        Log.d("Execution","${executionMap}")
+        executionAdapter = ExecutionAdapter(this,executionMap)
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
         plusButton.setOnClickListener {
@@ -76,5 +77,6 @@ class ExecutionActivity : AppCompatActivity() {
             SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(execution.date)
         }
     }
+
 }
 

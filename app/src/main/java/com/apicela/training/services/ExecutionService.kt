@@ -40,7 +40,7 @@ class ExecutionService(private val db: Database) {
         val groupedItems = items.groupBy { it.exercise_id }
         for (exerciseId in groupedItems.keys) {
             val exerciseName = exerciseService.getExerciseById(exerciseId).exerciseName
-            listOfExecutions.add("${exerciseName} : ${joinExerciseListToString(groupedItems[exerciseId]!!)}")
+            listOfExecutions.add("${exerciseName.lowercase()} : ${joinExerciseListToString(groupedItems[exerciseId]!!)}")
         }
         return listOfExecutions
     }
