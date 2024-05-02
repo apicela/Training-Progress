@@ -81,7 +81,7 @@ class ExerciseAdapter(
 
                 }
             }
-            if (isEditing == false) {
+            if (isEditing == false && checkedItemCountChangedListener == null) {
                 exerciseItemView.setOnClickListener {
                     val intent = Intent(holder.itemView.context, ExecutionActivity::class.java)
                     intent.putExtra("exercise_id", exercise.id)
