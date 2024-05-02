@@ -17,5 +17,9 @@ enum class Muscle(val ptbr: String) {
         fun getMuscleByPtbr(muscle: String): String {
             return Muscle.values().find { it.toString() == muscle }!!.ptbr
         }
+
+        fun getMusclePTBRtoENG(muscle: String): Muscle? {
+            return Muscle.values().find { it.ptbr.toString() == muscle }
+        }
     }
 }

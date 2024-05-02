@@ -48,11 +48,12 @@ class CreateExercise : AppCompatActivity() {
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
+                val muscle = (UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
                 exerciseService.addExerciseToDatabase(
                     Exercise(
                         exerciseName.text.toString(),
                         imageUrl.text.toString(),
-                        Muscle.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
+                        Muscle.getMusclePTBRtoENG(muscle)!!
                     )
                 )
             }

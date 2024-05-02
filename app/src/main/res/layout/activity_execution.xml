@@ -71,7 +71,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image"
-            style="@style/CardViewImage"
+            style="@style/ImageViewExercise"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImage" />
 
         <TextView
