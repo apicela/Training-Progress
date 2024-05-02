@@ -52,7 +52,7 @@ class ExerciseActivity : AppCompatActivity() {
                 }
         }
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, exerciseService)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap,division_id, exerciseService)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
 

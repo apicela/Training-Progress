@@ -2,6 +2,7 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +19,12 @@ import com.apicela.training.models.Muscle
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.ui.utils.ImageHelper
 import com.google.android.material.imageview.ShapeableImageView
+import kotlinx.coroutines.runBlocking
 
 
 class ExerciseAdapter(
     private val context: Context, private var exerciseMap: Map<String, List<Exercise>>,
+    private val divisionId : String? = null,
     private val exerciseService: ExerciseService,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
@@ -54,9 +57,19 @@ class ExerciseAdapter(
             val exerciseName = exerciseItemView.findViewById<TextView>(R.id.exercise_text)
             val exerciseImage = exerciseItemView.findViewById<ImageView>(R.id.exercise_image)
             val checkbox = exerciseItemView.findViewById<CheckBox>(R.id.checkbox)
+            val minusImage = exerciseItemView.findViewById<ImageView>(R.id.minus)
             exerciseName.text = "${exercise.exerciseName}"
             ImageHelper.setImage(context, exerciseImage, exercise.image, true)
-            checkbox.visibility = if (isEditing && checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
+            checkbox.visibility = if (checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
+            minusImage.visibility = if(isEditing) View.VISIBLE else View.GONE
+
+            minusImage.setOnClickListener{
+                runBlocking {
+                    exerciseService.removeExerciseFromDivision(divisionId!!, exercise.id)
+                    exerciseMap = exerciseService.exerciseListToMap(divisionId!!)!!
+                    notifyDataSetChanged()
+                }
+            }
             checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     checkedItems.add(exercise)
@@ -100,5 +113,6 @@ class ExerciseAdapter(
 
     fun setEditing(isEditing: Boolean) {
         this.isEditing = isEditing
+        notifyDataSetChanged()
     }
 }

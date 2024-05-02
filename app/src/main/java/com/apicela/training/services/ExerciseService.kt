@@ -11,6 +11,13 @@ class ExerciseService(private val db: Database) {
     val divisionService = DivisionService(db)
 
 
+    suspend fun removeExerciseFromDivision(division_id: String, exercise_id : String){
+        var division = divisionService.getDivisionById(division_id)
+        val listOfExercises = division!!.listOfExercises as MutableList<Exercise>
+        listOfExercises.removeIf{it.id == exercise_id}
+        division.listOfExercises = listOfExercises
+        divisionService.updateDivisionObject(division)
+    }
     suspend fun addExerciseToDatabase(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             db.exerciseDao().insert(exercise)

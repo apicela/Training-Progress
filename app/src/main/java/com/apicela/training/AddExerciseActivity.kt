@@ -50,8 +50,7 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
         }
 
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, exerciseService, this)
-        exerciseAdapter.setEditing(true)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, null,exerciseService, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
 
