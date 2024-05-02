@@ -2,28 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/semi_black">
+    android:windowBackground="@android:color/transparent"
+    android:background="@color/semi_black"
 
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/black_dialog"
+
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clique em confirmar para deletar o item abaixo:"
-            android:textSize="25sp"
             android:textColor="@color/amarelo_personalizado"
-            ></TextView>
+            android:padding="25dp"
+            android:gravity="center"
+            android:textSize="25sp"></TextView>
+
         <TextView
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
             android:gravity="center"
-            ></TextView>
+            android:textSize="27sp"></TextView>
 
     </LinearLayout>
 
@@ -33,18 +44,19 @@
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@color/amarelo_personalizado"
-        android:textColor="@color/black"
         android:layout_marginVertical="10dp"
-        android:text="Confirmar"/>
+        android:background="@drawable/yellow_bordered_button"
+        android:text="Confirmar"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/buttonCancelar"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@color/amarelo_personalizado"
-        android:textColor="@color/black"
         android:layout_marginBottom="10dp"
-        android:text="Cancelar"/>
+        android:background="@drawable/yellow_bordered_button"
+        android:text="Cancelar"
+        android:textColor="@color/black" />
+</LinearLayout>
 </LinearLayout>

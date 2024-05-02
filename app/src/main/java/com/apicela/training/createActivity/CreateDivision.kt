@@ -33,7 +33,10 @@ class CreateDivision : AppCompatActivity() {
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                val division = divisionService.createDivision(divisionName.text.toString(), image.text.toString())
+                val division = divisionService.createDivision(
+                    divisionName.text.toString(),
+                    image.text.toString()
+                )
                 divisionService.addDivisionToWorkout(division, workout_id!!)
             }
             val resultIntent = Intent()

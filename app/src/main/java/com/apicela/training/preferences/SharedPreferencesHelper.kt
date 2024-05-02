@@ -8,10 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SharedPreferencesHelper() {
-    private val PREF_NAME = "user_prefs"
-    private val PREF_INITIALIZED = "started23DB"
+    private val PREF_NAME = "user_prefs_apicela"
+    private val PREF_INITIALIZED = "apicela_db_started"
 
-    suspend fun initializeOnce(context: Context, db : Database) {
+    suspend fun initializeOnce(context: Context, db: Database) {
         withContext(Dispatchers.IO) {
             val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val initialized = prefs.getBoolean(PREF_INITIALIZED, false)

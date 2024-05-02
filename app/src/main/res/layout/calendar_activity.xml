@@ -5,15 +5,14 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".CalendarActivity">
 
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/content"
-        >
+        app:layout_constraintTop_toTopOf="@id/content">
 
         <Button
             android:id="@+id/back_button"
@@ -21,6 +20,7 @@
             android:layout_height="48dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,6 @@
             android:text="Voltar"
             android:textColor="@color/amarelo_personalizado"
             android:textSize="14sp"></TextView>
-
 
 
         <RelativeLayout
@@ -49,29 +48,29 @@
         </RelativeLayout>
 
     </LinearLayout>
-<LinearLayout
-    android:id="@+id/layoutCalendar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/backLinearLayout"
-    >
-    <com.apicela.training.ui.utils.CustomCalendarView
-        android:id="@+id/calendarView"
+
+    <LinearLayout
+        android:id="@+id/layoutCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
+
+        <com.apicela.training.ui.utils.CustomCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layoutCalendar"
-        >
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/layoutCalendar">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

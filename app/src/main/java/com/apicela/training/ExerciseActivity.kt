@@ -12,23 +12,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.ExerciseAdapter
 import com.apicela.training.createActivity.CreateExercise
 import com.apicela.training.models.Exercise
-import com.apicela.training.services.DivisionService
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
 import com.apicela.training.utils.UtilsComponents
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
 class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseListMap: Map<String,List<Exercise>>
-    private lateinit var exerciseService : ExerciseService
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var exerciseAdapter : ExerciseAdapter
+    private lateinit var exerciseListMap: Map<String, List<Exercise>>
+    private lateinit var exerciseService: ExerciseService
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
     private lateinit var editButton: Button
@@ -37,9 +33,8 @@ class ExerciseActivity : AppCompatActivity() {
         Log.d("activity", "exercise started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
+        var editMode = true;
         exerciseService = ExerciseService(HomeActivity.database)
-        val listOfCheckBox: MutableList<CheckBox> = mutableListOf()
-        var checkBoxVisible = false;
         // layouts
         plusButton = findViewById(R.id.plus_button)
         backButton = findViewById(R.id.back_button)
@@ -48,27 +43,26 @@ class ExerciseActivity : AppCompatActivity() {
         val isDivision = intent.getBooleanExtra("isDivision", false)
         val division_id = intent.getStringExtra("division_id")
 
-        runBlocking{
+        runBlocking {
             exerciseListMap =
                 if (isDivision) {
                     exerciseService.exerciseListToMap(division_id!!) ?: emptyMap()
-                } else{
-                exerciseService.exerciseListToMap()!!
-            }
+                } else {
+                    exerciseService.exerciseListToMap()!!
+                }
         }
-            recyclerView = findViewById(R.id.recyclerView)
-
-            exerciseAdapter = ExerciseAdapter(this,exerciseListMap, exerciseService)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = exerciseAdapter
+        recyclerView = findViewById(R.id.recyclerView)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, exerciseService)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = exerciseAdapter
 
 
         plusButton.setOnClickListener {
-            if(isDivision){
+            if (isDivision) {
                 val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
                 intent.putExtra("division_id", division_id)
                 startActivityForResult(intent, REQUEST_CODE_CREATED)
-            } else{
+            } else {
                 val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)
                 startActivityForResult(intent, REQUEST_CODE_CREATED)
             }
@@ -77,9 +71,9 @@ class ExerciseActivity : AppCompatActivity() {
             finish()
         }
 
-        editButton.setOnClickListener{
-            UtilsComponents.turnListOfViewVisible(listOfCheckBox, checkBoxVisible)
-            checkBoxVisible = !checkBoxVisible;
+        editButton.setOnClickListener {
+            exerciseAdapter.setEditing(editMode)
+            editMode = !editMode
         }
     }
 

@@ -5,16 +5,16 @@
     android:id="@+id/defaulwt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/light_black"
-    tools:context=".createActivity.CreateExercise"
-    android:theme="@style/Theme.Training">
+    android:orientation="vertical"
+    android:theme="@style/Theme.Training"
+    tools:context=".createActivity.CreateExercise">
+
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/defaulwt"
-        >
+        app:layout_constraintTop_toTopOf="@id/defaulwt">
 
         <Button
             android:id="@+id/back_button"
@@ -22,6 +22,7 @@
             android:layout_height="48dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,8 +55,8 @@
         android:id="@+id/layout_cliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
@@ -69,9 +70,9 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/pedido_field"
             android:hint="Nome do exercicio"
-            android:textColorHint="@color/amarelo_personalizado"
             android:paddingStart="15dp"
             android:textColor="@color/white"
+            android:textColorHint="@color/amarelo_personalizado"
             android:textSize="15dp" />
 
         <ImageView
@@ -89,10 +90,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="-17dp"
             android:text="Exercicio"
-            android:textColor="@color/amarelo_personalizado"
-           ></TextView>
-
-
+            android:textColor="@color/amarelo_personalizado"></TextView>
 
 
         <EditText
@@ -101,29 +99,26 @@
             android:layout_height="40dp"
             android:layout_marginTop="38dp"
             android:background="@drawable/pedido_field"
-            android:textSize="15dp"
             android:hint="URL da imagem/GIF"
+            android:paddingStart="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/amarelo_personalizado"
-            android:paddingStart="15dp"
-            />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="87dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="-45dp"
-            android:src="@drawable/light_black_image"
-            />
+            android:src="@drawable/light_black_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="17dp"
-            android:layout_marginTop="-19dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="-19dp"
             android:text="Imagem/GIF"
-            android:textColor="@color/amarelo_personalizado"
-            ></TextView>
+            android:textColor="@color/amarelo_personalizado"></TextView>
 
         <Spinner
             android:id="@+id/muscleTypeSpinner"
@@ -132,28 +127,25 @@
             android:layout_marginTop="38dp"
             android:background="@drawable/pedido_field"
             android:gravity="center"
-            android:textSize="15dp"
+            android:paddingStart="15dp"
             android:textColor="@color/amarelo_personalizado"
             android:textColorHint="@color/amarelo_personalizado"
-            android:paddingStart="15dp"
-            />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="109dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="-45dp"
-            android:src="@drawable/light_black_image"
-            />
+            android:src="@drawable/light_black_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="17dp"
-            android:layout_marginTop="-19dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="-19dp"
             android:text="Grupo muscular"
-            android:textColor="@color/amarelo_personalizado"
-            ></TextView>
+            android:textColor="@color/amarelo_personalizado"></TextView>
     </LinearLayout>
 
     <Button
@@ -169,7 +161,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

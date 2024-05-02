@@ -28,10 +28,9 @@ class ExecutionActivity : AppCompatActivity() {
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
     private lateinit var edit: Button
-    private lateinit var executionService : ExecutionService
+    private lateinit var executionService: ExecutionService
     private lateinit var nameText: TextView
     private lateinit var imageExercise: ShapeableImageView
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,11 +50,11 @@ class ExecutionActivity : AppCompatActivity() {
         nameText.text = intent.getStringExtra("exercise_name") as String
         val exercise_image = intent.getStringExtra("exercise_image") as String
 
-       ImageHelper.setImageToImageView(this,imageExercise, exercise_image)
+        ImageHelper.setImageToImageView(this, imageExercise, exercise_image)
 
         val executionMap = executionService.executionListToMap(exercise_id)
-        Log.d("Execution","${executionMap}")
-        executionAdapter = ExecutionAdapter(this,executionMap)
+        Log.d("Execution", "${executionMap}")
+        executionAdapter = ExecutionAdapter(this, executionMap)
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
         plusButton.setOnClickListener {

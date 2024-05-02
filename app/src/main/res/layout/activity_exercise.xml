@@ -5,17 +5,17 @@
     android:id="@+id/defaultLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/light_black"
+    android:orientation="vertical"
     android:theme="@style/Theme.Training"
     tools:context=".ExecutionActivity">
     >
+
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/defaultLayout"
-        >
+        app:layout_constraintTop_toTopOf="@id/defaultLayout">
 
         <Button
             android:id="@+id/back_button"
@@ -23,6 +23,7 @@
             android:layout_height="48dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +34,6 @@
             android:text="Voltar"
             android:textColor="@color/amarelo_personalizado"
             android:textSize="14sp"></TextView>
-
 
 
         <RelativeLayout
@@ -56,29 +56,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.8"
-        app:layout_constraintTop_toBottomOf="@+id/backLinearLayout"
-        />
+        android:orientation="vertical"
+        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintTop_toBottomOf="@+id/backLinearLayout" />
 
-    <LinearLayout
-        android:id="@+id/testLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <ImageButton
+        android:id="@+id/plus_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        android:gravity="center_vertical"
-        >
-        <ImageButton
-            android:id="@+id/plus_button"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/plus_button"
-            android:background="@android:color/transparent"
-            android:layout_gravity="end"
-            android:scaleType="centerInside"/>
-
-    </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

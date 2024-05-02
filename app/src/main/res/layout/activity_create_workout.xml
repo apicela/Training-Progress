@@ -4,16 +4,16 @@
     android:id="@+id/defaulwt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/light_black"
-    tools:context=".createActivity.CreateExercise"
-    android:theme="@style/Theme.Training">
+    android:orientation="vertical"
+    android:theme="@style/Theme.Training"
+    tools:context=".createActivity.CreateExercise">
+
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/defaulwt"
-        >
+        app:layout_constraintTop_toTopOf="@id/defaulwt">
 
         <Button
             android:id="@+id/back_button"
@@ -21,6 +21,7 @@
             android:layout_height="48dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,8 +39,8 @@
         android:id="@+id/layout_cliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
@@ -53,9 +54,9 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/pedido_field"
             android:hint="Nome do treinamento"
-            android:textColorHint="@color/amarelo_personalizado"
             android:paddingStart="15dp"
             android:textColor="@color/white"
+            android:textColorHint="@color/amarelo_personalizado"
             android:textSize="15dp" />
 
         <ImageView
@@ -72,10 +73,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="-17dp"
             android:text="Treino"
-            android:textColor="@color/amarelo_personalizado"
-            ></TextView>
-
-
+            android:textColor="@color/amarelo_personalizado"></TextView>
 
 
         <EditText
@@ -84,30 +82,27 @@
             android:layout_height="120dp"
             android:layout_marginTop="43dp"
             android:background="@drawable/pedido_field"
-            android:textSize="15dp"
-            android:hint="Descrição adicional"
             android:foregroundGravity="center"
+            android:hint="Descrição adicional"
+            android:paddingStart="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/amarelo_personalizado"
-            android:paddingStart="15dp"
-            />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="74dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="-130dp"
-            android:src="@drawable/light_black_image"
-            />
+            android:src="@drawable/light_black_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="17dp"
-            android:layout_marginTop="-17dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="-17dp"
             android:text="Descrição"
-            android:textColor="@color/amarelo_personalizado"
-            ></TextView>
+            android:textColor="@color/amarelo_personalizado"></TextView>
 
     </LinearLayout>
 
@@ -124,7 +119,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

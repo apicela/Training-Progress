@@ -17,7 +17,10 @@ import com.apicela.training.services.ExecutionService
 import kotlinx.coroutines.runBlocking
 
 
-class ExecutionAdapter(private val context: Context, private var executionMap: Map<String, List<Execution>>) :
+class ExecutionAdapter(
+    private val context: Context,
+    private var executionMap: Map<String, List<Execution>>
+) :
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
     val executionService = ExecutionService(HomeActivity.database)
     private var isEditing = false
@@ -45,7 +48,7 @@ class ExecutionAdapter(private val context: Context, private var executionMap: M
             imageViewMinus.visibility = if (isEditing) View.VISIBLE else View.GONE
             imageViewEdit.visibility = if (isEditing) View.VISIBLE else View.GONE
 
-            imageViewEdit.setOnClickListener{
+            imageViewEdit.setOnClickListener {
                 val dialog = RegisterExecutionDialog(execution.exercise_id, execution.id, context)
                 if (context is FragmentActivity) {
                     dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
@@ -54,7 +57,7 @@ class ExecutionAdapter(private val context: Context, private var executionMap: M
                     }
                 }
             }
-            imageViewMinus.setOnClickListener{
+            imageViewMinus.setOnClickListener {
                 runBlocking {
                     executionService.deleteById(execution.id)
                     executionMap = executionService.executionListToMap(execution.exercise_id)
@@ -69,7 +72,8 @@ class ExecutionAdapter(private val context: Context, private var executionMap: M
 
     class ExecutionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.date)
-        val linearLayoutExecutions: LinearLayout = itemView.findViewById(R.id.linearLayoutExecutions)
+        val linearLayoutExecutions: LinearLayout =
+            itemView.findViewById(R.id.linearLayoutExecutions)
     }
 
     fun updateData(newExecutionMap: Map<String, List<Execution>>) {

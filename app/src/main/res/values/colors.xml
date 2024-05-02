@@ -11,9 +11,9 @@
     <color name="amarelo_personalizado">#FFCA09</color>
 
     <color name="semi_black">#1E1E1E</color>
-        <color name="light_black">#272626</color>
+    <color name="light_black">#272626</color>
     <color name="very_light_black">#323131</color>
 
-<!--    <color name="light_grey">#A5A5A5</color>-->
-<!--    <color name="semi_grey">#CDCACA</color>-->
+    <!--    <color name="light_grey">#A5A5A5</color>-->
+    <!--    <color name="semi_grey">#CDCACA</color>-->
 </resources>

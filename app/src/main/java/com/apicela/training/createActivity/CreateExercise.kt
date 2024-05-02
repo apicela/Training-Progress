@@ -48,12 +48,14 @@ class CreateExercise : AppCompatActivity() {
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-            exerciseService.addExerciseToDatabase(
-                Exercise(exerciseName.text.toString(),
-                    imageUrl.text.toString(),
-                    Muscle.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner)))
-            )
-        }
+                exerciseService.addExerciseToDatabase(
+                    Exercise(
+                        exerciseName.text.toString(),
+                        imageUrl.text.toString(),
+                        Muscle.valueOf(UtilsComponents.getSpinnerSelectedItem(muscleTypeSpinner))
+                    )
+                )
+            }
             val resultIntent = Intent()
             setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
             finish()

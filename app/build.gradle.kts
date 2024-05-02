@@ -57,7 +57,7 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
@@ -78,13 +78,13 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation ("com.github.bumptech.glide:glide:4.16.0") // Verifique a versão mais recente no repositório do Glide
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
-    implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("androidx.room:room-runtime:2.4.0")
-    kapt ("androidx.room:room-compiler:2.4.0")
-    implementation ("androidx.appcompat:appcompat")
-    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0") // Verifique a versão mais recente no repositório do Glide
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.room:room-runtime:2.4.0")
+    kapt("androidx.room:room-compiler:2.4.0")
+    implementation("androidx.appcompat:appcompat")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 
 }

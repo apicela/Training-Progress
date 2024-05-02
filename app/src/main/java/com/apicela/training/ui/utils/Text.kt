@@ -1,8 +1,6 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.widget.TextView
 import com.apicela.training.R
 import com.apicela.training.models.Muscle
@@ -21,7 +19,7 @@ class Text {
         fun createTextView(
             context: Context,
             text: String,
-            style : String,
+            style: String,
             tag: Any?
         ): TextView {
 

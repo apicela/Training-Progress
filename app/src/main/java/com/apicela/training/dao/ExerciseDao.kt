@@ -11,7 +11,7 @@ interface ExerciseDao {
     fun getAllExercises(): List<Exercise>
 
     @Query("SELECT * FROM exercise WHERE id = :id")
-    fun getExerciseById(id : String): Exercise
+    fun getExerciseById(id: String): Exercise
 
     @Insert
     fun insert(exercise: Exercise)

@@ -12,11 +12,12 @@ import com.google.android.material.shape.ShapeAppearanceModel
 class ImageHelper {
     companion object {
 
-        fun setImage(context: Context,
-                     view : ImageView,
-                     image: String,
-                     isGif : Boolean
-        ){
+        fun setImage(
+            context: Context,
+            view: ImageView,
+            image: String,
+            isGif: Boolean
+        ) {
             val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
             // recurso encontrado
             if (resourceId != 0) {
@@ -24,32 +25,34 @@ class ImageHelper {
                     .asBitmap()
                     .load(resourceId)
                     .into(view)
-                if(isGif){
+                if (isGif) {
                     view.setOnClickListener {
                         Glide.with(context)
                             .load(resourceId)
                             .into(GifDrawableImageViewTarget(view, 1))
-                    }}
+                    }
+                }
 //
             } else {
                 Glide.with(context)
                     .asBitmap()
                     .load(image)
                     .into(view)
-                if(isGif){
+                if (isGif) {
 
                     view.setOnClickListener {
                         Glide.with(context)
                             .load(image)
                             .into(GifDrawableImageViewTarget(view, 1))
-                    }}
+                    }
+                }
             }
         }
 
         fun createCircleImageView(
             context: Context,
             image: String,
-            isGif : Boolean,
+            isGif: Boolean,
             appearanceModel: ShapeAppearanceModel?,
             size: Int
         ): ShapeableImageView {
@@ -72,35 +75,36 @@ class ImageHelper {
                     .asBitmap()
                     .load(resourceId)
                     .into(circleImageView)
-                if(isGif){
-                circleImageView.setOnClickListener {
-                    Glide.with(context)
-                        .load(resourceId)
-                        .into(GifDrawableImageViewTarget(circleImageView, 1))
-                }}
+                if (isGif) {
+                    circleImageView.setOnClickListener {
+                        Glide.with(context)
+                            .load(resourceId)
+                            .into(GifDrawableImageViewTarget(circleImageView, 1))
+                    }
+                }
 //
             } else {
                 Glide.with(context)
                     .asBitmap()
                     .load(image)
                     .into(circleImageView)
-                if(isGif){
+                if (isGif) {
 
-                circleImageView.setOnClickListener {
-                    Glide.with(context)
-                        .load(image)
-                        .into(GifDrawableImageViewTarget(circleImageView, 1))
-                }}
+                    circleImageView.setOnClickListener {
+                        Glide.with(context)
+                            .load(image)
+                            .into(GifDrawableImageViewTarget(circleImageView, 1))
+                    }
+                }
             }
             if (appearanceModel !== null) circleImageView.shapeAppearanceModel = appearanceModel
             return circleImageView
         }
 
 
-
         fun setImageToImageView(
             context: Context,
-            imageView : ShapeableImageView,
+            imageView: ShapeableImageView,
             image: String
         ) {
             val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)

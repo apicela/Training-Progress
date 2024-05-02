@@ -4,28 +4,54 @@
     android:id="@+id/defaulwt"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/light_black"
+    android:orientation="vertical"
     android:theme="@style/Theme.Training">
+
     <LinearLayout
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/exerciseLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="7dp"
         android:orientation="horizontal"
-        style="@style/linearLayoutExercise"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/exercise_image"
             style="@style/ImageViewExercise"
-            />
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedImage" />
 
         <TextView
             android:id="@+id/exercise_text"
-            android:text="SUPINO RETO"
             style="@style/TextViewExercise"
-            />
+            android:text="SUPINO RETO" />
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/exerciseLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/exerciseLayout" />
+
+    <ImageView
+        android:id="@+id/minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:visibility="gone"
+        android:src="@drawable/minus"
+        app:layout_constraintBottom_toBottomOf="@id/exerciseLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/exerciseLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

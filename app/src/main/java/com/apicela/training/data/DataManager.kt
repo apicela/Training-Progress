@@ -14,7 +14,7 @@ object DataManager {
                     database = Room.databaseBuilder(
                         context.applicationContext,
                         Database::class.java,
-                        "db_app_training"
+                        "apicela_training"
                     )
                         // Habilitar migração automática
                         .fallbackToDestructiveMigration()

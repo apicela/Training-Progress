@@ -1,11 +1,10 @@
 package com.apicela.training.dialog
+
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
@@ -24,8 +23,12 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 
 
-class RegisterExecutionDialog(private val exerciseId : String, private val executionId : String?, private val context : Context) : DialogFragment() {
-    val executionService : ExecutionService = ExecutionService(HomeActivity.database)
+class RegisterExecutionDialog(
+    private val exerciseId: String,
+    private val executionId: String?,
+    private val context: Context
+) : DialogFragment() {
+    val executionService: ExecutionService = ExecutionService(HomeActivity.database)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
@@ -37,26 +40,26 @@ class RegisterExecutionDialog(private val exerciseId : String, private val execu
         val buttonConfirmar = view.findViewById<Button>(R.id.buttonConfirmar)
         val buttonCancelar = view.findViewById<Button>(R.id.buttonCancelar)
 
-        if(executionId == null){
+        if (executionId == null) {
             val lastExercise = runBlocking { executionService.getLastInsertedExecution(exerciseId) }
-            if(lastExercise !== null){
+            if (lastExercise !== null) {
                 editTextKG.setText("${lastExercise.kg}")
                 editTextRepeticoes.setText("${lastExercise.repetitions}")
             }
-        } else{
+        } else {
             val executionToUpdate = runBlocking { executionService.getExecutionById(executionId) }
-            if(executionToUpdate !== null){
+            if (executionToUpdate !== null) {
                 editTextKG.setText("${executionToUpdate.kg}")
                 editTextRepeticoes.setText("${executionToUpdate.repetitions}")
             }
         }
 
 
-
         var date = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        )
         editTextDate.setText(date as String)
-        editTextDate.setOnClickListener{
+        editTextDate.setOnClickListener {
             Components.showDatePicker(editTextDate, context)
             editTextDate.requestFocus() // Request focus after showing the DatePicker
         }
@@ -66,13 +69,13 @@ class RegisterExecutionDialog(private val exerciseId : String, private val execu
             val repetitions = editTextRepeticoes.text.toString().toIntOrNull() ?: 0
             val format = SimpleDateFormat("dd/MM/yyyy")
             val formattedDate = format.parse(editTextDate.text.toString()) as Date
-            if(executionId == null){
-            val execution = Execution(repetitions, kg,exerciseId, formattedDate)
+            if (executionId == null) {
+                val execution = Execution(repetitions, kg, exerciseId, formattedDate)
                 GlobalScope.launch {
                     executionService.addExecutionToDatabase(execution)
                 }
-            } else{
-                val execution = Execution(executionId, repetitions, kg,exerciseId, formattedDate)
+            } else {
+                val execution = Execution(executionId, repetitions, kg, exerciseId, formattedDate)
                 GlobalScope.launch {
                     executionService.updateExecutionObject(execution)
                 }

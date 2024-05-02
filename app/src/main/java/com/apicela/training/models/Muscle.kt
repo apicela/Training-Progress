@@ -13,6 +13,7 @@ enum class Muscle(val ptbr: String) {
         fun getAsListPTBR(): List<String> {
             return values().map { it.ptbr }
         }
+
         fun getMuscleByPtbr(muscle: String): String {
             return Muscle.values().find { it.toString() == muscle }!!.ptbr
         }

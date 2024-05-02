@@ -2,18 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/semi_black">
-
+    android:background="@color/semi_black"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/black_dialog">
     <EditText
         android:id="@+id/editTextDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:hint="Data"
         android:textColor="@color/amarelo_personalizado"
-        android:textColorHint="@color/amarelo_personalizado"
-        android:hint="Data"/>
+        android:textColorHint="@color/amarelo_personalizado" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,10 +28,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:text="Peso:"
-            android:textSize="25dp"
-            android:textColor="@color/amarelo_personalizado" />
+            android:textAlignment="center"
+            android:textColor="@color/amarelo_personalizado"
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/editTextKG"
@@ -34,10 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:hint="kg"
             android:inputType="numberDecimal"
             android:textColor="@color/amarelo_personalizado"
-            android:textColorHint="@color/amarelo_personalizado"
-            android:hint="kg" />
+            android:textColorHint="@color/amarelo_personalizado" />
 
     </LinearLayout>
 
@@ -50,21 +55,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Repetições:"
             android:gravity="center"
-            android:textSize="25dp"
-            android:textColor="@color/amarelo_personalizado" />
+            android:text="Repetições:"
+            android:textColor="@color/amarelo_personalizado"
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/editTextRepeticoes"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
+            android:hint="Repetições"
             android:inputType="number"
             android:textColor="@color/amarelo_personalizado"
-            android:textColorHint="@color/amarelo_personalizado"
-            android:hint="Repetições"/>
+            android:textColorHint="@color/amarelo_personalizado" />
 
     </LinearLayout>
 
@@ -74,18 +79,19 @@
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@color/amarelo_personalizado"
-        android:textColor="@color/black"
         android:layout_marginVertical="10dp"
-        android:text="Confirmar"/>
+        android:background="@drawable/yellow_bordered_button"
+        android:text="Confirmar"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/buttonCancelar"
         android:layout_width="130dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@color/amarelo_personalizado"
-        android:textColor="@color/black"
         android:layout_marginBottom="10dp"
-        android:text="Cancelar"/>
+        android:background="@drawable/yellow_bordered_button"
+        android:text="Cancelar"
+        android:textColor="@color/black" />
+</LinearLayout>
 </LinearLayout>

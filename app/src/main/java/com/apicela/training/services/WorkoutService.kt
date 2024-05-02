@@ -6,14 +6,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class WorkoutService(private val db: Database) {
-    val divisionService : DivisionService = DivisionService(db)
+    val divisionService: DivisionService = DivisionService(db)
 
-    suspend fun addWorkout(workoutName: String, descricao: String, image : String) {
+    suspend fun addWorkout(workoutName: String, descricao: String, image: String) {
         val workoutItem = Workout(
             workoutName, descricao, image, listOf(
                 divisionService.createDivision("A", "division_a"),
-                divisionService.createDivision("B","division_b"),
-                divisionService.createDivision("C","division_c"),
+                divisionService.createDivision("B", "division_b"),
+                divisionService.createDivision("C", "division_c"),
             )
         )
         withContext(Dispatchers.IO) {
@@ -21,14 +21,15 @@ class WorkoutService(private val db: Database) {
         }
     }
 
-     suspend fun getAllWorkouts() : List<Workout>{
-        return  withContext(Dispatchers.IO) {
-             db.workoutDao().getAllWorkouts()
+    suspend fun getAllWorkouts(): List<Workout> {
+        return withContext(Dispatchers.IO) {
+            db.workoutDao().getAllWorkouts()
         }
     }
 
-    suspend fun deleteById(id : String){
-         withContext(Dispatchers.IO) {
+    suspend fun deleteById(id: String) {
+        withContext(Dispatchers.IO) {
             db.workoutDao().deleteById(id)
-        }    }
+        }
+    }
 }

@@ -25,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         lateinit var database: Database
     }
+
     private lateinit var workoutAdapter: WorkoutAdapter
     private lateinit var exercisesButton: ImageButton
     private lateinit var calendarButton: ImageButton
@@ -36,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         database = DataManager.getDatabase(applicationContext)
-        val workoutService : WorkoutService = WorkoutService(database)
+        val workoutService: WorkoutService = WorkoutService(database)
 
         val workouts = runBlocking { workoutService.getAllWorkouts() }
 
@@ -49,8 +50,8 @@ class HomeActivity : AppCompatActivity() {
             sharedPreferencesHelper.initializeOnce(applicationContext, database)
             withContext(Dispatchers.Main) {
 
-                }
             }
+        }
 
 
         exercisesButton = findViewById(R.id.exercise_button)

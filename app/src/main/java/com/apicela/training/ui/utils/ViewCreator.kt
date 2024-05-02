@@ -25,6 +25,7 @@ class ViewCreator {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
         fun checkChilds(mainLinearLayout: LinearLayout): ViewGroup.LayoutParams? {
             for (i in 0 until mainLinearLayout.childCount) {
                 val childView = mainLinearLayout.getChildAt(i)
@@ -68,7 +69,12 @@ class ViewCreator {
             return linearLayout
         }
 
-        fun createCardViewForWorkout(context: Context, text: String, tag: String?, image : String): CardView {
+        fun createCardViewForWorkout(
+            context: Context,
+            text: String,
+            tag: String?,
+            image: String
+        ): CardView {
             val linearLayout = createLinearLayoutForExercise(context)
             // Criando um novo CardView
             val cardView = CardView(context, null, R.style.CardView_Workout)
@@ -81,12 +87,12 @@ class ViewCreator {
                 marginParams.bottomMargin // mantém a margem inferior atual
             )
 
-                cardView.layoutParams = params
-                //defaultParam  as ViewGroup.MarginLayoutParams
+            cardView.layoutParams = params
+            //defaultParam  as ViewGroup.MarginLayoutParams
             cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.semi_black))
 
             // Adicionando uma TextView dentro do CardView
-            var text = Text.createTextView(context, text, "cardViewWorkout",tag)
+            var text = Text.createTextView(context, text, "cardViewWorkout", tag)
 
 
             val img = ImageHelper.createCircleImageView(
@@ -128,8 +134,8 @@ class ViewCreator {
             context: Context,
             exercise: Exercise,
             appearanceModel: ShapeAppearanceModel,
-            checkboxVisible : Boolean,
-            isDivision : Boolean
+            checkboxVisible: Boolean,
+            isDivision: Boolean
         ): LinearLayout {
             val linearLayout = createLinearLayoutForExercise(context)
             linearLayout.orientation = LinearLayout.HORIZONTAL
@@ -142,7 +148,12 @@ class ViewCreator {
                 context.resources.getDimensionPixelSize(R.dimen.dp50)
             )
             linearLayout.addView(img)
-            val text = Text.createTextView(context, exercise.exerciseName, "cardViewWorkout",exercise.muscleType)
+            val text = Text.createTextView(
+                context,
+                exercise.exerciseName,
+                "cardViewWorkout",
+                exercise.muscleType
+            )
             text.textSize = 16f
             val textLayoutParams = LinearLayout.LayoutParams(
                 0,
@@ -159,7 +170,9 @@ class ViewCreator {
                 0.1f
             )
             checkBox.layoutParams = checkBoxLayoutParams
-            if(!checkboxVisible) { checkBox.visibility = View.INVISIBLE }
+            if (!checkboxVisible) {
+                checkBox.visibility = View.INVISIBLE
+            }
             checkBox.tag = "exercise_checkbox"
 
             linearLayout.addView(checkBox)
@@ -168,11 +181,11 @@ class ViewCreator {
         }
 
 
-
         fun createDivisionLine(
             context: Context,
-            image : String,
-            text: String): LinearLayout {
+            image: String,
+            text: String
+        ): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
             linearLayout.layoutParams = defaultParam
             val img = ImageHelper.createCircleImageView(
@@ -183,7 +196,7 @@ class ViewCreator {
                 context.resources.getDimensionPixelSize(R.dimen.dp50)
             )
             linearLayout.addView(img)
-            val text = Text.createTextView(context, text, "TextViewDivision",null)
+            val text = Text.createTextView(context, text, "TextViewDivision", null)
             linearLayout.addView(text)
             return linearLayout
         }

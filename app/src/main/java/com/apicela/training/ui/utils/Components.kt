@@ -9,7 +9,7 @@ import java.time.LocalDate
 import java.util.Calendar
 
 class Components {
-    companion object{
+    companion object {
 
         fun showDatePicker(dateTimeText: EditText, context: Context) {
             val calendar = Calendar.getInstance()
@@ -42,13 +42,11 @@ class Components {
         }
 
 
-
-
-        fun formatDateAsString(date : LocalDate) : String{
+        fun formatDateAsString(date: LocalDate): String {
             val day = date.dayOfMonth
             val month = date.month
             val year = date.year
-            return  "${day}/${month}/${year}"
+            return "${day}/${month}/${year}"
         }
 
     }

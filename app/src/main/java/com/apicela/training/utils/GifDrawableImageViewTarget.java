@@ -1,14 +1,12 @@
 package com.apicela.training.utils;
 
 import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.ImageViewTarget;
-import com.google.android.material.imageview.ShapeableImageView;
 
 public class GifDrawableImageViewTarget extends ImageViewTarget<Drawable> {
 
@@ -19,7 +17,7 @@ public class GifDrawableImageViewTarget extends ImageViewTarget<Drawable> {
         mLoopCount = loopCount;
     }
 
-    public GifDrawableImageViewTarget(ShapeableImageView view, int loopCount, boolean waitForLayout) {
+    public GifDrawableImageViewTarget(ImageView view, int loopCount, boolean waitForLayout) {
         super(view, waitForLayout);
         mLoopCount = loopCount;
     }

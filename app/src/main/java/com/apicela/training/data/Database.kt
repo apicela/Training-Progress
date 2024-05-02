@@ -15,12 +15,17 @@ import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Workout
 
-@Database(entities = [Division::class, Exercise::class, Workout::class, Execution::class], version = 6, exportSchema = false)
+@Database(
+    entities = [Division::class, Exercise::class, Workout::class, Execution::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(
-    ExerciseListConverter::class,  DivisionListConverter::class, Converter::class )
+    ExerciseListConverter::class, DivisionListConverter::class, Converter::class
+)
 abstract class Database : RoomDatabase() {
     abstract fun divisionDao(): DivisionDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
-    abstract fun executionDao() : ExecutionDao
+    abstract fun executionDao(): ExecutionDao
 }
