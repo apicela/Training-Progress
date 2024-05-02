@@ -102,8 +102,8 @@ class ExerciseAdapter(
         val layoutExercises: LinearLayout = itemView.findViewById(R.id.linearLayoutExercise)
     }
 
-    fun updateData(newExecutionMap: Map<String, List<Exercise>>) {
-        exerciseMap = newExecutionMap
+    fun updateData() {
+        runBlocking {exerciseMap = exerciseService.exerciseListToMap(null)!!}
         notifyDataSetChanged()
     }
 

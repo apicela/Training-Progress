@@ -102,27 +102,5 @@ class ImageHelper {
         }
 
 
-        fun setImageToImageView(
-            context: Context,
-            imageView: ShapeableImageView,
-            image: String
-        ) {
-            val resourceId = context.resources.getIdentifier(image, "drawable", context.packageName)
-            // recurso encontrado
-            if (resourceId != 0) {
-                Glide.with(context)
-                    .asBitmap()
-                    .load(resourceId)
-                    .into(imageView)
-
-                imageView.setOnClickListener {
-                    Glide.with(context)
-                        .load(resourceId)
-                        .into(GifDrawableImageViewTarget(imageView, 1))
-                }
-//
-            }
-        }
-
     }
 }

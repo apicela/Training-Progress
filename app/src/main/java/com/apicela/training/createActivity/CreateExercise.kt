@@ -36,13 +36,8 @@ class CreateExercise : AppCompatActivity() {
 
         val items = Muscle.getAsListPTBR()
 
-        // Adaptador para o Spinner
         val adapter = ArrayAdapter(this, R.layout.transparent_layout, items)
-
-        // Layout do dropdown do Spinner
         adapter.setDropDownViewResource(R.layout.dropdown_muscle_type)
-
-        // Definir o adaptador para o Spinner
         muscleTypeSpinner.adapter = adapter
 
 

@@ -50,7 +50,7 @@ class ExecutionActivity : AppCompatActivity() {
         nameText.text = intent.getStringExtra("exercise_name") as String
         val exercise_image = intent.getStringExtra("exercise_image") as String
 
-        ImageHelper.setImageToImageView(this, imageExercise, exercise_image)
+        ImageHelper.setImage(this, imageExercise, exercise_image,  false)
 
         val executionMap = executionService.executionListToMap(exercise_id)
         Log.d("Execution", "${executionMap}")

@@ -3,6 +3,7 @@ package com.apicela.training
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageButton
@@ -33,7 +34,6 @@ class ExerciseActivity : AppCompatActivity() {
         Log.d("activity", "exercise started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
-        var editMode = true;
         exerciseService = ExerciseService(HomeActivity.database)
         // layouts
         plusButton = findViewById(R.id.plus_button)
@@ -42,7 +42,7 @@ class ExerciseActivity : AppCompatActivity() {
 
         val isDivision = intent.getBooleanExtra("isDivision", false)
         val division_id = intent.getStringExtra("division_id")
-
+        var editMode = false;
         runBlocking {
             exerciseListMap =
                 if (isDivision) {
@@ -55,7 +55,6 @@ class ExerciseActivity : AppCompatActivity() {
         exerciseAdapter = ExerciseAdapter(this, exerciseListMap,division_id, exerciseService)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
-
 
         plusButton.setOnClickListener {
             if (isDivision) {
@@ -72,15 +71,16 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         editButton.setOnClickListener {
-            exerciseAdapter.setEditing(editMode)
             editMode = !editMode
+            exerciseAdapter.setEditing(editMode)
+            plusButton.visibility = if(plusButton.visibility == View.VISIBLE ) View.GONE  else View.VISIBLE
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CREATED && resultCode == RESULT_CODE_EXERCISE_CREATED) {
-            recreate() // Isso reiniciará a Activity
+            exerciseAdapter.updateData()
         }
     }
 }
