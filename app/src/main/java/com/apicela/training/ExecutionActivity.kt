@@ -17,13 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.ExecutionAdapter
 import com.apicela.training.dialog.RegisterExecutionDialog
-import com.apicela.training.models.Execution
 import com.apicela.training.services.ExecutionService
-import com.apicela.training.ui.utils.Image
+import com.apicela.training.ui.utils.ImageHelper
 import com.google.android.material.imageview.ShapeableImageView
-import kotlinx.coroutines.runBlocking
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class ExecutionActivity : AppCompatActivity() {
 
@@ -55,7 +51,7 @@ class ExecutionActivity : AppCompatActivity() {
         nameText.text = intent.getStringExtra("exercise_name") as String
         val exercise_image = intent.getStringExtra("exercise_image") as String
 
-       Image.setImageToImageView(this,imageExercise, exercise_image)
+       ImageHelper.setImageToImageView(this,imageExercise, exercise_image)
 
         val executionMap = executionService.executionListToMap(exercise_id)
         Log.d("Execution","${executionMap}")

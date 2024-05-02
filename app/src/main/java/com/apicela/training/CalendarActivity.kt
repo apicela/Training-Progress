@@ -22,6 +22,8 @@ class CalendarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val executionService : ExecutionService = ExecutionService(HomeActivity.database)
         val exerciseService : ExerciseService = ExerciseService(HomeActivity.database)
+//        val teste = runBlocking {   exerciseService.exerciseListToMap() }
+//        Log.d("calendar", "${teste}")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calendar_activity)
         backButton = findViewById(R.id.back_button)

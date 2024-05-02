@@ -22,7 +22,7 @@ class WorkoutAdapter(private val context: Context, private var listWorkouts : Li
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_workout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.workout_item, parent, false)
         return MyViewHolder(itemView)
     }
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

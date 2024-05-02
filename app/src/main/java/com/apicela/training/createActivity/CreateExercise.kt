@@ -34,7 +34,7 @@ class CreateExercise : AppCompatActivity() {
         concludeButton = findViewById(R.id.concludeButton)
 
 
-        val items = Muscle.getAsList()
+        val items = Muscle.getAsListPTBR()
 
         // Adaptador para o Spinner
         val adapter = ArrayAdapter(this, R.layout.transparent_layout, items)

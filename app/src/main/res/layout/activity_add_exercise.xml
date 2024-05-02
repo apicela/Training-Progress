@@ -164,7 +164,7 @@
                 android:gravity="center_vertical"
                 android:background="@color/semi_black">
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:src="@drawable/muscle_group_shoulders"
+                    android:src="@drawable/muscle_group_shoulder"
                     style="@style/CardViewImage"
 
 
@@ -338,7 +338,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     style="@style/CardViewImage"
 
-                    android:src="@drawable/muscle_group_hamstrings"
+                    android:src="@drawable/muscle_group_hamstring"
                     />
 
                 <TextView
@@ -424,7 +424,7 @@
                 android:gravity="center_vertical">
                 <de.hdodenhof.circleimageview.CircleImageView
                     style="@style/CardViewImage"
-                    android:src="@drawable/muscle_group_abs"
+                    android:src="@drawable/muscle_group_abdominal"
                     />
 
                 <TextView

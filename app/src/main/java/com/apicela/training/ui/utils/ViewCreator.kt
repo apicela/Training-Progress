@@ -89,7 +89,7 @@ class ViewCreator {
             var text = Text.createTextView(context, text, "cardViewWorkout",tag)
 
 
-            val img = Image.createCircleImageView(
+            val img = ImageHelper.createCircleImageView(
                 context,
                 image,
                 false,
@@ -134,7 +134,7 @@ class ViewCreator {
             val linearLayout = createLinearLayoutForExercise(context)
             linearLayout.orientation = LinearLayout.HORIZONTAL
 
-            var img = Image.createCircleImageView(
+            var img = ImageHelper.createCircleImageView(
                 context,
                 exercise.image,
                 true,
@@ -175,7 +175,7 @@ class ViewCreator {
             text: String): LinearLayout {
             val linearLayout = createLinearLayoutForDivision(context)
             linearLayout.layoutParams = defaultParam
-            val img = Image.createCircleImageView(
+            val img = ImageHelper.createCircleImageView(
                 context,
                 image,
                 false,

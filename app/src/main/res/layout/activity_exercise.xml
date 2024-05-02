@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/defaulwt"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/defaultLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_black"
     android:theme="@style/Theme.Training"
+    tools:context=".ExecutionActivity">
     >
-
     <LinearLayout
         android:id="@+id/backLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/defaulwt"
+        app:layout_constraintTop_toTopOf="@id/defaultLayout"
         >
 
         <Button
@@ -22,7 +23,7 @@
             android:layout_height="48dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow" />
-      <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -42,486 +43,42 @@
             android:layout_gravity="end">
 
             <Button
-                android:id="@+id/edit_button"
+                android:id="@+id/edit"
                 android:layout_width="44dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:drawableLeft="@drawable/edit" />
+                android:background="@null"
+                android:drawableLeft="@drawable/edit" />
         </RelativeLayout>
 
     </LinearLayout>
 
-    <android.widget.SearchView
-        android:id="@+id/searchView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintTop_toBottomOf="@+id/backLinearLayout"
+        />
+
+    <LinearLayout
+        android:id="@+id/testLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Pesquisar..."
-        android:iconifiedByDefault="false"
-        android:background="@color/very_light_black"
-        android:searchIcon="@drawable/search_icon"
-        app:layout_constraintTop_toBottomOf="@id/backLinearLayout"
-        />
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        app:layout_constraintHeight_percent="0.886"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        android:gravity="center_vertical"
         >
-        >
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="@+id/defaulwt">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_chest"
-                android:tag="cardView_chest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/testLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    >
-                    <com.google.android.material.imageview.ShapeableImageView
-                        style="@style/CardViewImage"
-                        app:shapeAppearanceOverlay="@style/roundedImage"
-                        android:src="@drawable/muscle_group_chest"/>
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="PEITORAL"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/chestLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_back"
-                android:tag="cardView_back"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="@color/semi_black"
-                    >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-                        android:src="@drawable/muscle_group_back"
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="COSTAS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/backLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_shoulder"
-                android:tag="cardView_shoulder"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                android:background="@color/semi_black"
-
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:background="@color/semi_black">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:src="@drawable/muscle_group_shoulders"
-                        style="@style/CardViewImage"
-
-
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="OMBROS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/shoulderLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_triceps"
-                android:tag="cardView_triceps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                android:orientation="vertical"
-                app:cardBackgroundColor="@color/semi_black"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-                        android:src="@drawable/muscle_group_triceps"
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TRÍCEPS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/tricepsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_biceps"
-                android:tag="cardView_biceps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-                        android:src="@drawable/muscle_group_biceps"
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="BICEPS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/bicepsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_quadriceps"
-                android:tag="cardView_quadriceps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-
-                        android:src="@drawable/muscle_group_quadriceps" />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="QUADRICEPS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/quadricepsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_hamstring"
-                android:tag="cardView_hamstring"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-
-                        android:src="@drawable/muscle_group_hamstrings"
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="POSTERIOR DE COXAS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/hamstringLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_glutes_calves"
-                android:tag="cardView_glutes_calves"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-
-                        android:src="@drawable/muscle_group_glutes_calves"
-                        />
-
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="GLUTEOS/PANTURRILHA"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/glutes_calvesLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_abs"
-                android:tag="cardView_abs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-                        android:src="@drawable/muscle_group_abs"
-                        />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ABDÔMEN"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/absLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-
-
-            </LinearLayout>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_others"
-                android:tag="cardView_others"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/semi_black"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        style="@style/CardViewImage"
-                        android:src="@drawable/others" />
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="OUTROS"
-                        android:textSize="28dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/others"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-    <ImageButton
-        android:id="@+id/plus_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/plus_button"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="-107dp"
-        android:layout_marginTop="-103dp"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
-        app:layout_constraintStart_toEndOf="@id/scrollView"
-        android:scaleType="centerInside"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/plus_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/plus_button"
+            android:background="@android:color/transparent"
+            android:layout_gravity="end"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>

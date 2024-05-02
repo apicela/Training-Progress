@@ -1,6 +1,8 @@
 package com.apicela.training.utils;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
@@ -12,7 +14,7 @@ public class GifDrawableImageViewTarget extends ImageViewTarget<Drawable> {
 
     private int mLoopCount = GifDrawable.LOOP_FOREVER;
 
-    public GifDrawableImageViewTarget(ShapeableImageView view, int loopCount) {
+    public GifDrawableImageViewTarget(ImageView view, int loopCount) {
         super(view);
         mLoopCount = loopCount;
     }
