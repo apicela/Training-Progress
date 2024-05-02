@@ -1,0 +1,1 @@
+# O código-fonte contido aqui está incompleto, disponibilizei alguns trechos para observarem a estrutura do projeto
