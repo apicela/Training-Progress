@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/light_black"
+    android:paddingTop="3dp">
+
+    <ImageView
+        android:id="@+id/imageViewMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/minus"
+        android:layout_marginStart="20dp"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/exercise_image"
+            style="@style/ImageViewExercise"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedImage" />
+        <TextView
+            android:id="@+id/textDivision"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/amarelo_personalizado"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/edit1"
+        android:visibility="invisible" />
+
+</LinearLayout>

@@ -11,14 +11,15 @@ import com.apicela.training.adapters.WorkoutAdapter
 import com.apicela.training.createActivity.CreateWorkout
 import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
+import com.apicela.training.models.Exercise
 import com.apicela.training.preferences.SharedPreferencesHelper
+import com.apicela.training.services.ExerciseService
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.utils.Codes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity() {
 
@@ -35,9 +36,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         database = DataManager.getDatabase(applicationContext)
         val workoutService: WorkoutService = WorkoutService(database)
+        val exerciseService: ExerciseService = ExerciseService(database)
 
         val workouts = runBlocking { workoutService.getAllWorkouts() }
 
@@ -48,8 +49,12 @@ class HomeActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val sharedPreferencesHelper = SharedPreferencesHelper()
             sharedPreferencesHelper.initializeOnce(applicationContext, database)
-            withContext(Dispatchers.Main) {
+            val listExercises = runBlocking { exerciseService.getAllExercises() }
+            val itemsToAdd =
+                Exercise.listaExercises.filter { obj -> listExercises.none { it.exerciseName == obj.exerciseName } }
 
+            itemsToAdd.forEach {
+                exerciseService.addExerciseToDatabase(it)
             }
         }
 

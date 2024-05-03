@@ -50,7 +50,7 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
         }
 
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, null,exerciseService, this)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, null, exerciseService, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
 
@@ -66,10 +66,11 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
                     division?.listOfExercises = newListExercises
                     divisionService.updateDivisionObject(division!!)
                 }
+                val resultIntent = Intent()
+                setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
+                finish()
             }
-            val resultIntent = Intent()
-            setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
-            finish()
+
         }
 
     }

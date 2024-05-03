@@ -13,6 +13,9 @@ interface ExerciseDao {
     @Query("SELECT * FROM exercise WHERE id = :id")
     fun getExerciseById(id: String): Exercise
 
+    @Query("DELETE FROM Exercise WHERE id = :id")
+    fun deleteById(id: String)
+
     @Insert
     fun insert(exercise: Exercise)
 }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +15,6 @@ import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
-import com.apicela.training.utils.UtilsComponents
 import kotlinx.coroutines.runBlocking
 
 
@@ -52,7 +50,7 @@ class ExerciseActivity : AppCompatActivity() {
                 }
         }
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap,division_id, exerciseService)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, division_id, exerciseService)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
 
@@ -73,7 +71,8 @@ class ExerciseActivity : AppCompatActivity() {
         editButton.setOnClickListener {
             editMode = !editMode
             exerciseAdapter.setEditing(editMode)
-            plusButton.visibility = if(plusButton.visibility == View.VISIBLE ) View.GONE  else View.VISIBLE
+            plusButton.visibility =
+                if (plusButton.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
 

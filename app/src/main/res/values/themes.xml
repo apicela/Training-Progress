@@ -88,16 +88,17 @@
     <style name="ImageViewExercise">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">40dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:background">@drawable/image_circle_background</item>
     </style>
 
-    <!--    <style name="ImageViewExercise">-->
-    <!--        <item name="android:layout_width">60dp</item>-->
-    <!--        <item name="android:layout_marginStart">20dp</item>-->
-    <!--        <item name="android:layout_height">@dimen/exercise_image_size</item>-->
-    <!--        <item name="android:background">@drawable/image_circle_background</item>-->
-    <!--    </style>-->
+    <style name="ImageViewDivision">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/image_circle_background</item>
+    </style>
 
 
     <style name="CardViewImage">

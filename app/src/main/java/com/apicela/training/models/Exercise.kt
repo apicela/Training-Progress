@@ -46,16 +46,33 @@ data class Exercise(
                     "supino_inclinado_barra",
                     Muscle.CHEST
                 ),
-//            Exercise("CRUCIFIXO RETO", "someUrl1",Muscles.CHEST),
-//            Exercise("VOADOR PEITORAL", "someUrl1",Muscles.CHEST),
-//            Exercise("FLEXÃO DE BRAÇOS", "someUrl1",Muscles.CHEST),
+                Exercise(
+                    "CRUCIFIXO RETO",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2019/11/03081301-crucifixo-com-halteres.gif",
+                    Muscle.CHEST
+                ),
+                Exercise(
+                    "VOADOR PEITORAL",
+                    "https://www.blog.treinoemalta.com.br/wp-content/uploads/2023/07/Peck-Deck.gif",
+                    Muscle.CHEST
+                ),
+                Exercise(
+                    "FLEXÃO DE BRAÇOS",
+                    "https://www.hipertrofia.org/blog/wp-content/uploads/2019/12/negative-push-up.gif",
+                    Muscle.CHEST
+                ),
                 Exercise(
                     UUID.randomUUID().toString(),
                     "MERGULHO EM PARALELAS",
                     "dip",
                     Muscle.CHEST
                 ),
-//            Exercise("SUPINO MÁQUINA", "someUrl1",Muscles.CHEST),
+                Exercise(
+                    "SUPINO MÁQUINA",
+                    "https://s6.gifyu.com/images/supino-reto_na-maquina.gif",
+                    Muscle.CHEST
+                ),
+
                 // BACK
                 Exercise(
                     UUID.randomUUID().toString(),
@@ -71,6 +88,12 @@ data class Exercise(
                 ),
                 Exercise(
                     UUID.randomUUID().toString(),
+                    "LEVANTAMENTO TERRA",
+                    "deadlift",
+                    Muscle.BACK
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
                     "REMADA CURVADA",
                     "remada_curvada",
                     Muscle.BACK
@@ -81,9 +104,32 @@ data class Exercise(
                     "https://www.mundoboaforma.com.br/wp-content/uploads/2021/09/remada-sentado-com-cabos-e-triangulo-para-costas.gif",
                     Muscle.BACK
                 ),
-
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "REMADA CAVALINHO",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/costas-remada-em-pe-com-barra-T.gif",
+                    Muscle.BACK
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "REMADA NO BANCO",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/costas-remada-no-banco-inclinado-com-halteres.gif",
+                    Muscle.BACK
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "REMADA UNILATERAL",
+                    "https://static.wixstatic.com/media/2edbed_cf8feb6f79494833b887104bc358843d~mv2.gif",
+                    Muscle.BACK
+                ),
 
                 // SHOULDER
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "LEVANTAMENTO FRONTAL",
+                    "https://www.hipertrofia.org/blog/wp-content/uploads/2023/11/dumbbell-front-raise.gif",
+                    Muscle.SHOULDER
+                ),
                 Exercise(
                     UUID.randomUUID().toString(),
                     "LEVANTAMENTO LATERAL",
@@ -100,6 +146,18 @@ data class Exercise(
                     UUID.randomUUID().toString(),
                     "DESENVOLVIMENTO HALTERES",
                     "https://karoldeliberato.com.br/wp-content/uploads/2023/04/image36-1.gif",
+                    Muscle.SHOULDER
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "CRUCIFIXO INVERTIDO",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/ombros-crucifixo-invertido-com-halteres.gif",
+                    Muscle.SHOULDER
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "VOADOR INVERSO",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/ombros-voador-invertido-na-maquina.gif",
                     Muscle.SHOULDER
                 ),
 
@@ -157,7 +215,23 @@ data class Exercise(
                     "deadlift",
                     Muscle.QUADRICEPS
                 ),
-//            Exercise("LEG PRESS", "someUrl3",Muscles.QUADRICEPS),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "CADEIRA EXTENSORA",
+                    "https://media.tenor.com/fNeMiJuGmEcAAAAM/cadeira-extensora-extensora.gif",
+                    Muscle.QUADRICEPS
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "AGACHAMENTO SUMÔ",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2021/09/agachamento-sumo-sem-halter.gif",
+                    Muscle.QUADRICEPS
+                ),
+                Exercise(
+                    "LEG PRESS",
+                    "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/leg-press.gif",
+                    Muscle.QUADRICEPS
+                ),
 
 
                 // HARMSTRING
@@ -166,6 +240,24 @@ data class Exercise(
                     UUID.randomUUID().toString(),
                     "MESA FLEXORA",
                     "mesa_flexora",
+                    Muscle.HAMSTRING
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "BOM DIA",
+                    "https://www.hipertrofia.org/blog/wp-content/uploads/2023/09/barbell-good-morning.gif",
+                    Muscle.HAMSTRING
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "ELEVAÇÃO PÉLVICA",
+                    "https://static.wixstatic.com/media/2edbed_852ea3938607497aa100eb79e600e11a~mv2.gif",
+                    Muscle.HAMSTRING
+                ),
+                Exercise(
+                    UUID.randomUUID().toString(),
+                    "EXTENSÃO DE QUADRIL",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2020/11/coice-no-cabo.gif",
                     Muscle.HAMSTRING
                 ),
 
@@ -186,7 +278,11 @@ data class Exercise(
 
                 // ABS
                 Exercise(UUID.randomUUID().toString(), "PRANCHA", "plank", Muscle.ABDOMINAL),
-//            Exercise("ABDOMINAL INFRA", "someUrl3",Muscles.ABDOMINAL),
+                Exercise(
+                    "ABDOMINAL INFRA",
+                    "https://www.mundoboaforma.com.br/wp-content/uploads/2021/04/abdominal-no-chao-com-elevacao-de-pernas-semi-dobradas.gif",
+                    Muscle.ABDOMINAL
+                ),
 
                 // OTHERS
                 Exercise(UUID.randomUUID().toString(), "CORRIDA", "someUrl3", Muscle.OTHER),
