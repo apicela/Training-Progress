@@ -19,10 +19,10 @@ import com.apicela.training.services.WorkoutService
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.runBlocking
 
-class WorkoutAdapter(
+class DivisionAdapter(
     private val context: Context, private var listWorkouts: List<Workout>, private val
     workoutService: WorkoutService
-) : RecyclerView.Adapter<WorkoutAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<DivisionAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
@@ -49,13 +49,13 @@ class WorkoutAdapter(
         val workout = listWorkouts.get(position)
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DivisionActivity::class.java)
-            intent.putExtra("workout_id", (workout.id))
-            intent.putExtra("divisionList", ArrayList(workout.listOfDivision))
+            intent.putExtra("workout_id", workout.id)
             holder.itemView.context.startActivity(intent)
         }
         holder.itemView.setOnLongClickListener {
             val dialog = DeleteItemDialog(workout.workoutName)
             if (context is FragmentActivity) {
+                dialog.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
             }
             dialog.onDismissListener = { // Configura o listener para saber da dismiss do diálogo

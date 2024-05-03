@@ -33,7 +33,8 @@ class DivisionActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_button)
         descriptionText = findViewById(R.id.description_text)
         val workout_id = intent.getStringExtra("workout_id")
-
+        val divisionList = intent.getSerializableExtra("divisionList") as ArrayList<Division>
+        Log.d("activity", "${divisionList[0].listOfExercises}")
 
         CoroutineScope(Dispatchers.IO).launch {
             db = HomeActivity.database
