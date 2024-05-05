@@ -2,8 +2,6 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +14,7 @@ import com.apicela.training.R
 import com.apicela.training.dialog.DeleteItemDialog
 import com.apicela.training.models.Workout
 import com.apicela.training.services.WorkoutService
+import com.apicela.training.ui.utils.ImageHelper
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.runBlocking
 
@@ -50,7 +49,6 @@ class WorkoutAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DivisionActivity::class.java)
             intent.putExtra("workout_id", (workout.id))
-            intent.putExtra("divisionList", ArrayList(workout.listOfDivision))
             holder.itemView.context.startActivity(intent)
         }
         holder.itemView.setOnLongClickListener {
@@ -69,8 +67,6 @@ class WorkoutAdapter(
             true
         }
         holder.workout_name.text = workout.workoutName
-        val resourceId =
-            context.resources.getIdentifier(workout.image, "drawable", context.packageName)
-        holder.workout_image.setImageResource(resourceId)
+        ImageHelper.setImage(context, holder.workout_image, workout.image, false)
     }
 }

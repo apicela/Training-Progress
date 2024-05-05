@@ -40,7 +40,7 @@
             android:layout_gravity="end">
 
             <Button
-                android:id="@+id/edit_voltar"
+                android:id="@+id/edit"
                 android:layout_width="44dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
@@ -54,7 +54,6 @@
         android:id="@+id/description_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
 
@@ -62,21 +61,21 @@
             android:id="@+id/description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:textColor="@color/amarelo_personalizado"></TextView>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/description_layout">
 
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintTop_toBottomOf="@+id/description_layout"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/plus_button"

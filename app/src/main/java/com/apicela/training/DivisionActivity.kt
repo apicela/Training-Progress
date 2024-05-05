@@ -3,69 +3,62 @@ package com.apicela.training
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.adapters.DivisionAdapter
 import com.apicela.training.createActivity.CreateDivision
-import com.apicela.training.data.Database
-import com.apicela.training.models.Division
-import com.apicela.training.ui.utils.ViewCreator
+import com.apicela.training.services.WorkoutService
 import com.apicela.training.utils.Codes
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runBlocking
 
 class DivisionActivity : AppCompatActivity() {
     private lateinit var backButton: Button
+    private lateinit var editButton: Button
     private lateinit var plusButton: ImageButton
-    private lateinit var db: Database
     private lateinit var descriptionText: TextView
+    private lateinit var recyclerView: RecyclerView // Add this line
+    private lateinit var adapter: DivisionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("activity", "division started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_division)
-        val container = findViewById<LinearLayout>(R.id.container)
+        val workoutService = WorkoutService(HomeActivity.database)
         plusButton = findViewById(R.id.plus_button)
         backButton = findViewById(R.id.back_button)
-        descriptionText = findViewById(R.id.description_text)
-        val workout_id = intent.getStringExtra("workout_id")
-        val divisionList = intent.getSerializableExtra("divisionList") as ArrayList<Division>
-        Log.d("activity", "${divisionList[0].listOfExercises}")
+        editButton = findViewById(R.id.edit)
+        var editMode = false;
 
-        CoroutineScope(Dispatchers.IO).launch {
-            db = HomeActivity.database
-            val workout = db.workoutDao().getWorkoutById(workout_id!!)
-            descriptionText.text = workout?.description
-            val listOfDivisions: List<Division>? = workout?.listOfDivision
-            withContext(Dispatchers.Main) {
-                listOfDivisions?.forEach { division ->
-                    val item = ViewCreator.createDivisionLine(
-                        applicationContext,
-                        division.image,
-                        division.divisionName
-                    )
-                    item.setOnClickListener {
-                        val intent = Intent(this@DivisionActivity, ExerciseActivity::class.java)
-                        intent.putExtra("division_id", division.id)
-                        intent.putExtra("isDivision", true)
-                        startActivity(intent)
-                    }
-                    container.addView(item)
-                }
-            }
-        }
+        descriptionText = findViewById(R.id.description_text)
+        val workoutId = intent.getStringExtra("workout_id")
+        val workoutDescription =
+            runBlocking { workoutService.getWorkoutById(workoutId!!).description }
+        descriptionText.text = workoutDescription
+
+        recyclerView = findViewById(R.id.recyclerView)
+        adapter = DivisionAdapter(this, workoutId!!)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
         backButton.setOnClickListener {
             finish()
         }
 
+        editButton.setOnClickListener {
+            editMode = !editMode
+            adapter.setEditing(editMode)
+            plusButton.visibility =
+                if (plusButton.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
+
         plusButton.setOnClickListener {
             val intent = Intent(this@DivisionActivity, CreateDivision::class.java)
-            intent.putExtra("workout_id", workout_id)
+            intent.putExtra("workout_id", workoutId)
             startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
         }
     }

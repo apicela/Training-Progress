@@ -29,15 +29,16 @@ class CreateDivision : AppCompatActivity() {
         divisionService = DivisionService(HomeActivity.database)
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
-        val workout_id = intent.getStringExtra("workout_id")
+        val workoutId = intent.getStringExtra("workout_id")
 
         concludeButton.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 val division = divisionService.createDivision(
+                    workoutId!!,
                     divisionName.text.toString(),
                     image.text.toString()
                 )
-                divisionService.addDivisionToWorkout(division, workout_id!!)
+                divisionService.addDivisionToWorkout(division, workoutId!!)
             }
             val resultIntent = Intent()
             setResult(Codes.REQUEST_CODE_CREATED, resultIntent)

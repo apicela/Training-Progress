@@ -2,75 +2,100 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.DivisionActivity
+import com.apicela.training.ExerciseActivity
+import com.apicela.training.HomeActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.DeleteItemDialog
-import com.apicela.training.models.Workout
+import com.apicela.training.dialog.EditDivisionDialog
+import com.apicela.training.models.Division
 import com.apicela.training.services.WorkoutService
-import de.hdodenhof.circleimageview.CircleImageView
+import com.apicela.training.ui.utils.ImageHelper
+import com.google.android.material.imageview.ShapeableImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class DivisionAdapter(
-    private val context: Context, private var listWorkouts: List<Workout>, private val
-    workoutService: WorkoutService
+    private val context: Context,
+    private val workoutId: String
 ) : RecyclerView.Adapter<DivisionAdapter.MyViewHolder>() {
+    val workoutService = WorkoutService(HomeActivity.database)
+    private var isEditing = false
+    val workout = runBlocking { workoutService.getWorkoutById(workoutId) }
+    var list = workout.listOfDivision as MutableList<Division>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.workout_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_division, parent, false)
         return MyViewHolder(itemView)
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var workout_name = itemView.findViewById<TextView>(R.id.workout_name)
-        var workout_image = itemView.findViewById<CircleImageView>(R.id.workout_image)
+        var name = itemView.findViewById<TextView>(R.id.text)
+        var image = itemView.findViewById<ShapeableImageView>(R.id.image)
+        val minusButton = itemView.findViewById<ImageView>(R.id.minus)
+        val editButton = itemView.findViewById<ImageView>(R.id.imageViewEdit)
     }
 
     fun updateData() {
-        listWorkouts = runBlocking { workoutService.getAllWorkouts() }
-        Log.d("adapter", "called updateData")
+        notifyDataSetChanged()
+    }
+
+    fun setEditing(isEditing: Boolean) {
+        this.isEditing = isEditing
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return listWorkouts.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val workout = listWorkouts.get(position)
+        val division = list.get(position)
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DivisionActivity::class.java)
-            intent.putExtra("workout_id", workout.id)
+            val intent = Intent(holder.itemView.context, ExerciseActivity::class.java)
+            intent.putExtra("division_id", division.id)
             holder.itemView.context.startActivity(intent)
         }
-        holder.itemView.setOnLongClickListener {
-            val dialog = DeleteItemDialog(workout.workoutName)
+        holder.name.text = division.divisionName
+        holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
+        holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
+
+        holder.minusButton.setOnClickListener {
+            list.remove(division)
+            updateData()
+            CoroutineScope(Dispatchers.Main).launch {
+                workoutService.divisionService.deleteDivisionById(division.id)
+                workoutService.updateWorkout(workout)
+            }
+        }
+
+        holder.editButton.setOnClickListener {
+            val dialog = EditDivisionDialog(division.divisionName, division.image)
             if (context is FragmentActivity) {
-                dialog.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
+                dialog.show(context.supportFragmentManager, "EditarDivisão")
             }
             dialog.onDismissListener = { // Configura o listener para saber da dismiss do diálogo
                 val confirmDelete =
                     dialog.confirmed // Verifica se o diálogo foi cancelado (clique em "Cancelar")
                 if (confirmDelete) {
-                    runBlocking { workoutService.deleteById(workout.id) }
+                    division.divisionName = dialog.divisionName
+                    division.image = dialog.image
                     updateData()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        workoutService.divisionService.updateDivisionObject(division)
+                        workoutService.updateWorkout(workout)
+                    }
                 }
             }
-            true
         }
-        holder.workout_name.text = workout.workoutName
-        val resourceId =
-            context.resources.getIdentifier(workout.image, "drawable", context.packageName)
-        holder.workout_image.setImageResource(resourceId)
+        ImageHelper.setImage(context, holder.image, division.image, false)
     }
 }

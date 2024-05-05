@@ -42,12 +42,12 @@ class ExerciseAdapter(
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val key = exerciseMap.keys.elementAt(position)
         holder.muscle_name.text = Muscle.getMuscleByPtbr(key).uppercase()
-        val resourceId = context.resources.getIdentifier(
+        ImageHelper.setImage(
+            context,
+            holder.muscle_image,
             "muscle_group_${(key).lowercase()}",
-            "drawable",
-            context.packageName
+            false
         )
-        holder.muscle_image.setImageResource(resourceId)
         val exercises = exerciseMap.getValue(key)
         holder.layoutExercises.removeAllViews()
 

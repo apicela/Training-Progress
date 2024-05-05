@@ -1,49 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/defaulwt"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_black"
-    android:orientation="vertical"
-    android:theme="@style/Theme.Training"
-    tools:context=".createActivity.CreateDivision">
+    android:layout_height="wrap_content"
+    android:background="@color/semi_black"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/backLinearLayout"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/defaulwt">
-
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="63dp"
-            android:layout_height="48dp"
-            android:background="@null"
-            android:drawableLeft="@drawable/arrow" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="-36dp"
-            android:layout_marginTop="-1.5dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Voltar"
-            android:textColor="@color/amarelo_personalizado"
-            android:textSize="14sp"></TextView>
-    </LinearLayout>
+        android:layout_marginTop="25dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="EDITAR DIVISÃO"
+        android:textColor="@color/amarelo_personalizado"
+        android:textSize="35sp"></TextView>
 
     <LinearLayout
-        android:id="@+id/layout_cliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/backLinearLayout">
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/divisionNameText"
@@ -104,18 +81,23 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/concludeButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:id="@+id/buttonConfirmar"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/yellow_bordered_button"
-        android:text="CRIAR DIVISÃO"
-        android:textColor="@color/light_black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Confirmar"
+        android:textColor="@color/black" />
 
+    <Button
+        android:id="@+id/buttonCancelar"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/yellow_bordered_button"
+        android:text="Cancelar"
+        android:textColor="@color/black" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -9,15 +9,21 @@ class WorkoutService(private val db: Database) {
     val divisionService: DivisionService = DivisionService(db)
 
     suspend fun addWorkout(workoutName: String, descricao: String, image: String) {
-        val workoutItem = Workout(
-            workoutName, descricao, image, listOf(
-                divisionService.createDivision("A", "division_a"),
-                divisionService.createDivision("B", "division_b"),
-                divisionService.createDivision("C", "division_c"),
-            )
-        )
+        val workoutItem = Workout()
         withContext(Dispatchers.IO) {
             db.workoutDao().insert(workoutItem)
+        }
+        workoutItem.workoutName = workoutName
+        workoutItem.description = descricao
+        workoutItem.image = image
+        workoutItem.listOfDivision = listOf(
+            divisionService.createDivision(workoutItem.id, "A", "division_a"),
+            divisionService.createDivision(workoutItem.id, "B", "division_b"),
+            divisionService.createDivision(workoutItem.id, "C", "division_c"),
+        )
+
+        withContext(Dispatchers.IO) {
+            db.workoutDao().update(workoutItem)
         }
     }
 
@@ -27,9 +33,23 @@ class WorkoutService(private val db: Database) {
         }
     }
 
+    suspend fun getWorkoutById(id: String): Workout {
+        return withContext(Dispatchers.IO) {
+            db.workoutDao().getWorkoutById(id)
+        }
+    }
+
     suspend fun deleteById(id: String) {
         withContext(Dispatchers.IO) {
             db.workoutDao().deleteById(id)
         }
     }
+
+    suspend fun updateWorkout(workout: Workout) {
+        withContext(Dispatchers.IO) {
+            db.workoutDao().update(workout)
+        }
+    }
+
+
 }

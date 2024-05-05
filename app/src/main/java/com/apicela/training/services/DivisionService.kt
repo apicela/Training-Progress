@@ -8,8 +8,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DivisionService(private val db: Database) {
-    fun createDivision(divisionName: String, image: String): Division {
-        val division = Division(divisionName, image, listOf())
+    fun createDivision(workoutId: String, divisionName: String, image: String): Division {
+        val division = Division(workoutId, divisionName, image, listOf())
         CoroutineScope(Dispatchers.IO).launch {
             db.divisionDao().insert(division)
         }
@@ -36,4 +36,10 @@ class DivisionService(private val db: Database) {
         }
     }
 
+    suspend fun deleteDivisionById(id: String) {
+        withContext(Dispatchers.IO) {
+            db.divisionDao().deleteById(id)
+        }
+
+    }
 }

@@ -38,26 +38,25 @@ class ExerciseActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_button)
         editButton = findViewById(R.id.edit)
 
-        val isDivision = intent.getBooleanExtra("isDivision", false)
-        val division_id = intent.getStringExtra("division_id")
+        val divisionId = intent.getStringExtra("division_id")
         var editMode = false;
         runBlocking {
             exerciseListMap =
-                if (isDivision) {
-                    exerciseService.exerciseListToMap(division_id!!) ?: emptyMap()
+                if (divisionId !== null) {
+                    exerciseService.exerciseListToMap(divisionId) ?: emptyMap()
                 } else {
                     exerciseService.exerciseListToMap()!!
                 }
         }
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, division_id, exerciseService)
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, divisionId, exerciseService)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
 
         plusButton.setOnClickListener {
-            if (isDivision) {
+            if (divisionId != null) {
                 val intent = Intent(this@ExerciseActivity, AddExerciseActivity::class.java)
-                intent.putExtra("division_id", division_id)
+                intent.putExtra("division_id", divisionId)
                 startActivityForResult(intent, REQUEST_CODE_CREATED)
             } else {
                 val intent = Intent(this@ExerciseActivity, CreateExercise::class.java)

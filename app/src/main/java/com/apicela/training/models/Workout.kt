@@ -14,19 +14,6 @@ data class Workout(
     var listOfDivision: List<Division>
 ) {
     @Ignore
-    constructor(
-        workoutName: String,
-        descricao: String,
-        image: String,
-        listOfDivision: List<Division>
-    ) :
-            this(UUID.randomUUID().toString(), workoutName, descricao, image, listOfDivision)
+    constructor() : this(UUID.randomUUID().toString(), "", "", "", emptyList())
 
-    companion object {
-        val listaExercises: MutableList<Workout> by lazy {
-            mutableListOf<Workout>(
-//            Workout("Treino 01", "descricao", listOf())
-            )
-        }
-    }
 }
