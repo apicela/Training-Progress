@@ -20,7 +20,7 @@ import java.util.UUID
 data class Division(
     @PrimaryKey var id: String,
     var workoutId: String,
-    var divisionName: String,
+    var name: String,
     var image: String,
     var listOfExercises: List<Exercise>
 ) : Serializable {

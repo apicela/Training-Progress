@@ -13,7 +13,7 @@ class WorkoutService(private val db: Database) {
         withContext(Dispatchers.IO) {
             db.workoutDao().insert(workoutItem)
         }
-        workoutItem.workoutName = workoutName
+        workoutItem.name = workoutName
         workoutItem.description = descricao
         workoutItem.image = image
         workoutItem.listOfDivision = listOf(

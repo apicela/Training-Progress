@@ -8,7 +8,7 @@ import java.util.UUID
 @Entity
 data class Workout(
     @PrimaryKey var id: String,
-    var workoutName: String,
+    var name: String,
     var description: String,
     var image: String,
     var listOfDivision: List<Division>

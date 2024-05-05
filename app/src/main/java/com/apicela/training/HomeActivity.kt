@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
             sharedPreferencesHelper.initializeOnce(applicationContext, database)
             val listExercises = runBlocking { exerciseService.getAllExercises() }
             val itemsToAdd =
-                Exercise.listaExercises.filter { obj -> listExercises.none { it.exerciseName == obj.exerciseName } }
+                Exercise.listaExercises.filter { obj -> listExercises.none { it.name == obj.name } }
 
             itemsToAdd.forEach {
                 exerciseService.addExerciseToDatabase(it)

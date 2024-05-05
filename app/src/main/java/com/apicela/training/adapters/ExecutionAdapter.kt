@@ -38,7 +38,7 @@ class ExecutionAdapter(
         holder.linearLayoutExecutions.removeAllViews()
 
         executions.forEach { execution ->
-            val executionView = LayoutInflater.from(context).inflate(R.layout.execution_item, null)
+            val executionView = LayoutInflater.from(context).inflate(R.layout.item_execution, null)
             val textViewRepetitions = executionView.findViewById<TextView>(R.id.textViewRepetitions)
             val textViewWeight = executionView.findViewById<TextView>(R.id.textViewWeight)
             val imageViewMinus = executionView.findViewById<ImageView>(R.id.imageViewMinus)

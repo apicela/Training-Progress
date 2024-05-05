@@ -47,7 +47,7 @@ class ExecutionService(private val db: Database) {
         val listOfExecutions = mutableListOf("");
         val groupedItems = items.groupBy { it.exercise_id }
         for (exerciseId in groupedItems.keys) {
-            val exerciseName = exerciseService.getExerciseById(exerciseId).exerciseName
+            val exerciseName = exerciseService.getExerciseById(exerciseId).name
             listOfExecutions.add(
                 "${exerciseName.lowercase()} : ${
                     joinExerciseListToString(

@@ -53,12 +53,12 @@ class ExerciseAdapter(
 
         exercises.forEach { exercise ->
             val exerciseItemView =
-                LayoutInflater.from(context).inflate(R.layout.exercise_item, null)
+                LayoutInflater.from(context).inflate(R.layout.item_exercise, null)
             val exerciseName = exerciseItemView.findViewById<TextView>(R.id.exercise_text)
             val exerciseImage = exerciseItemView.findViewById<ImageView>(R.id.exercise_image)
             val checkbox = exerciseItemView.findViewById<CheckBox>(R.id.checkbox)
             val minusImage = exerciseItemView.findViewById<ImageView>(R.id.minus)
-            exerciseName.text = "${exercise.exerciseName}"
+            exerciseName.text = "${exercise.name}"
             ImageHelper.setImage(context, exerciseImage, exercise.image, true)
             checkbox.visibility =
                 if (checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
@@ -91,7 +91,7 @@ class ExerciseAdapter(
                     val intent = Intent(holder.itemView.context, ExecutionActivity::class.java)
                     intent.putExtra("exercise_id", exercise.id)
                     intent.putExtra("exercise_image", exercise.image)
-                    intent.putExtra("exercise_name", exercise.exerciseName)
+                    intent.putExtra("exercise_name", exercise.name)
                     holder.itemView.context.startActivity(intent)
                 }
             }

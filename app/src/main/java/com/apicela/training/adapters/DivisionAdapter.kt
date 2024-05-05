@@ -64,7 +64,7 @@ class DivisionAdapter(
             intent.putExtra("division_id", division.id)
             holder.itemView.context.startActivity(intent)
         }
-        holder.name.text = division.divisionName
+        holder.name.text = division.name
         holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
         holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
 
@@ -78,7 +78,7 @@ class DivisionAdapter(
         }
 
         holder.editButton.setOnClickListener {
-            val dialog = EditDivisionDialog(division.divisionName, division.image)
+            val dialog = EditDivisionDialog(division.name, division.image)
             if (context is FragmentActivity) {
                 dialog.show(context.supportFragmentManager, "EditarDivisão")
             }
@@ -86,7 +86,7 @@ class DivisionAdapter(
                 val confirmDelete =
                     dialog.confirmed // Verifica se o diálogo foi cancelado (clique em "Cancelar")
                 if (confirmDelete) {
-                    division.divisionName = dialog.divisionName
+                    division.name = dialog.divisionName
                     division.image = dialog.image
                     updateData()
                     CoroutineScope(Dispatchers.IO).launch {

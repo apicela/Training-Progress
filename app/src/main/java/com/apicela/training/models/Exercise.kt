@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity
 data class Exercise(
     @PrimaryKey var id: String,
-    var exerciseName: String,
+    var name: String,
     var image: String,
     var muscleType: Muscle
 ) :

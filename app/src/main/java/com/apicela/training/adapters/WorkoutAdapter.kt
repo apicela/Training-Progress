@@ -25,7 +25,7 @@ class WorkoutAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.workout_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_workout, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -52,7 +52,7 @@ class WorkoutAdapter(
             holder.itemView.context.startActivity(intent)
         }
         holder.itemView.setOnLongClickListener {
-            val dialog = DeleteItemDialog(workout.workoutName)
+            val dialog = DeleteItemDialog(workout.name)
             if (context is FragmentActivity) {
                 dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
             }
@@ -66,7 +66,7 @@ class WorkoutAdapter(
             }
             true
         }
-        holder.workout_name.text = workout.workoutName
+        holder.workout_name.text = workout.name
         ImageHelper.setImage(context, holder.workout_image, workout.image, false)
     }
 }
