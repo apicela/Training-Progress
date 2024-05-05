@@ -12,7 +12,7 @@ interface WorkoutDao {
     fun getAllWorkouts(): List<Workout>
 
     @Query("SELECT * FROM workout WHERE id = :workoutId")
-    fun getWorkoutById(workoutId: String): Workout?
+    fun getWorkoutById(workoutId: String): Workout
 
     @Insert
     fun insert(workout: Workout)

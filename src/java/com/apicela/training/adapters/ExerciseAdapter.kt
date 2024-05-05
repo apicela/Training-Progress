@@ -24,7 +24,7 @@ import kotlinx.coroutines.runBlocking
 
 class ExerciseAdapter(
     private val context: Context, private var exerciseMap: Map<String, List<Exercise>>,
-    private val divisionId : String? = null,
+    private val divisionId: String? = null,
     private val exerciseService: ExerciseService,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
@@ -42,32 +42,37 @@ class ExerciseAdapter(
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val key = exerciseMap.keys.elementAt(position)
         holder.muscle_name.text = Muscle.getMuscleByPtbr(key).uppercase()
-        val resourceId = context.resources.getIdentifier(
+        ImageHelper.setImage(
+            context,
+            holder.muscle_image,
             "muscle_group_${(key).lowercase()}",
-            "drawable",
-            context.packageName
+            false
         )
-        holder.muscle_image.setImageResource(resourceId)
         val exercises = exerciseMap.getValue(key)
         holder.layoutExercises.removeAllViews()
 
         exercises.forEach { exercise ->
             val exerciseItemView =
-                LayoutInflater.from(context).inflate(R.layout.exercise_item, null)
+                LayoutInflater.from(context).inflate(R.layout.item_exercise, null)
             val exerciseName = exerciseItemView.findViewById<TextView>(R.id.exercise_text)
             val exerciseImage = exerciseItemView.findViewById<ImageView>(R.id.exercise_image)
             val checkbox = exerciseItemView.findViewById<CheckBox>(R.id.checkbox)
             val minusImage = exerciseItemView.findViewById<ImageView>(R.id.minus)
-            exerciseName.text = "${exercise.exerciseName}"
+            exerciseName.text = "${exercise.name}"
             ImageHelper.setImage(context, exerciseImage, exercise.image, true)
-            checkbox.visibility = if (checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
-            minusImage.visibility = if(isEditing) View.VISIBLE else View.GONE
+            checkbox.visibility =
+                if (checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
+            minusImage.visibility = if (isEditing) View.VISIBLE else View.GONE
 
-            minusImage.setOnClickListener{
+            minusImage.setOnClickListener {
                 runBlocking {
-                    exerciseService.removeExerciseFromDivision(divisionId!!, exercise.id)
-                    exerciseMap = exerciseService.exerciseListToMap(divisionId!!)!!
-                    notifyDataSetChanged()
+                    if (divisionId !== null) {
+                        exerciseService.removeExerciseFromDivision(divisionId, exercise.id)
+                        exerciseMap = exerciseService.exerciseListToMap(divisionId)!!
+                    } else {
+                        exerciseService.deleteExerciseById(exercise.id)
+                    }
+                    updateData()
                 }
             }
             checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -86,7 +91,7 @@ class ExerciseAdapter(
                     val intent = Intent(holder.itemView.context, ExecutionActivity::class.java)
                     intent.putExtra("exercise_id", exercise.id)
                     intent.putExtra("exercise_image", exercise.image)
-                    intent.putExtra("exercise_name", exercise.exerciseName)
+                    intent.putExtra("exercise_name", exercise.name)
                     holder.itemView.context.startActivity(intent)
                 }
             }
@@ -103,8 +108,12 @@ class ExerciseAdapter(
     }
 
     fun updateData() {
-        runBlocking {exerciseMap = exerciseService.exerciseListToMap(null)!!}
-        notifyDataSetChanged()
+        runBlocking {
+            exerciseMap = exerciseService.exerciseListToMap(divisionId)!!
+            Log.d("adapter", "id: ${divisionId} \n${exerciseMap}")
+            notifyDataSetChanged()
+        }
+
     }
 
     fun getSelectedExercises(): List<Exercise> {

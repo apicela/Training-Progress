@@ -19,5 +19,8 @@ interface DivisionDao {
 
     @Update
     fun update(division: Division)
+
+    @Query("DELETE FROM Division WHERE id = :id")
+    fun deleteById(id: String)
 }
 
