@@ -18,7 +18,18 @@
 ### Cronômetro. <Em breve>
 ### Adicionar observações diárias a respeito do seu treino, para acompanhar seu desempenho durante a sessão de treinamento (Ex: "não me sentia bem neste dia, estava com sono") <Em breve>
 
-# Documentação
-<p align="center">
-  <img src="https://www.gov.br/agricultura/pt-br/assuntos/riscos-seguro/imagens/em_construao.png/@@images/image.png">
-</p>
+## Tela Inicial
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/7858349b-e065-40b1-bafd-e97b103f512f" width="290" height="600">
+
+## Lista de todos exercícios
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/d5a82828-b007-4a02-bbea-6ce92b6eb5df" width="290" height="600">
+
+## Lista de treinamento divisão "A" (Você personaliza quais exercícios fazem parte da sua divisão de treinamento)
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/136a2cda-4aa3-47b0-ab20-5d0c1f6a84bd" width="290" height="600">
+
+## Calendário de exercícios realizados
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/61b5eb74-5be8-433b-93f9-be2f19e283c6" width="290" height="600">
+
+## Vídeo exemplificando algumas de suas utilidades
+https://github.com/apicela/Training-Progress/assets/105384228/713b4e6d-fced-4b52-86f1-74263ad01107
+
