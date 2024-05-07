@@ -22,10 +22,10 @@
 <img src="https://github.com/apicela/Training-Progress/assets/105384228/7858349b-e065-40b1-bafd-e97b103f512f" width="290" height="600">
 
 ## Lista de todos exercícios
-<img src="https://github.com/apicela/Training-Progress/assets/105384228/d5a82828-b007-4a02-bbea-6ce92b6eb5df" width="290" height="600">
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/136a2cda-4aa3-47b0-ab20-5d0c1f6a84bd" width="290" height="600">
 
 ## Lista de treinamento divisão "A" (Você personaliza quais exercícios fazem parte da sua divisão de treinamento)
-<img src="https://github.com/apicela/Training-Progress/assets/105384228/136a2cda-4aa3-47b0-ab20-5d0c1f6a84bd" width="290" height="600">
+<img src="https://github.com/apicela/Training-Progress/assets/105384228/d5a82828-b007-4a02-bbea-6ce92b6eb5df" width="290" height="600">
 
 ## Calendário de exercícios realizados
 <img src="https://github.com/apicela/Training-Progress/assets/105384228/61b5eb74-5be8-433b-93f9-be2f19e283c6" width="290" height="600">
