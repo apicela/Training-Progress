@@ -21,7 +21,7 @@
 ## Tela Inicial
 <img src="https://github.com/apicela/Training-Progress/assets/105384228/7858349b-e065-40b1-bafd-e97b103f512f" width="290" height="600">
 
-## Lista de todos exercícios
+## Exemplo de lista de exercícios para compor seu treinamento
 <img src="https://github.com/apicela/Training-Progress/assets/105384228/136a2cda-4aa3-47b0-ab20-5d0c1f6a84bd" width="290" height="600">
 
 ## Lista de treinamento divisão "A" (Você personaliza quais exercícios fazem parte da sua divisão de treinamento)
