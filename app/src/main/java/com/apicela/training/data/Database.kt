@@ -9,14 +9,16 @@ import com.apicela.training.converter.ExerciseListConverter
 import com.apicela.training.dao.DivisionDao
 import com.apicela.training.dao.ExecutionDao
 import com.apicela.training.dao.ExerciseDao
+import com.apicela.training.dao.ObservationDao
 import com.apicela.training.dao.WorkoutDao
 import com.apicela.training.models.Division
 import com.apicela.training.models.Execution
 import com.apicela.training.models.Exercise
+import com.apicela.training.models.Observation
 import com.apicela.training.models.Workout
 
 @Database(
-    entities = [Exercise::class, Workout::class, Division::class, Execution::class],
+    entities = [Exercise::class, Workout::class, Division::class, Execution::class, Observation::class],
     version = 3,
     exportSchema = false
 )
@@ -28,4 +30,5 @@ abstract class Database : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun executionDao(): ExecutionDao
+    abstract fun observationDao() : ObservationDao
 }
