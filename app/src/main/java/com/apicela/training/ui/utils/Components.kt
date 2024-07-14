@@ -7,6 +7,7 @@ import android.widget.EditText
 import com.apicela.training.R
 import java.time.LocalDate
 import java.util.Calendar
+import java.util.Date
 
 class Components {
     companion object {
@@ -49,5 +50,13 @@ class Components {
             return "${day}/${month}/${year}"
         }
 
+
+        fun formatDateWithCurrentTime(date : Date) : Date {
+            var now = Date()
+            now.date = date.date
+            now.month = date.month
+            now.year = date.year
+            return now;
+        }
     }
 }

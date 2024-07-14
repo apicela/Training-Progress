@@ -1,6 +1,7 @@
 package com.apicela.training.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class ExecutionAdapter(
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
     val executionService = ExecutionService(HomeActivity.database)
     private var isEditing = false
+    private val reversedOrderKeys: List<String> = executionMap.keys.toList().reversed();
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExecutionViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.date_linear_layout, parent, false)
@@ -31,7 +33,8 @@ class ExecutionAdapter(
     }
 
     override fun onBindViewHolder(holder: ExecutionViewHolder, position: Int) {
-        val key = executionMap.keys.elementAt(position)
+//        Log.d("Execution", "onBind called position: $position")
+        val key = reversedOrderKeys.elementAt(position)
         holder.date.text = key
 
         val executions = executionMap.getValue(key)

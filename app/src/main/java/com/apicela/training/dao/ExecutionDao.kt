@@ -13,8 +13,8 @@ interface ExecutionDao {
     @Query("SELECT * FROM Execution")
     fun getAllExecution(): List<Execution>
 
-    @Query("SELECT * FROM execution WHERE date = :date")
-    fun getAllExecutionFromDate(date: Long): List<Execution>
+    @Query("SELECT * FROM execution WHERE strftime('%d/%m/%Y', date / 1000, 'unixepoch') =  :date")
+    fun getAllExecutionFromDate(date: String): List<Execution>
 
     @Query("SELECT * FROM execution WHERE id = :id")
     fun getExecutionById(id: String): Execution

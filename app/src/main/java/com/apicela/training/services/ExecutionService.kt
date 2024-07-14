@@ -33,12 +33,10 @@ class ExecutionService(private val db: Database) {
     }
 
     suspend fun findExecutionsListByDate(date: Date): List<Execution> {
-        date.hours = 0
-        date.minutes = 0
-        date.seconds = 0
-        val timestamp = date.time - (date.time % 1000)
+        val format = SimpleDateFormat("dd/MM/yyyy")
+        val formattedDate = format.format(date)
         return withContext(Dispatchers.IO) {
-            db.executionDao().getAllExecutionFromDate(timestamp)
+            db.executionDao().getAllExecutionFromDate(formattedDate.toString())
         }
     }
 
@@ -79,7 +77,6 @@ class ExecutionService(private val db: Database) {
     }
 
     suspend fun getLastInsertedExecution(id: String): Execution? {
-        Log.d("execution", "get last Inserted ")
         return withContext(Dispatchers.IO) {
             db.executionDao().getLastInsertedExecution(id)
         }

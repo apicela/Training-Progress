@@ -68,14 +68,15 @@ class RegisterExecutionDialog(
             val kg = editTextKG.text.toString().toFloatOrNull() ?: 0f
             val repetitions = editTextRepeticoes.text.toString().toIntOrNull() ?: 0
             val format = SimpleDateFormat("dd/MM/yyyy")
-            val formattedDate = format.parse(editTextDate.text.toString()) as Date
+            val editTextAsDate = format.parse(editTextDate.text.toString()) as Date
+            val date = Components.formatDateWithCurrentTime(editTextAsDate)
             if (executionId == null) {
-                val execution = Execution(repetitions, kg, exerciseId, formattedDate)
+                val execution = Execution(repetitions, kg, exerciseId, date)
                 GlobalScope.launch {
                     executionService.addExecutionToDatabase(execution)
                 }
             } else {
-                val execution = Execution(executionId, repetitions, kg, exerciseId, formattedDate)
+                val execution = Execution(executionId, repetitions, kg, exerciseId, date)
                 GlobalScope.launch {
                     executionService.updateExecutionObject(execution)
                 }

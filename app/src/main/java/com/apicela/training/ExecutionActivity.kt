@@ -53,7 +53,6 @@ class ExecutionActivity : AppCompatActivity() {
         ImageHelper.setImage(this, imageExercise, exercise_image, false)
 
         val executionMap = executionService.executionListToMap(exercise_id)
-        Log.d("Execution", "${executionMap}")
         executionAdapter = ExecutionAdapter(this, executionMap)
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
