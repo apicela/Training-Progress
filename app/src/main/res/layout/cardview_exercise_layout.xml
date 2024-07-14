@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/light_black"
     android:orientation="vertical"
-    android:theme="@style/Theme.Training">
+    android:theme="@style/Theme.ApicelaTraining">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

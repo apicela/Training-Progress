@@ -37,7 +37,7 @@ class ExecutionActivity : AppCompatActivity() {
         Log.d("activity", "execution started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_execution)
-        executionService = ExecutionService(HomeActivity.database)
+        executionService = ExecutionService(HomeActivity.DATABASE)
         backButton = findViewById(R.id.back_button)
         edit = findViewById(R.id.edit)
         recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
