@@ -19,7 +19,7 @@ import com.apicela.training.models.Workout
 
 @Database(
     entities = [Exercise::class, Workout::class, Division::class, Execution::class, Observation::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(
