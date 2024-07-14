@@ -15,7 +15,6 @@
         <!-- Customize your theme here. -->
         <item name="cardViewStyle">@style/CardView.Workout</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@color/light_black</item>
         <item name="itemBackground">@color/amarelo_personalizado</item>
     </style>
     <style name="roundedImage">
