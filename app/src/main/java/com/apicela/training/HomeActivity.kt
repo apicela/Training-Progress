@@ -29,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var workoutAdapter: WorkoutAdapter
     private lateinit var exercisesButton: ImageButton
+    private lateinit var profileButton: ImageButton
     private lateinit var calendarButton: ImageButton
     private lateinit var newWorkoutButton: AppCompatButton
     private lateinit var recyclerView: RecyclerView // Add this line
@@ -62,11 +63,16 @@ class HomeActivity : AppCompatActivity() {
         exercisesButton = findViewById(R.id.exercise_button)
         calendarButton = findViewById(R.id.calendar_button)
         newWorkoutButton = findViewById(R.id.new_workout_button)
-
+        profileButton = findViewById(R.id.profile_button)
 
 
         exercisesButton.setOnClickListener {
             val intent = Intent(this@HomeActivity, ExerciseActivity::class.java)
+            startActivity(intent)
+        }
+
+        profileButton.setOnClickListener {
+            val intent = Intent(this@HomeActivity, ProfileFragment::class.java)
             startActivity(intent)
         }
 
