@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:title="Inicio"
+        android:icon="@drawable/ic_home"
+        android:id="@+id/homeFragment"/>
+    <item
     android:title="Exercicios"
-    android:icon="@drawable/ic_exercise"
-    android:id="@+id/exercisesFragment"/>
+    android:icon="@drawable/ic_exercise_list"
+    android:id="@+id/exercisesActivity"/>
     <item
         android:title="Calendario"
         android:icon="@drawable/ic_calendar"

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android
+    .com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
     <fragment
@@ -9,14 +10,19 @@
         android:name="com.apicela.training.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <activity
+    <fragment
         android:id="@+id/profileFragment"
-        android:name="com.apicela.training.HomeActivity"
+        android:name="com.apicela.training.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <activity
-        android:id="@+id/calendarActivity"
-        android:name="com.apicela.training.CalendarFragment"
-        android:label="calendar_activity"
-        tools:layout="@layout/calendar_activity" />
+        <activity
+            android:id="@+id/exercisesActivity"
+            android:name="com.apicela.training.ExerciseActivity"
+            android:label="calendar_activity"
+            tools:layout="@layout/activity_exercise" />
+<!--    <activity-->
+<!--        android:id="@+id/calendarActivity"-->
+<!--        android:name="com.apicela.training.CalendarFragment"-->
+<!--        android:label="calendar_activity"-->
+<!--        tools:layout="@layout/calendar_activity" />-->
 </navigation>
