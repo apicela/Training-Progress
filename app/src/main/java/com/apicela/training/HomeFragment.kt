@@ -2,11 +2,11 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.WorkoutAdapter
@@ -56,5 +56,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun linkViewFields(v : View) {
         newWorkoutButton = v.findViewById(R.id.buttonNewWorkout)
         recyclerView = v.findViewById(R.id.recyclerView)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Codes.REQUEST_CODE_CREATED && resultCode == Codes.RESULT_CODE_EXERCISE_CREATED) {
+            this.workoutAdapter.refreshData()
+        }
     }
 }

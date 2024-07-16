@@ -45,4 +45,5 @@ class CreateWorkout : AppCompatActivity() {
             finish()
         }
     }
+
 }

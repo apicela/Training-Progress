@@ -1,14 +1,10 @@
 package com.apicela.training
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.apicela.training.data.DataManager
 import com.apicela.training.data.Database
-import com.apicela.training.utils.Codes
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -25,13 +21,5 @@ class HomeActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavigation,navController)
 
 
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Codes.REQUEST_CODE_CREATED && resultCode == Codes.RESULT_CODE_EXERCISE_CREATED) {
-            recreate() // Isso reiniciará a Activity
-        }
     }
 }
