@@ -20,9 +20,9 @@
             android:name="com.apicela.training.ExerciseActivity"
             android:label="calendar_activity"
             tools:layout="@layout/activity_exercise" />
-<!--    <activity-->
-<!--        android:id="@+id/calendarActivity"-->
-<!--        android:name="com.apicela.training.CalendarFragment"-->
-<!--        android:label="calendar_activity"-->
-<!--        tools:layout="@layout/calendar_activity" />-->
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.apicela.training.CalendarFragment"
+        android:label="calendar_fragment"
+        tools:layout="@layout/fragment_calendar" />
 </navigation>
