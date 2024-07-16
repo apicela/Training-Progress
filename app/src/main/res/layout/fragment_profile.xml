@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Digite sua observação aqui"
-        android:textColorHint="@color/amarelo_personalizado"
+        android:textColorHint="@color/white"
         android:inputType="textMultiLine"
         android:minLines="4"
         android:textColor="@color/white"
@@ -62,6 +62,8 @@
         android:layout_height="wrap_content"
         android:text="Salvar"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/semi_black_button"
+        android:layout_marginTop="15dp"
         android:padding="12dp"
         android:textSize="16sp" />
 
