@@ -2,6 +2,7 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -18,7 +19,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        DATABASE = DataManager.getDatabase(applicationContext)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.navigation_bar)
         val navController = Navigation.findNavController(this,R.id.frag_host)

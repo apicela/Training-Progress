@@ -1,6 +1,7 @@
 package com.apicela.training.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 
 
@@ -16,7 +17,6 @@ object DataManager {
                         Database::class.java,
                         "apicela_training"
                     )
-                        // Habilitar migração automática
                         .addMigrations(MIGRATION_3_4) // Adiciona a migração
                         .build()
                 }

@@ -1,33 +1,60 @@
 package com.apicela.training
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.adapters.WorkoutAdapter
+import com.apicela.training.createActivity.CreateWorkout
+import com.apicela.training.models.Workout
+import com.apicela.training.services.WorkoutService
+import com.apicela.training.utils.Codes
+import kotlinx.coroutines.runBlocking
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    lateinit var newWorkoutButton : Button
+    lateinit var workoutAdapter: WorkoutAdapter
+    lateinit var recyclerView: RecyclerView // Add this line
+    lateinit var workoutService : WorkoutService
+    lateinit var listOfWorkouts : List<Workout>
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpVariables()
+        setOnClickWorkoutButton()
     }
+
+    private fun setUpVariables() {
+        workoutService = WorkoutService(HomeActivity.DATABASE)
+        listOfWorkouts = runBlocking { workoutService.getAllWorkouts() }
+        workoutAdapter = WorkoutAdapter(requireContext(), listOfWorkouts, workoutService)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = workoutAdapter
+    }
+
+    private fun setOnClickWorkoutButton() {
+        newWorkoutButton.setOnClickListener {
+            val intent = Intent(requireContext(), CreateWorkout::class.java)
+            startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
+        }    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        linkViewFields(view)
+        return view;
+    }
+
+    private fun linkViewFields(v : View) {
+        newWorkoutButton = v.findViewById(R.id.buttonNewWorkout)
+        recyclerView = v.findViewById(R.id.recyclerView)
     }
 }
