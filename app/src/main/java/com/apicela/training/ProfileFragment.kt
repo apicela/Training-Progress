@@ -12,8 +12,8 @@ import com.apicela.training.ui.utils.Components
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-// R.layout.fragment_profile
-class ProfileFragment  : Fragment() {
+//
+class ProfileFragment  : Fragment(R.layout.fragment_profile) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

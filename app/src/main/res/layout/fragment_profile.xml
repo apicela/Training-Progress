@@ -7,28 +7,53 @@
     android:padding="16dp"
     android:background="@color/light_black"
     tools:context=".HomeActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/buttonDecrementDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_left_arrow"
+            android:background="@android:color/transparent"
+            android:tint="@color/white"
+            android:layout_margin="8dp" />
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="14/07/2024"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+        <ImageButton
+            android:id="@+id/buttonIncrementDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:tint="@color/white"
+            android:src="@drawable/ic_right_arrow"
+            android:background="@android:color/transparent"
+            android:layout_margin="8dp" />
+    </LinearLayout>
 
-    <!-- Label com a data -->
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:textSize="18sp"
-        android:paddingBottom="8dp"
-        android:background="@android:drawable/edit_text"/>
-
-    <!-- Caixa de texto para adicionar uma observação -->
     <EditText
         android:id="@+id/editTextObservation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Digite sua observação aqui"
+        android:textColorHint="@color/amarelo_personalizado"
         android:inputType="textMultiLine"
         android:minLines="4"
+        android:textColor="@color/white"
         android:gravity="top"
         android:padding="8dp"
-        android:background="@android:drawable/edit_text" />
+        android:background="@color/super_light_black" />
 
     <!-- Botão para salvar -->
     <Button
