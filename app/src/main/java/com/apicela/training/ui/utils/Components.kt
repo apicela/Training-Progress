@@ -24,25 +24,26 @@ class Components {
                 R.style.DatePickerDialogStyle, // Estilo personalizado
                 { view, selectedYear, selectedMonth, selectedDay ->
                     // Logic to handle the selected date
-                    val formattedMonth = if (selectedMonth + 1 < 10) {
-                        "0${selectedMonth + 1}" // Adiciona um zero se o mês for menor que 10
-                    } else {
-                        "${selectedMonth + 1}"
-                    }
-                    val selectedDateTime = "$selectedDay/$formattedMonth/$selectedYear"
-                    Log.d("date", " selected  :  ${selectedDateTime}")
+                    val formattedMonth = concatZero(selectedMonth + 1)
+                    val formattedDay = concatZero(selectedDay)
+                    val selectedDateTime = "$formattedDay/$formattedMonth/$selectedYear"
                     dateTimeText.setText(selectedDateTime)
                 },
                 year,
                 month,
                 day
             )
-
             // Show the DatePickerDialog
             datePickerDialog.show()
         }
 
-
+        fun concatZero(number : Int) : String{
+            return if (number < 10) {
+                "0${number}" // Adiciona um zero se o mês for menor que 10
+            } else {
+                "${number}"
+            }
+        }
         fun formatDateAsString(date: LocalDate): String {
             val day = date.dayOfMonth
             val month = date.month

@@ -30,6 +30,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setOnClickWorkoutButton()
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        linkViewFields(view)
+        return view;
+    }
+
     private fun setUpVariables() {
         workoutService = WorkoutService(HomeActivity.DATABASE)
         listOfWorkouts = runBlocking { workoutService.getAllWorkouts() }
@@ -44,14 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
         }    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view =  inflater.inflate(R.layout.fragment_home, container, false)
-        linkViewFields(view)
-        return view;
-    }
 
     private fun linkViewFields(v : View) {
         newWorkoutButton = v.findViewById(R.id.buttonNewWorkout)

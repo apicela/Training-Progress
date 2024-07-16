@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.apicela.training.ui.utils.Components
@@ -14,31 +15,61 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 //
 class ProfileFragment  : Fragment(R.layout.fragment_profile) {
+    lateinit var saveButton : Button
+    lateinit var buttonDecrementDate : ImageButton
+    lateinit var buttonIncrementDate : ImageButton
+    lateinit var editTextObservation: EditText
+    lateinit var editTextDate: EditText
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val saveButton: Button = view.findViewById(R.id.buttonSave)
-        val editTextObservation: EditText = view.findViewById(R.id.editTextObservation)
-        val editTextDate: EditText = view.findViewById(R.id.editTextDate)
+        linkViewFields(view)
+        return view
+    }
 
-
-        var date = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val todayDate = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy")
         )
-        editTextDate.setText(date as String)
+        setUpDateInfo(todayDate)
+        setOnClick()
+    }
+
+    // @require date as dd/MM/yyyy
+    fun setUpDateInfo(date : String){
+        editTextDate.setText(date)
+    }
+
+    private fun setOnClick() {
+        // saveButton
+        saveButton.setOnClickListener {
+            val observationText = editTextObservation.text.toString()
+            TODO()
+
+        }
+
+        // edit text date
         editTextDate.setOnClickListener {
             Components.showDatePicker(editTextDate, requireContext())
             editTextDate.requestFocus() // Request focus after showing the DatePicker
         }
-        saveButton.setOnClickListener {
-            val observationText = editTextObservation.text.toString()
+    }
 
 
-        }
+    private fun linkViewFields(view: View) {
+        // buttons
+        saveButton = view.findViewById(R.id.buttonSave)
+        buttonDecrementDate = view.findViewById(R.id.buttonDecrementDate)
+        buttonIncrementDate = view.findViewById(R.id.buttonIncrementDate)
 
-        return view
+        // texts
+        editTextObservation = view.findViewById(R.id.editTextObservation)
+        editTextDate = view.findViewById(R.id.editTextDate)
+
     }
 }
