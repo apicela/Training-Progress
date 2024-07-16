@@ -23,7 +23,7 @@ class CreateWorkout : AppCompatActivity() {
         setContentView(R.layout.activity_create_workout)
         val workouteName: EditText = findViewById(R.id.workoutName)
         val descricaoText: EditText = findViewById(R.id.descricaoText)
-        workoutService = WorkoutService(HomeActivity.database)
+        workoutService = WorkoutService(HomeActivity.DATABASE)
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
 
@@ -45,4 +45,5 @@ class CreateWorkout : AppCompatActivity() {
             finish()
         }
     }
+
 }

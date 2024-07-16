@@ -28,7 +28,7 @@ class RegisterExecutionDialog(
     private val executionId: String?,
     private val context: Context
 ) : DialogFragment() {
-    val executionService: ExecutionService = ExecutionService(HomeActivity.database)
+    val executionService: ExecutionService = ExecutionService(HomeActivity.DATABASE)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater

@@ -32,7 +32,7 @@ class ExerciseActivity : AppCompatActivity() {
         Log.d("activity", "exercise started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
-        exerciseService = ExerciseService(HomeActivity.database)
+        exerciseService = ExerciseService(HomeActivity.DATABASE)
         // layouts
         plusButton = findViewById(R.id.plus_button)
         backButton = findViewById(R.id.back_button)

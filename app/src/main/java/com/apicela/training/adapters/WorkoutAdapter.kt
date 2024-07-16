@@ -34,7 +34,7 @@ class WorkoutAdapter(
         var workout_image = itemView.findViewById<CircleImageView>(R.id.workout_image)
     }
 
-    fun updateData() {
+    fun refreshData() {
         listWorkouts = runBlocking { workoutService.getAllWorkouts() }
         Log.d("adapter", "called updateData")
         notifyDataSetChanged()
@@ -61,7 +61,7 @@ class WorkoutAdapter(
                     dialog.confirmed // Verifica se o diálogo foi cancelado (clique em "Cancelar")
                 if (confirmDelete) {
                     runBlocking { workoutService.deleteById(workout.id) }
-                    updateData()
+                    refreshData()
                 }
             }
             true

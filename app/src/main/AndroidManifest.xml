@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Apicela"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/draven"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Training"
+        android:theme="@style/Theme.ApicelaTraining"
         tools:targetApi="31">
         <activity
             android:name=".ExecutionActivity"
@@ -34,23 +35,22 @@
             android:name=".createActivity.CreateExercise"
             android:exported="true"
             android:label="@string/title_activity_create_exercise"
-            android:theme="@style/Theme.Training" />
+            android:theme="@style/Theme.ApicelaTraining" />
         <activity
             android:name=".ExerciseActivity"
             android:exported="false" />
-        <activity
-            android:name=".CalendarActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Training" />
+<!--        <activity-->
+<!--            android:name=".CalendarFragment"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.Training" />-->
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Training">
+            android:theme="@style/Theme.ApicelaTraining">
 
             <!-- Removendo android:label para ocultar o nome do ícone de lançamento -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

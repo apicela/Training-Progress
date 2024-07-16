@@ -1,7 +1,6 @@
 package com.apicela.training.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ class ExecutionAdapter(
     private var executionMap: Map<String, List<Execution>>
 ) :
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
-    val executionService = ExecutionService(HomeActivity.database)
+    val executionService = ExecutionService(HomeActivity.DATABASE)
     private var isEditing = false
     private val reversedOrderKeys: List<String> = executionMap.keys.toList().reversed();
 

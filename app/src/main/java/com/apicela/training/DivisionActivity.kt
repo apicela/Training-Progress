@@ -28,7 +28,7 @@ class DivisionActivity : AppCompatActivity() {
         Log.d("activity", "division started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_division)
-        val workoutService = WorkoutService(HomeActivity.database)
+        val workoutService = WorkoutService(HomeActivity.DATABASE)
         plusButton = findViewById(R.id.plus_button)
         backButton = findViewById(R.id.back_button)
         editButton = findViewById(R.id.edit)

@@ -26,7 +26,7 @@ class CreateDivision : AppCompatActivity() {
         val divisionName: EditText = findViewById(R.id.divisionNameText)
         val image: EditText = findViewById(R.id.imageUrlText)
 
-        divisionService = DivisionService(HomeActivity.database)
+        divisionService = DivisionService(HomeActivity.DATABASE)
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
         val workoutId = intent.getStringExtra("workout_id")

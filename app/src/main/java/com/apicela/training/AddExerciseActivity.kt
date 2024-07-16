@@ -36,8 +36,8 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise)
-        val exerciseService = ExerciseService(HomeActivity.database)
-        val divisionService = DivisionService(HomeActivity.database)
+        val exerciseService = ExerciseService(HomeActivity.DATABASE)
+        val divisionService = DivisionService(HomeActivity.DATABASE)
         val division_id = intent.getStringExtra("division_id")
         // layouts
         backButton = findViewById(R.id.back_button)

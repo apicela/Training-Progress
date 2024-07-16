@@ -26,7 +26,7 @@ class DivisionAdapter(
     private val context: Context,
     private val workoutId: String
 ) : RecyclerView.Adapter<DivisionAdapter.MyViewHolder>() {
-    val workoutService = WorkoutService(HomeActivity.database)
+    val workoutService = WorkoutService(HomeActivity.DATABASE)
     private var isEditing = false
     val workout = runBlocking { workoutService.getWorkoutById(workoutId) }
     var list = workout.listOfDivision as MutableList<Division>
