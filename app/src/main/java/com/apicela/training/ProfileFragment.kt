@@ -1,6 +1,7 @@
 package com.apicela.training
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,16 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.apicela.training.models.Observation
+import com.apicela.training.services.ObservationService
 import com.apicela.training.ui.utils.Components
+import kotlinx.coroutines.runBlocking
 import java.time.Instant
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Date
+
 //
 class ProfileFragment  : Fragment(R.layout.fragment_profile) {
     lateinit var saveButton : Button
@@ -20,7 +27,7 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
     lateinit var buttonIncrementDate : ImageButton
     lateinit var editTextObservation: EditText
     lateinit var editTextDate: EditText
-
+    lateinit var observationService: ObservationService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +40,7 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpVariables()
         val todayDate = Instant.now().atZone(ZoneId.systemDefault()).toLocalDateTime().format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy")
         )
@@ -40,17 +48,35 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
         setOnClick()
     }
 
+    private fun setUpVariables() {
+        observationService = ObservationService()
+    }
+
     // @require date as dd/MM/yyyy
     fun setUpDateInfo(date : String){
         editTextDate.setText(date)
+//        val observationFromDB = runBlocking { observationService.getObservationByDate(date) }
+//        val observationText = observationFromDB?.observation ?: ""
+//        editTextObservation.setText(observationText)
     }
 
     private fun setOnClick() {
         // saveButton
         saveButton.setOnClickListener {
             val observationText = editTextObservation.text.toString()
-            TODO()
+            val observation = Observation(Date(editTextDate.text.toString()), observationText)
+            observationService.addObservation(observation)
+        }
 
+        buttonIncrementDate.setOnClickListener{
+            val newDate = updateDate(editTextDate.text.toString(), 1)
+            editTextDate.setText(newDate)
+            setUpDateInfo(newDate)
+        }
+        buttonDecrementDate.setOnClickListener{
+            val newDate = updateDate(editTextDate.text.toString(), -1)
+            editTextDate.setText(newDate)
+            setUpDateInfo(newDate)
         }
 
         // edit text date
@@ -71,5 +97,13 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
         editTextObservation = view.findViewById(R.id.editTextObservation)
         editTextDate = view.findViewById(R.id.editTextDate)
 
+    }
+
+    fun updateDate(dateAsString: String, days : Int) : String{
+        val currentDate = LocalDate.parse(dateAsString, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        val updatedDate = currentDate.plusDays(days.toLong()).format(
+            DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        )
+        return updatedDate;
     }
 }
