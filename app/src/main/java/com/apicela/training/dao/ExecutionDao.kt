@@ -19,7 +19,7 @@ interface ExecutionDao {
     @Query("SELECT * FROM execution WHERE id = :id")
     fun getExecutionById(id: String): Execution
 
-    @Query("SELECT * FROM Execution WHERE exercise_id = :exerciseId")
+    @Query("SELECT * FROM Execution WHERE exercise_id = :exerciseId ORDER BY date DESC")
     fun getAllExecutionFromExercise(exerciseId: String): List<Execution>
 
     @Query("SELECT * FROM Execution WHERE exercise_id = :id ORDER BY date DESC LIMIT 1")
