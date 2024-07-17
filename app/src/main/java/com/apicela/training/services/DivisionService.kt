@@ -8,13 +8,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DivisionService(private val db: Database) {
-    fun createDivision(workoutId: String, divisionName: String, image: String): Division {
-        val division = Division(workoutId, divisionName, image, listOf())
+    fun createDivision(workoutId: String, divisionName: String, image: String?): Division {
+        val division = Division(workoutId, divisionName, image ?:"", listOf())
         CoroutineScope(Dispatchers.IO).launch {
             db.divisionDao().insert(division)
         }
         return division
     }
+
+
 
     suspend fun updateDivisionObject(division: Division) {
         withContext(Dispatchers.IO) {

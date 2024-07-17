@@ -17,9 +17,9 @@ class WorkoutService(private val db: Database) {
         workoutItem.description = descricao
         workoutItem.image = image
         workoutItem.listOfDivision = listOf(
-            divisionService.createDivision(workoutItem.id, "A", "division_a"),
-            divisionService.createDivision(workoutItem.id, "B", "division_b"),
-            divisionService.createDivision(workoutItem.id, "C", "division_c"),
+            divisionService.createDivision(workoutItem.id, "A", "number_1"),
+            divisionService.createDivision(workoutItem.id, "B", "number_2"),
+            divisionService.createDivision(workoutItem.id, "C", "number_3"),
         )
 
         withContext(Dispatchers.IO) {

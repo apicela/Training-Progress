@@ -24,7 +24,6 @@ class CreateDivision : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_division)
         val divisionName: EditText = findViewById(R.id.divisionNameText)
-        val image: EditText = findViewById(R.id.imageUrlText)
 
         divisionService = DivisionService(HomeActivity.DATABASE)
         backButton = findViewById(R.id.back_button)
@@ -36,8 +35,7 @@ class CreateDivision : AppCompatActivity() {
                 val division = divisionService.createDivision(
                     workoutId!!,
                     divisionName.text.toString(),
-                    image.text.toString()
-                )
+                    null)
                 divisionService.addDivisionToWorkout(division, workoutId!!)
             }
             val resultIntent = Intent()

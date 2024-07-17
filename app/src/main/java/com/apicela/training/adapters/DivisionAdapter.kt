@@ -96,6 +96,6 @@ class DivisionAdapter(
                 }
             }
         }
-        ImageHelper.setImage(context, holder.image, division.image, false)
+        ImageHelper.setImage(context, holder.image, "number_${(position+1)}", false)
     }
 }
