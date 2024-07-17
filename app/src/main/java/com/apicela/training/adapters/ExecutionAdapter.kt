@@ -13,7 +13,13 @@ import com.apicela.training.HomeActivity
 import com.apicela.training.R
 import com.apicela.training.dialog.RegisterExecutionDialog
 import com.apicela.training.models.Execution
+import com.apicela.training.models.Observation
 import com.apicela.training.services.ExecutionService
+import com.apicela.training.services.ObservationService
+import com.apicela.training.ui.utils.Components
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -25,7 +31,7 @@ class ExecutionAdapter(
     val executionService = ExecutionService(HomeActivity.DATABASE)
     private var isEditing = false
     private val reversedOrderKeys: List<String> = executionMap.keys.toList().reversed();
-
+    private val observationService = ObservationService()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExecutionViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.date_linear_layout, parent, false)
         return ExecutionViewHolder(view)
@@ -35,6 +41,14 @@ class ExecutionAdapter(
 //        Log.d("Execution", "onBind called position: $position")
         val key = reversedOrderKeys.elementAt(position)
         holder.date.text = key
+        var observation : Observation?
+        CoroutineScope(Dispatchers.IO).launch {
+             observation = observationService.getObservationByDate(key)
+            if(observation != null){
+                holder.observationImage.visibility = View.VISIBLE
+                setOnClickObservation(holder.observationImage, observation!!.observation)
+            }
+        }
 
         val executions = executionMap.getValue(key)
         holder.linearLayoutExecutions.removeAllViews()
@@ -74,10 +88,16 @@ class ExecutionAdapter(
 
     class ExecutionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.date)
+        val observationImage : ImageView = itemView.findViewById(R.id.observation)
         val linearLayoutExecutions: LinearLayout =
             itemView.findViewById(R.id.linearLayoutExecutions)
     }
 
+    fun setOnClickObservation(imageView: ImageView, observationText : String){
+        imageView.setOnClickListener{
+            Components.showPopUp(observationText, context)
+        }
+    }
     fun updateData(newExecutionMap: Map<String, List<Execution>>) {
         executionMap = newExecutionMap
         notifyDataSetChanged()

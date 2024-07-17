@@ -1,9 +1,11 @@
 package com.apicela.training.ui.utils
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Context
 import android.util.Log
 import android.widget.EditText
+import android.widget.TextView
 import com.apicela.training.R
 import java.time.LocalDate
 import java.util.Calendar
@@ -58,6 +60,16 @@ class Components {
             now.month = date.month
             now.year = date.year
             return now;
+        }
+
+        fun showPopUp(text : String, context : Context) {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.pop_up_text)
+            dialog.setCancelable(true) // Permite que o pop-up desapareça ao clicar fora
+
+            val tvMessage = dialog.findViewById<TextView>(R.id.tvMessage)
+            tvMessage.text = text
+            dialog.show()
         }
     }
 }

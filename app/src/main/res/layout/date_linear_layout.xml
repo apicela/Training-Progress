@@ -21,11 +21,12 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/notify"
+            android:id="@+id/observation"
             android:layout_width="wrap_content"
             android:layout_weight="0.05"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
+            android:visibility="invisible"
             android:src="@drawable/notification" />
     </LinearLayout>
 
