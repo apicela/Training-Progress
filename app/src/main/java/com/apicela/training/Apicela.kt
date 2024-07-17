@@ -14,7 +14,7 @@ class Apicela : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        HomeActivity.DATABASE = DataManager.getDatabase(this)
+        DataManager.setHomeActivityDATABASE(this)
         exerciseService = ExerciseService(HomeActivity.DATABASE)
         setUpFirstStart()
 

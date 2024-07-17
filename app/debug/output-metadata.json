@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.apicela.apicelaTraining",
+  "applicationId": "com.apicela.training",
   "variantName": "debug",
   "elements": [
     {
