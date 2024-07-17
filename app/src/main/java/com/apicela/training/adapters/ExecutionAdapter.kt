@@ -1,6 +1,7 @@
 package com.apicela.training.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +26,14 @@ import kotlinx.coroutines.runBlocking
 
 class ExecutionAdapter(
     private val context: Context,
-    private var executionMap: Map<String, List<Execution>>
+    private val exerciseId: String
 ) :
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
     val executionService = ExecutionService(HomeActivity.DATABASE)
+    var executionMap: Map<String, List<Execution>> = executionService.executionListToMap(exerciseId)
     private var isEditing = false
-    private val reversedOrderKeys: List<String> = executionMap.keys.toList().reversed();
     private val observationService = ObservationService()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExecutionViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.date_linear_layout, parent, false)
         return ExecutionViewHolder(view)
@@ -39,7 +41,7 @@ class ExecutionAdapter(
 
     override fun onBindViewHolder(holder: ExecutionViewHolder, position: Int) {
 //        Log.d("Execution", "onBind called position: $position")
-        val key = reversedOrderKeys.elementAt(position)
+        val key = executionMap.keys.elementAt(position)
         holder.date.text = key
         var observation : Observation?
         CoroutineScope(Dispatchers.IO).launch {
@@ -69,15 +71,14 @@ class ExecutionAdapter(
                 if (context is FragmentActivity) {
                     dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
                     dialog.onDismissListener = {
-                        updateData(executionService.executionListToMap(execution.exercise_id))
+                        refreshData(execution.exercise_id)
                     }
                 }
             }
             imageViewMinus.setOnClickListener {
                 runBlocking {
                     executionService.deleteById(execution.id)
-                    executionMap = executionService.executionListToMap(execution.exercise_id)
-                    notifyDataSetChanged()
+                    refreshData(execution.exercise_id)
                 }
             }
             holder.linearLayoutExecutions.addView(executionView)
@@ -98,8 +99,9 @@ class ExecutionAdapter(
             Components.showPopUp(observationText, context)
         }
     }
-    fun updateData(newExecutionMap: Map<String, List<Execution>>) {
-        executionMap = newExecutionMap
+
+    fun refreshData(exerciseId : String){
+        executionMap = executionService.executionListToMap(exerciseId)
         notifyDataSetChanged()
     }
 

@@ -28,7 +28,6 @@ class ExecutionActivity : AppCompatActivity() {
     private lateinit var plusButton: ImageButton
     private lateinit var backButton: Button
     private lateinit var edit: Button
-    private lateinit var executionService: ExecutionService
     private lateinit var nameText: TextView
     private lateinit var imageExercise: ShapeableImageView
 
@@ -37,7 +36,6 @@ class ExecutionActivity : AppCompatActivity() {
         Log.d("activity", "execution started")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_execution)
-        executionService = ExecutionService(HomeActivity.DATABASE)
         backButton = findViewById(R.id.back_button)
         edit = findViewById(R.id.edit)
         recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
@@ -52,15 +50,14 @@ class ExecutionActivity : AppCompatActivity() {
 
         ImageHelper.setImage(this, imageExercise, exercise_image, false)
 
-        val executionMap = executionService.executionListToMap(exercise_id)
-        executionAdapter = ExecutionAdapter(this, executionMap)
+        executionAdapter = ExecutionAdapter(this, exercise_id)
         recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
         recyclerViewExecutions.adapter = executionAdapter
         plusButton.setOnClickListener {
             val dialog = RegisterExecutionDialog(exercise_id, null, this)
             dialog.show(supportFragmentManager, "RegistrarExercicioDialog")
             dialog.onDismissListener = {
-                executionAdapter.updateData(executionService.executionListToMap(exercise_id))
+                executionAdapter.refreshData(exercise_id)
             }
         }
         backButton.setOnClickListener {

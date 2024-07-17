@@ -29,6 +29,7 @@ class RegisterExecutionDialog(
     private val context: Context
 ) : DialogFragment() {
     val executionService: ExecutionService = ExecutionService(HomeActivity.DATABASE)
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
@@ -72,12 +73,10 @@ class RegisterExecutionDialog(
             val date = Components.formatDateWithCurrentTime(editTextAsDate)
             if (executionId == null) {
                 val execution = Execution(repetitions, kg, exerciseId, date)
-                GlobalScope.launch {
-                    executionService.addExecutionToDatabase(execution)
-                }
+                runBlocking{ executionService.addExecutionToDatabase(execution) }
             } else {
                 val execution = Execution(executionId, repetitions, kg, exerciseId, date)
-                GlobalScope.launch {
+                runBlocking {
                     executionService.updateExecutionObject(execution)
                 }
             }
