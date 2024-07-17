@@ -12,6 +12,9 @@ interface ObservationDao {
     @Query("SELECT * FROM observation WHERE strftime('%d/%m/%Y', date / 1000, 'unixepoch') =  :date")
     fun getObservationByDate(date: String): Observation?
 
+    @Query("SELECT * FROM observation WHERE date = :date")
+    fun getObservationByDate(date: Long): Observation?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(observation : Observation)
 

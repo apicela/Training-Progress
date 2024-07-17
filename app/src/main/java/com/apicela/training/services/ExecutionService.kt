@@ -35,6 +35,7 @@ class ExecutionService(private val db: Database) {
     suspend fun findExecutionsListByDate(date: Date): List<Execution> {
         val format = SimpleDateFormat("dd/MM/yyyy")
         val formattedDate = format.format(date)
+        Log.d("Execution", "date: ${formattedDate}")
         return withContext(Dispatchers.IO) {
             db.executionDao().getAllExecutionFromDate(formattedDate.toString())
         }

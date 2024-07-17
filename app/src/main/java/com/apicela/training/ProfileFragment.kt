@@ -13,12 +13,17 @@ import androidx.fragment.app.Fragment
 import com.apicela.training.models.Observation
 import com.apicela.training.services.ObservationService
 import com.apicela.training.ui.utils.Components
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Date
+import java.util.Locale
 
 //
 class ProfileFragment  : Fragment(R.layout.fragment_profile) {
@@ -55,17 +60,24 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
     // @require date as dd/MM/yyyy
     fun setUpDateInfo(date : String){
         editTextDate.setText(date)
-//        val observationFromDB = runBlocking { observationService.getObservationByDate(date) }
-//        val observationText = observationFromDB?.observation ?: ""
-//        editTextObservation.setText(observationText)
+        val observationFromDB = runBlocking { observationService.getObservationByDate(date) }
+        Log.d("ProfileFragment", "observationFromDB: ${observationFromDB.toString()}")
+        val observationText = observationFromDB?.observation ?: ""
+        editTextObservation.setText(observationText)
     }
 
     private fun setOnClick() {
         // saveButton
         saveButton.setOnClickListener {
             val observationText = editTextObservation.text.toString()
-            val observation = Observation(Date(editTextDate.text.toString()), observationText)
-            observationService.addObservation(observation)
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val dateString = editTextDate.text.toString()
+
+            val observation = Observation(dateFormat.parse(dateString)!!, observationText)
+//            Log.d("ProfileFragment", "date from editText: ${Date(editTextDate.text.toString())} + editText.text : ${editTextDate.text.toString()}")
+            CoroutineScope(Dispatchers.IO).launch {
+               observationService.addObservation(observation)
+            }
         }
 
         buttonIncrementDate.setOnClickListener{
