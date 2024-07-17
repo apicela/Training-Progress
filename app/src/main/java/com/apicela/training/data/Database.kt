@@ -1,8 +1,6 @@
 package com.apicela.training.data
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.apicela.training.converter.Converter

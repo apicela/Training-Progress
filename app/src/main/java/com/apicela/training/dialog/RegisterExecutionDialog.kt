@@ -13,8 +13,6 @@ import com.apicela.training.R
 import com.apicela.training.models.Execution
 import com.apicela.training.services.ExecutionService
 import com.apicela.training.ui.utils.Components
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.time.Instant

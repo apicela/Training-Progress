@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.ExecutionAdapter
 import com.apicela.training.dialog.RegisterExecutionDialog
-import com.apicela.training.services.ExecutionService
 import com.apicela.training.ui.utils.ImageHelper
 import com.google.android.material.imageview.ShapeableImageView
 

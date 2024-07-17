@@ -1,6 +1,5 @@
 package com.apicela.training.services
 
-import android.util.Log
 import com.apicela.training.HomeActivity
 import com.apicela.training.models.Observation
 import kotlinx.coroutines.Dispatchers

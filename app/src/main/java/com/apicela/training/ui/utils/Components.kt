@@ -3,7 +3,6 @@ package com.apicela.training.ui.utils
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import com.apicela.training.R

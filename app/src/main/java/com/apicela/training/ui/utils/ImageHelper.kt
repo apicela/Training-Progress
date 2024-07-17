@@ -1,10 +1,10 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
-import android.util.Log
 import android.widget.ImageView
 import com.apicela.training.utils.GifDrawableImageViewTarget
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class ImageHelper {
     companion object {
@@ -22,6 +22,7 @@ class ImageHelper {
                     .asBitmap()
                     .load(resourceId)
                     .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // Desativa cache de disco para depuração
                     .into(view)
                 if (isGif) {
                     view.setOnClickListener {
@@ -35,6 +36,7 @@ class ImageHelper {
                     .asBitmap()
                     .load(image)
                     .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // Desativa cache de disco para depuração
                     .into(view)
                 if (isGif) {
 
