@@ -1,6 +1,7 @@
 package com.apicela.training.ui.utils
 
 import android.content.Context
+import android.util.Log
 import android.widget.ImageView
 import com.apicela.training.utils.GifDrawableImageViewTarget
 import com.bumptech.glide.Glide
@@ -20,6 +21,7 @@ class ImageHelper {
                 Glide.with(context)
                     .asBitmap()
                     .load(resourceId)
+                    .skipMemoryCache(true)
                     .into(view)
                 if (isGif) {
                     view.setOnClickListener {
@@ -28,11 +30,11 @@ class ImageHelper {
                             .into(GifDrawableImageViewTarget(view, 1))
                     }
                 }
-//
             } else {
                 Glide.with(context)
                     .asBitmap()
                     .load(image)
+                    .skipMemoryCache(true)
                     .into(view)
                 if (isGif) {
 
