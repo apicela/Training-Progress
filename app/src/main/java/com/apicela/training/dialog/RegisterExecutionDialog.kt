@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
@@ -27,18 +29,22 @@ class RegisterExecutionDialog(
     private val context: Context
 ) : DialogFragment() {
     val executionService: ExecutionService = ExecutionService(HomeActivity.DATABASE)
+    lateinit var editTextKG : EditText
+    lateinit var editTextRepeticoes : EditText
+    lateinit var editTextDate : EditText
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
         val view = inflater.inflate(R.layout.register_exercise, null)
         builder.setView(view)
-        val editTextKG = view.findViewById<EditText>(R.id.editTextKG)
-        val editTextDate = view.findViewById<EditText>(R.id.editTextDate)
-        val editTextRepeticoes = view.findViewById<EditText>(R.id.editTextRepeticoes)
+         editTextKG = view.findViewById<EditText>(R.id.editTextKG)
+        editTextDate = view.findViewById<EditText>(R.id.editTextDate)
+         editTextRepeticoes = view.findViewById<EditText>(R.id.editTextRepeticoes)
         val buttonConfirmar = view.findViewById<Button>(R.id.buttonConfirmar)
         val buttonCancelar = view.findViewById<Button>(R.id.buttonCancelar)
 
+        setOnClick()
         if (executionId == null) {
             val lastExercise = runBlocking { executionService.getLastInsertedExecution(exerciseId) }
             if (lastExercise !== null) {
@@ -88,8 +94,26 @@ class RegisterExecutionDialog(
         return builder.create()
     }
 
+    private fun setOnClick() {
+        setOnClickClearInputField(editTextKG)
+        setOnClickClearInputField(editTextRepeticoes)
+    }
+
     var onDismissListener: (() -> Unit)? = null
 
+    fun setOnClickClearInputField(field : Any){
+        if(field is EditText){
+            field.setOnClickListener{
+                field.setText("")
+            }
+            // focusable
+//            field.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+//                if (hasFocus) {
+//                    field.setText("")
+//                }
+//            }
+        }
+    }
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         onDismissListener?.invoke()
