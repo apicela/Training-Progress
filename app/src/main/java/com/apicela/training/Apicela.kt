@@ -15,7 +15,7 @@ class Apicela : Application() {
     override fun onCreate() {
         super.onCreate()
         HomeActivity.DATABASE = DataManager.getDatabase(this)
-        exerciseService = ExerciseService(HomeActivity.DATABASE)
+        exerciseService = ExerciseService()
         setUpFirstStart()
 
     }
@@ -23,7 +23,7 @@ class Apicela : Application() {
     fun setUpFirstStart(){
         CoroutineScope(Dispatchers.IO).launch {
             val sharedPreferencesHelper = SharedPreferencesHelper()
-            sharedPreferencesHelper.initializeOnce(applicationContext, HomeActivity.DATABASE)
+            sharedPreferencesHelper.initializeOnce(applicationContext)
             val listExercises =  exerciseService.getAllExercises()
             val itemsToAdd =
                 Exercise.listaExercises.filter { obj -> listExercises.none { it.name == obj.name } }

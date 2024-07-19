@@ -25,7 +25,7 @@ class CreateDivision : AppCompatActivity() {
         setContentView(R.layout.activity_create_division)
         val divisionName: EditText = findViewById(R.id.divisionNameText)
 
-        divisionService = DivisionService(HomeActivity.DATABASE)
+        divisionService = DivisionService()
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
         val workoutId = intent.getStringExtra("workout_id")

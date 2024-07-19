@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class WorkoutService(private val db: Database) {
-    val divisionService: DivisionService = DivisionService(db)
+    val divisionService: DivisionService = DivisionService()
 
     suspend fun addWorkout(workoutName: String, descricao: String, image: String) {
         val workoutItem = Workout()

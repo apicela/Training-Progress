@@ -36,14 +36,13 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise)
-        val exerciseService = ExerciseService(HomeActivity.DATABASE)
-        val divisionService = DivisionService(HomeActivity.DATABASE)
+        val exerciseService = ExerciseService()
         val division_id = intent.getStringExtra("division_id")
         // layouts
         backButton = findViewById(R.id.back_button)
         addExerciseToWorkoutButton = findViewById(R.id.add_exercise_to_workout)
         CoroutineScope(Dispatchers.IO).launch {
-            division = divisionService.getDivisionById(division_id!!)!!
+            division = exerciseService.getDivision(division_id)!!
         }
         runBlocking {
             exerciseListMap = exerciseService.exerciseListToMap() ?: emptyMap()
@@ -64,7 +63,7 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
                     val checkedItems = exerciseAdapter.getSelectedExercises()
                     val newListExercises = (division!!.listOfExercises + checkedItems).distinct()
                     division?.listOfExercises = newListExercises
-                    divisionService.updateDivisionObject(division!!)
+                    exerciseService.divisionService.updateDivisionObject(division!!)
                 }
                 val resultIntent = Intent()
                 setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)

@@ -11,7 +11,7 @@ import java.util.Date
 import java.util.Locale
 
 class ExecutionService(private val db: Database) {
-    val exerciseService: ExerciseService = ExerciseService(db)
+    val exerciseService: ExerciseService = ExerciseService()
 
     suspend fun addExecutionToDatabase(execution: Execution) {
         withContext(Dispatchers.IO) {

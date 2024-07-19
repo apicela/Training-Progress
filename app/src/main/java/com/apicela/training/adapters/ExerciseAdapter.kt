@@ -10,9 +10,11 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.ExecutionActivity
 import com.apicela.training.R
+import com.apicela.training.interfaces.ExerciseAdapterInterface
 import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle
@@ -23,12 +25,13 @@ import kotlinx.coroutines.runBlocking
 
 
 class ExerciseAdapter(
-    private val context: Context, private var exerciseMap: Map<String, List<Exercise>>,
+    private val context: Context,
+    private var exerciseMap: Map<String, List<Exercise>>,
     private val divisionId: String? = null,
     private val exerciseService: ExerciseService,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
-    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
+    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>(), ExerciseAdapterInterface {
 
     private var checkedItems = mutableListOf<Exercise>();
     private var isEditing = false
@@ -49,54 +52,8 @@ class ExerciseAdapter(
             false
         )
         val exercises = exerciseMap.getValue(key)
-        holder.layoutExercises.removeAllViews()
+        holder.layoutExercises.adapter = ExerciseItemAdapter(context, divisionId, exercises)
 
-        exercises.forEach { exercise ->
-            val exerciseItemView =
-                LayoutInflater.from(context).inflate(R.layout.item_exercise, null)
-            val exerciseName = exerciseItemView.findViewById<TextView>(R.id.exercise_text)
-            val exerciseImage = exerciseItemView.findViewById<ImageView>(R.id.exercise_image)
-            val checkbox = exerciseItemView.findViewById<CheckBox>(R.id.checkbox)
-            val minusImage = exerciseItemView.findViewById<ImageView>(R.id.minus)
-            exerciseName.text = "${exercise.name}"
-            ImageHelper.setImage(context, exerciseImage, exercise.image, true)
-            checkbox.visibility =
-                if (checkedItemCountChangedListener != null) View.VISIBLE else View.GONE
-            minusImage.visibility = if (isEditing) View.VISIBLE else View.GONE
-
-            minusImage.setOnClickListener {
-                runBlocking {
-                    if (divisionId !== null) {
-                        exerciseService.removeExerciseFromDivision(divisionId, exercise.id)
-                        exerciseMap = exerciseService.exerciseListToMap(divisionId)!!
-                    } else {
-                        exerciseService.deleteExerciseById(exercise.id)
-                    }
-                    updateData()
-                }
-            }
-            checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    checkedItems.add(exercise)
-                    checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems.size)
-
-                } else {
-                    checkedItems.remove(exercise)
-                    checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems.size)
-
-                }
-            }
-            if (isEditing == false && checkedItemCountChangedListener == null) {
-                exerciseItemView.setOnClickListener {
-                    val intent = Intent(holder.itemView.context, ExecutionActivity::class.java)
-                    intent.putExtra("exercise_id", exercise.id)
-                    intent.putExtra("exercise_image", exercise.image)
-                    intent.putExtra("exercise_name", exercise.name)
-                    holder.itemView.context.startActivity(intent)
-                }
-            }
-            holder.layoutExercises.addView(exerciseItemView)
-        }
     }
 
     override fun getItemCount(): Int = exerciseMap.size
@@ -104,10 +61,10 @@ class ExerciseAdapter(
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val muscle_name: TextView = itemView.findViewById(R.id.muscle_name)
         val muscle_image: ShapeableImageView = itemView.findViewById(R.id.muscle_image)
-        val layoutExercises: LinearLayout = itemView.findViewById(R.id.linearLayoutExercise)
+        val layoutExercises: RecyclerView = itemView.findViewById(R.id.recyclerViewExercises)
     }
 
-    fun updateData() {
+    override fun refreshData() {
         runBlocking {
             exerciseMap = exerciseService.exerciseListToMap(divisionId)!!
             Log.d("adapter", "id: ${divisionId} \n${exerciseMap}")
@@ -120,7 +77,7 @@ class ExerciseAdapter(
         return checkedItems;
     }
 
-    fun setEditing(isEditing: Boolean) {
+    override fun setEditing(isEditing: Boolean) {
         this.isEditing = isEditing
         notifyDataSetChanged()
     }

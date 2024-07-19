@@ -29,7 +29,7 @@ class CreateExercise : AppCompatActivity() {
         val exerciseName: EditText = findViewById(R.id.exerciseNameText)
         val imageUrl: EditText = findViewById(R.id.imageUrlText)
         val muscleTypeSpinner: Spinner = findViewById(R.id.muscleTypeSpinner)
-        exerciseService = ExerciseService(HomeActivity.DATABASE)
+        exerciseService = ExerciseService()
         backButton = findViewById(R.id.back_button)
         concludeButton = findViewById(R.id.concludeButton)
 
