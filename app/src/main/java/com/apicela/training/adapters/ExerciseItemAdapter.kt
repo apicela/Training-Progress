@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.ExecutionActivity
+import com.apicela.training.ItemTouchHelperAdapter
 import com.apicela.training.R
 import com.apicela.training.interfaces.ExerciseAdapterInterface
 import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
@@ -18,6 +19,7 @@ import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.ui.utils.ImageHelper
 import kotlinx.coroutines.runBlocking
+import java.util.Collections
 
 class ExerciseItemAdapter(
     private val context: Context,
@@ -26,7 +28,8 @@ class ExerciseItemAdapter(
     private val checkedItems : MutableList<Exercise>? = null,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
-    RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemViewHolder>(), ExerciseAdapterInterface {
+    RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemViewHolder>(), ExerciseAdapterInterface,
+    ItemTouchHelperAdapter {
 
     private var isEditing = false
     private val exerciseService = ExerciseService()
@@ -123,5 +126,10 @@ class ExerciseItemAdapter(
         notifyDataSetChanged()
     }
 
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        Collections.swap(exerciseList, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+        return true
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.apicela.training
 
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.Adapter
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apicela.training.adapters.ExerciseAdapter
@@ -55,6 +57,11 @@ class ExerciseActivity : AppCompatActivity() {
         } else ExerciseItemAdapter(this, divisionId)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter
+        if(exerciseAdapter is ItemTouchHelperAdapter){
+            val callback = ItemMoveCallback(exerciseAdapter as ItemTouchHelperAdapter)
+            val touchHelper = ItemTouchHelper(callback)
+            touchHelper.attachToRecyclerView(recyclerView)
+        }
 
         plusButton.setOnClickListener {
             if (divisionId != null) {
