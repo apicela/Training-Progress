@@ -55,6 +55,7 @@ class ExerciseService() {
             division?.listOfExercises
         }
         if (exerciseList != null) {
+            Log.d("teste", "exerciseListToMap")
             return exerciseList.groupBy { exercise ->
                 exercise.muscleType.toString()
             }

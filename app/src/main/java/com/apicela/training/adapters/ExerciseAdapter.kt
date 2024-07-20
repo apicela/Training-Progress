@@ -52,7 +52,9 @@ class ExerciseAdapter(
             false
         )
         val exercises = exerciseMap.getValue(key)
-        holder.layoutExercises.adapter = ExerciseItemAdapter(context, divisionId, exercises)
+        Log.d("teste", "${exercises}")
+        holder.recyclerView.layoutManager = LinearLayoutManager(context)
+        holder.recyclerView.adapter = ExerciseItemAdapter(context, divisionId, exercises)
 
     }
 
@@ -61,7 +63,7 @@ class ExerciseAdapter(
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val muscle_name: TextView = itemView.findViewById(R.id.muscle_name)
         val muscle_image: ShapeableImageView = itemView.findViewById(R.id.muscle_image)
-        val layoutExercises: RecyclerView = itemView.findViewById(R.id.recyclerViewExercises)
+        val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerViewExercises)
     }
 
     override fun refreshData() {

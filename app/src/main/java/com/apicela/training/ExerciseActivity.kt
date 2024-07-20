@@ -25,7 +25,6 @@ import kotlinx.coroutines.runBlocking
 
 class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exerciseListMap: Map<String, List<Exercise>>
     private lateinit var exerciseService: ExerciseService
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciseAdapter: RecyclerView.Adapter<*>
@@ -46,13 +45,13 @@ class ExerciseActivity : AppCompatActivity() {
         val divisionId = intent.getStringExtra("division_id")
         var editMode = false;
 
-        runBlocking {
-            exerciseListMap = exerciseService.exerciseListToMap(divisionId)
-        }
+
 
         recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = if (divisionId !== null) {
-            ExerciseAdapter(this, exerciseListMap, divisionId, exerciseService)
+        exerciseAdapter = if (divisionId == null) {
+             // non-sense -> se tem divisionId, logo, não tem cardview
+            val exerciseListMap = runBlocking {  exerciseService.exerciseListToMap() }
+            ExerciseAdapter(this, exerciseListMap, null, exerciseService)
         } else ExerciseItemAdapter(this, divisionId)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = exerciseAdapter

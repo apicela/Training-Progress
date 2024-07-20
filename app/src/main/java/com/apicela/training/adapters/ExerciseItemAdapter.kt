@@ -2,6 +2,7 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,13 +41,20 @@ class ExerciseItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ExerciseItemViewHolder, position: Int) {
-        exerciseList.forEach { exercise ->
-            holder.exerciseName.text = "${exercise.name}"
-            ImageHelper.setImage(context, holder.exerciseImage, exercise.image, true)
-            setVisibility(holder)
-            setOnClick(holder, exercise)
-            setOnChecked(holder, exercise)
-        }
+        val exercise = exerciseList[position]
+        Log.d("teste", "${exercise}")
+        holder.exerciseName.text = exercise.name
+        ImageHelper.setImage(context, holder.exerciseImage, exercise.image, true)
+        setVisibility(holder)
+        setOnClick(holder, exercise)
+        setOnChecked(holder, exercise)
+    }
+
+    class ExerciseItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val exerciseName = itemView.findViewById<TextView>(R.id.exercise_text)
+        val exerciseImage = itemView.findViewById<ImageView>(R.id.exercise_image)
+        val checkbox = itemView.findViewById<CheckBox>(R.id.checkbox)
+        val minusImage = itemView.findViewById<ImageView>(R.id.minus)
     }
 
     private fun setVisibility(holder: ExerciseItemAdapter.ExerciseItemViewHolder) {
@@ -92,14 +100,12 @@ class ExerciseItemAdapter(
         }
     }
 
-    override fun getItemCount(): Int = exerciseList.size
-
-    class ExerciseItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val exerciseName = itemView.findViewById<TextView>(R.id.exercise_text)
-        val exerciseImage = itemView.findViewById<ImageView>(R.id.exercise_image)
-        val checkbox = itemView.findViewById<CheckBox>(R.id.checkbox)
-        val minusImage = itemView.findViewById<ImageView>(R.id.minus)
+    override fun getItemCount(): Int {
+        return exerciseList.size
     }
+
+
+
 
     override fun refreshData() {
         runBlocking {
