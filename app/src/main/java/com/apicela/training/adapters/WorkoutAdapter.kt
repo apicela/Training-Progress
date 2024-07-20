@@ -36,7 +36,6 @@ class WorkoutAdapter(
 
     fun refreshData() {
         listWorkouts = runBlocking { workoutService.getAllWorkouts() }
-        Log.d("adapter", "called updateData")
         notifyDataSetChanged()
     }
 

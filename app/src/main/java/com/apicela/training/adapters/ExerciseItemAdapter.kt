@@ -23,11 +23,11 @@ class ExerciseItemAdapter(
     private val context: Context,
     private val divisionId: String? = null,
     private val exercises : List<Exercise>? = null,
+    private val checkedItems : MutableList<Exercise>? = null,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
     RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemViewHolder>(), ExerciseAdapterInterface {
 
-    private var checkedItems = mutableListOf<Exercise>();
     private var isEditing = false
     private val exerciseService = ExerciseService()
     private var exerciseList : List<Exercise> = getExerciseList()
@@ -65,11 +65,11 @@ class ExerciseItemAdapter(
     private fun setOnChecked(holder: ExerciseItemAdapter.ExerciseItemViewHolder, exercise : Exercise) {
         holder.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                checkedItems.add(exercise)
-                checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems.size)
+                checkedItems?.add(exercise)
+                checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems!!.size)
             } else {
-                checkedItems.remove(exercise)
-                checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems.size)
+                checkedItems?.remove(exercise)
+                checkedItemCountChangedListener!!.onCheckedItemCountChanged(checkedItems!!.size)
 
             }
         }
@@ -117,9 +117,6 @@ class ExerciseItemAdapter(
         return exercises ?: exerciseService.getExerciseListFromDivision(divisionId)
     }
 
-    fun getSelectedExercises(): List<Exercise> {
-        return checkedItems;
-    }
 
     override fun setEditing(isEditing: Boolean) {
         this.isEditing = isEditing

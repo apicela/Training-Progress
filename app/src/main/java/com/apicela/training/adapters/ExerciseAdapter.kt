@@ -32,7 +32,6 @@ class ExerciseAdapter(
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>(), ExerciseAdapterInterface {
-
     private var checkedItems = mutableListOf<Exercise>();
     private var isEditing = false
 
@@ -53,7 +52,7 @@ class ExerciseAdapter(
         )
         val exercises = exerciseMap.getValue(key)
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
-        holder.recyclerView.adapter = ExerciseItemAdapter(context, divisionId, exercises)
+        holder.recyclerView.adapter = ExerciseItemAdapter(context, divisionId, exercises, checkedItems, checkedItemCountChangedListener)
 
     }
 
