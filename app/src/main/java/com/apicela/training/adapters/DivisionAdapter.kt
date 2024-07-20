@@ -44,7 +44,7 @@ class DivisionAdapter(
         val editButton = itemView.findViewById<ImageView>(R.id.imageViewEdit)
     }
 
-    fun updateData() {
+    fun refreshData() {
         notifyDataSetChanged()
     }
 
@@ -70,7 +70,7 @@ class DivisionAdapter(
 
         holder.minusButton.setOnClickListener {
             list.remove(division)
-            updateData()
+            refreshData()
             CoroutineScope(Dispatchers.Main).launch {
                 workoutService.divisionService.deleteDivisionById(division.id)
                 workoutService.updateWorkout(workout)
@@ -88,7 +88,7 @@ class DivisionAdapter(
                 if (confirmDelete) {
                     division.name = dialog.divisionName
                     division.image = dialog.image
-                    updateData()
+                    refreshData()
                     CoroutineScope(Dispatchers.IO).launch {
                         workoutService.divisionService.updateDivisionObject(division)
                         workoutService.updateWorkout(workout)

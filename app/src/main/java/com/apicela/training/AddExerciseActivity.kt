@@ -3,6 +3,7 @@ package com.apicela.training
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -36,6 +37,7 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise)
+        Log.d("activity", "addExerciseActivity called")
         val exerciseService = ExerciseService()
         val division_id = intent.getStringExtra("division_id")
         // layouts

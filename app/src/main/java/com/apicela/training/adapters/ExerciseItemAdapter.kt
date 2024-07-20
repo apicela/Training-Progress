@@ -42,7 +42,6 @@ class ExerciseItemAdapter(
 
     override fun onBindViewHolder(holder: ExerciseItemViewHolder, position: Int) {
         val exercise = exerciseList[position]
-        Log.d("teste", "${exercise}")
         holder.exerciseName.text = exercise.name
         ImageHelper.setImage(context, holder.exerciseImage, exercise.image, true)
         setVisibility(holder)

@@ -52,7 +52,6 @@ class ExerciseAdapter(
             false
         )
         val exercises = exerciseMap.getValue(key)
-        Log.d("teste", "${exercises}")
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = ExerciseItemAdapter(context, divisionId, exercises)
 
