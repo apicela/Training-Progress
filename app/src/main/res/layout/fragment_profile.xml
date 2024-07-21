@@ -6,7 +6,7 @@
     android:background="@color/light_black"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".HomeActivity">
+    tools:context=".ui.activitys.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

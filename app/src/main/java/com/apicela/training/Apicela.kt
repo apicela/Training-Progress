@@ -3,8 +3,9 @@ package com.apicela.training
 import android.app.Application
 import com.apicela.training.data.DataManager
 import com.apicela.training.models.Exercise
-import com.apicela.training.preferences.SharedPreferencesHelper
+import com.apicela.training.utils.preferences.SharedPreferencesHelper
 import com.apicela.training.services.ExerciseService
+import com.apicela.training.ui.activitys.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

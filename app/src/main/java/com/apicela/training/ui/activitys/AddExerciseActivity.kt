@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.activitys
 
 
 import android.content.Intent
@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.R
 import com.apicela.training.adapters.ExerciseAdapter
 import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
 import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService
-import com.apicela.training.utils.Codes
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
 import com.apicela.training.utils.Codes.Companion.RESULT_CODE_EXERCISE_CREATED
 import kotlinx.coroutines.CoroutineScope

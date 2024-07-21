@@ -1,4 +1,4 @@
-package com.apicela.training.dao
+package com.apicela.training.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

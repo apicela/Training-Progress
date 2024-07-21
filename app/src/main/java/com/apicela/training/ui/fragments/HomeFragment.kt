@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.R
 import com.apicela.training.adapters.WorkoutAdapter
-import com.apicela.training.createActivity.CreateWorkout
+import com.apicela.training.ui.activitys.CreateWorkout
 import com.apicela.training.models.Workout
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.utils.Codes

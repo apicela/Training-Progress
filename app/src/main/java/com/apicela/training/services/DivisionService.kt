@@ -1,6 +1,6 @@
 package com.apicela.training.services
 
-import com.apicela.training.HomeActivity
+import com.apicela.training.ui.activitys.HomeActivity
 import com.apicela.training.data.Database
 import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise

@@ -1,4 +1,4 @@
-package com.apicela.training.dialog
+package com.apicela.training.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog

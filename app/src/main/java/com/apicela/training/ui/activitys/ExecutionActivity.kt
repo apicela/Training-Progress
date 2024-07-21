@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.activitys
 
 //class ExecutionActivity : AppCompatActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +15,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.R
 import com.apicela.training.adapters.ExecutionAdapter
-import com.apicela.training.dialog.RegisterExecutionDialog
+import com.apicela.training.ui.dialogs.RegisterExecutionDialog
 import com.apicela.training.ui.utils.ImageHelper
 import com.google.android.material.imageview.ShapeableImageView
 

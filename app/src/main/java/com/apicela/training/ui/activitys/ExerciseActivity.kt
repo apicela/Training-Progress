@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.activitys
 
 
 import android.content.Intent
@@ -11,9 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.ItemMoveCallback
+import com.apicela.training.ItemTouchHelperAdapter
+import com.apicela.training.R
 import com.apicela.training.adapters.ExerciseAdapter
 import com.apicela.training.adapters.ExerciseItemAdapter
-import com.apicela.training.createActivity.CreateExercise
 import com.apicela.training.interfaces.ExerciseAdapterInterface
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED

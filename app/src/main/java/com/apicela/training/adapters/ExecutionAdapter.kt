@@ -9,9 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.HomeActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.RegisterExecutionDialog
+import com.apicela.training.ui.dialogs.RegisterExecutionDialog
 import com.apicela.training.models.Execution
 import com.apicela.training.models.Observation
 import com.apicela.training.services.ExecutionService

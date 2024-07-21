@@ -7,7 +7,7 @@
     android:background="@color/light_black"
     android:orientation="vertical"
     android:theme="@style/Theme.ApicelaTraining"
-    tools:context=".createActivity.CreateExercise">
+    tools:context=".ui.activitys.CreateExercise">
 
     <LinearLayout
         android:id="@+id/backLinearLayout"

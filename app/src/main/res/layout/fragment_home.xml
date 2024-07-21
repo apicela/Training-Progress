@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_black"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".ui.activitys.HomeActivity">
 
     <LinearLayout
         android:id="@+id/trainings"

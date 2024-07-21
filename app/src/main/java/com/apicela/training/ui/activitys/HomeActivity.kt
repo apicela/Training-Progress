@@ -1,9 +1,10 @@
-package com.apicela.training
+package com.apicela.training.ui.activitys
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.apicela.training.R
 import com.apicela.training.data.Database
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

@@ -1,4 +1,4 @@
-package com.apicela.training.createActivity
+package com.apicela.training.ui.activitys
 
 
 import android.content.Intent

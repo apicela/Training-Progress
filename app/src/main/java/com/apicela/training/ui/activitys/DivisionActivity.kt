@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apicela.training.R
 import com.apicela.training.adapters.DivisionAdapter
-import com.apicela.training.createActivity.CreateDivision
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.utils.Codes
 import kotlinx.coroutines.runBlocking

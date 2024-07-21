@@ -9,7 +9,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.ExecutionActivity
+import com.apicela.training.ui.activitys.ExecutionActivity
 import com.apicela.training.ItemTouchHelperAdapter
 import com.apicela.training.R
 import com.apicela.training.interfaces.ExerciseAdapterInterface

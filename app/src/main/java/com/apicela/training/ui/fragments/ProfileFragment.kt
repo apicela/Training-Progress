@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.apicela.training.R
 import com.apicela.training.models.Observation
 import com.apicela.training.services.ObservationService
 import com.apicela.training.ui.utils.Components

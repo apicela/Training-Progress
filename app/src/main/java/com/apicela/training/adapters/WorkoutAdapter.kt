@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.DivisionActivity
+import com.apicela.training.ui.activitys.DivisionActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.DeleteItemDialog
+import com.apicela.training.ui.dialogs.DeleteItemDialog
 import com.apicela.training.models.Workout
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.ui.utils.ImageHelper

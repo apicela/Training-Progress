@@ -1,4 +1,4 @@
-package com.apicela.training
+package com.apicela.training.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.CalendarView
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.apicela.training.R
 import com.apicela.training.services.ExecutionService
 import kotlinx.coroutines.runBlocking
 import java.util.Calendar

@@ -1,4 +1,4 @@
-package com.apicela.training.preferences
+package com.apicela.training.utils.preferences
 
 import android.content.Context
 import com.apicela.training.models.Exercise

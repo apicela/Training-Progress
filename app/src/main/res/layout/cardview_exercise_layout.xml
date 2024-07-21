@@ -8,7 +8,7 @@
     android:background="@color/light_black"
     android:orientation="vertical"
     android:theme="@style/Theme.ApicelaTraining"
-    tools:context=".ExerciseActivity">
+    tools:context=".ui.activitys.ExerciseActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

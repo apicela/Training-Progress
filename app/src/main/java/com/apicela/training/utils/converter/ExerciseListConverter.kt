@@ -1,4 +1,4 @@
-package com.apicela.training.converter
+package com.apicela.training.utils.converter
 
 import androidx.room.TypeConverter
 import com.apicela.training.models.Exercise

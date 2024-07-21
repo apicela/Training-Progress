@@ -1,4 +1,4 @@
-package com.apicela.training.dialog
+package com.apicela.training.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import com.apicela.training.HomeActivity
 import com.apicela.training.R
 import com.apicela.training.models.Execution
 import com.apicela.training.services.ExecutionService

@@ -9,10 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.ExerciseActivity
-import com.apicela.training.HomeActivity
+import com.apicela.training.ui.activitys.ExerciseActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.EditDivisionDialog
+import com.apicela.training.ui.dialogs.EditDivisionDialog
 import com.apicela.training.models.Division
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.ui.utils.ImageHelper
