@@ -2,7 +2,6 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +17,16 @@ import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
 import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.ui.utils.ImageHelper
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.Collections
 
 class ExerciseItemAdapter(
     private val context: Context,
     private val divisionId: String? = null,
-    private val exercises : List<Exercise>? = null,
-    private val checkedItems : MutableList<Exercise>? = null,
+    private val exercises: List<Exercise>? = null,
+    private val checkedItems: MutableList<Exercise>? = null,
     private val checkedItemCountChangedListener: OnExerciseCheckedChangeListener? = null // Adicionando a interface
 ) :
     RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemViewHolder>(), ExerciseAdapterInterface,
@@ -33,8 +34,7 @@ class ExerciseItemAdapter(
 
     private var isEditing = false
     private val exerciseService = ExerciseService()
-    private var exerciseList : List<Exercise> = getExerciseList()
-
+    private var exerciseList: List<Exercise> = getExerciseList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseItemViewHolder {
@@ -45,11 +45,15 @@ class ExerciseItemAdapter(
 
     override fun onBindViewHolder(holder: ExerciseItemViewHolder, position: Int) {
         val exercise = exerciseList[position]
-        holder.exerciseName.text = exercise.name
-        ImageHelper.setImage(context, holder.exerciseImage, exercise.image, true)
+        setUpViews(holder, exercise)
         setVisibility(holder)
         setOnClick(holder, exercise)
         setOnChecked(holder, exercise)
+    }
+
+    private fun setUpViews(holder: ExerciseItemAdapter.ExerciseItemViewHolder, exercise: Exercise) {
+        holder.exerciseName.text = exercise.name
+        ImageHelper.setImage(context, holder.exerciseImage, exercise.image, true)
     }
 
     class ExerciseItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -65,7 +69,10 @@ class ExerciseItemAdapter(
         holder.minusImage.visibility = if (isEditing) View.VISIBLE else View.GONE
     }
 
-    private fun setOnChecked(holder: ExerciseItemAdapter.ExerciseItemViewHolder, exercise : Exercise) {
+    private fun setOnChecked(
+        holder: ExerciseItemAdapter.ExerciseItemViewHolder,
+        exercise: Exercise
+    ) {
         holder.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkedItems?.add(exercise)
@@ -77,7 +84,8 @@ class ExerciseItemAdapter(
             }
         }
     }
-    private fun setOnClick(holder: ExerciseItemAdapter.ExerciseItemViewHolder, exercise : Exercise) {
+
+    private fun setOnClick(holder: ExerciseItemAdapter.ExerciseItemViewHolder, exercise: Exercise) {
 
         holder.minusImage.setOnClickListener {
             runBlocking {
@@ -107,16 +115,14 @@ class ExerciseItemAdapter(
     }
 
 
-
-
     override fun refreshData() {
         runBlocking {
-            exerciseList =  getExerciseList()
+            exerciseList = getExerciseList()
             notifyDataSetChanged()
         }
     }
 
-    private fun getExerciseList() : List<Exercise>{
+    private fun getExerciseList(): List<Exercise> {
         return exercises ?: exerciseService.getExerciseListFromDivision(divisionId)
     }
 
@@ -128,6 +134,9 @@ class ExerciseItemAdapter(
 
     override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
         Collections.swap(exerciseList, fromPosition, toPosition)
+        GlobalScope.launch {
+            exerciseService.notifyListExercisesFromDivisionChanged(divisionId!!, exerciseList)
+        }
         notifyItemMoved(fromPosition, toPosition)
         return true
     }

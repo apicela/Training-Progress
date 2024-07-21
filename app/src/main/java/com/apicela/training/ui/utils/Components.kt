@@ -38,13 +38,14 @@ class Components {
             datePickerDialog.show()
         }
 
-        fun concatZero(number : Int) : String{
+        fun concatZero(number: Int): String {
             return if (number < 10) {
                 "0${number}" // Adiciona um zero se o mês for menor que 10
             } else {
                 "${number}"
             }
         }
+
         fun formatDateAsString(date: LocalDate): String {
             val day = date.dayOfMonth
             val month = date.month
@@ -53,7 +54,7 @@ class Components {
         }
 
 
-        fun formatDateWithCurrentTime(date : Date) : Date {
+        fun formatDateWithCurrentTime(date: Date): Date {
             var now = Date()
             now.date = date.date
             now.month = date.month
@@ -61,7 +62,7 @@ class Components {
             return now;
         }
 
-        fun showPopUp(text : String, context : Context) {
+        fun showPopUp(text: String, context: Context) {
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.pop_up_text)
             dialog.setCancelable(true) // Permite que o pop-up desapareça ao clicar fora

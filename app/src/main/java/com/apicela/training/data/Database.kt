@@ -32,6 +32,6 @@ abstract class Database : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun executionDao(): ExecutionDao
-    abstract fun observationDao() : ObservationDao
+    abstract fun observationDao(): ObservationDao
 
 }

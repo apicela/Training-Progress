@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.apicela.training.HomeActivity
 import com.apicela.training.R
 import com.apicela.training.services.DivisionService
 import com.apicela.training.utils.Codes
@@ -35,7 +34,8 @@ class CreateDivision : AppCompatActivity() {
                 val division = divisionService.createDivision(
                     workoutId!!,
                     divisionName.text.toString(),
-                    null)
+                    null
+                )
                 divisionService.addDivisionToWorkout(division, workoutId!!)
             }
             val resultIntent = Intent()

@@ -1,18 +1,13 @@
 package com.apicela.training.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.ExecutionActivity
 import com.apicela.training.R
 import com.apicela.training.interfaces.ExerciseAdapterInterface
 import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
@@ -43,6 +38,24 @@ class ExerciseAdapter(
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val key = exerciseMap.keys.elementAt(position)
+        setUpViews(holder, key)
+
+        val exercises = exerciseMap.getValue(key)
+        setUpRecyclerView(holder, exercises)
+    }
+
+    private fun setUpRecyclerView(holder: ExerciseViewHolder, exercises: List<Exercise>) {
+        holder.recyclerView.layoutManager = LinearLayoutManager(context)
+        holder.recyclerView.adapter = ExerciseItemAdapter(
+            context,
+            divisionId,
+            exercises,
+            checkedItems,
+            checkedItemCountChangedListener
+        )
+    }
+
+    private fun setUpViews(holder: ExerciseAdapter.ExerciseViewHolder, key: String) {
         holder.muscle_name.text = Muscle.getMuscleByPtbr(key).uppercase()
         ImageHelper.setImage(
             context,
@@ -50,10 +63,6 @@ class ExerciseAdapter(
             "muscle_group_${(key).lowercase()}",
             false
         )
-        val exercises = exerciseMap.getValue(key)
-        holder.recyclerView.layoutManager = LinearLayoutManager(context)
-        holder.recyclerView.adapter = ExerciseItemAdapter(context, divisionId, exercises, checkedItems, checkedItemCountChangedListener)
-
     }
 
     override fun getItemCount(): Int = exerciseMap.size

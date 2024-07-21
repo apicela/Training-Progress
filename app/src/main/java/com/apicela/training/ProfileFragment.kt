@@ -24,10 +24,10 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 //
-class ProfileFragment  : Fragment(R.layout.fragment_profile) {
-    lateinit var saveButton : Button
-    lateinit var buttonDecrementDate : ImageButton
-    lateinit var buttonIncrementDate : ImageButton
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
+    lateinit var saveButton: Button
+    lateinit var buttonDecrementDate: ImageButton
+    lateinit var buttonIncrementDate: ImageButton
     lateinit var editTextObservation: EditText
     lateinit var editTextDate: EditText
     lateinit var observationService: ObservationService
@@ -56,7 +56,7 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
     }
 
     // @require date as dd/MM/yyyy
-    fun setUpDateInfo(date : String){
+    fun setUpDateInfo(date: String) {
         editTextDate.setText(date)
         val observationFromDB = runBlocking { observationService.getObservationByDate(date) }
         Log.d("ProfileFragment", "observationFromDB: ${observationFromDB.toString()}")
@@ -74,16 +74,16 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
             val observation = Observation(dateFormat.parse(dateString)!!, observationText)
 //            Log.d("ProfileFragment", "date from editText: ${Date(editTextDate.text.toString())} + editText.text : ${editTextDate.text.toString()}")
             CoroutineScope(Dispatchers.IO).launch {
-               observationService.addObservation(observation)
+                observationService.addObservation(observation)
             }
         }
 
-        buttonIncrementDate.setOnClickListener{
+        buttonIncrementDate.setOnClickListener {
             val newDate = updateDate(editTextDate.text.toString(), 1)
             editTextDate.setText(newDate)
             setUpDateInfo(newDate)
         }
-        buttonDecrementDate.setOnClickListener{
+        buttonDecrementDate.setOnClickListener {
             val newDate = updateDate(editTextDate.text.toString(), -1)
             editTextDate.setText(newDate)
             setUpDateInfo(newDate)
@@ -109,7 +109,7 @@ class ProfileFragment  : Fragment(R.layout.fragment_profile) {
 
     }
 
-    fun updateDate(dateAsString: String, days : Int) : String{
+    fun updateDate(dateAsString: String, days: Int): String {
         val currentDate = LocalDate.parse(dateAsString, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         val updatedDate = currentDate.plusDays(days.toLong()).format(
             DateTimeFormatter.ofPattern("dd/MM/yyyy")

@@ -13,7 +13,6 @@ import com.apicela.training.adapters.ExerciseAdapter
 import com.apicela.training.interfaces.OnExerciseCheckedChangeListener
 import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
-import com.apicela.training.services.DivisionService
 import com.apicela.training.services.ExerciseService
 import com.apicela.training.utils.Codes
 import com.apicela.training.utils.Codes.Companion.REQUEST_CODE_CREATED
@@ -33,47 +32,58 @@ class AddExerciseActivity : AppCompatActivity(), OnExerciseCheckedChangeListener
     private lateinit var exerciseListMap: Map<String, List<Exercise>>
     private lateinit var division: Division
     private var checkedItems: Int = 0
+    private val exerciseService = ExerciseService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_exercise)
         Log.d("activity", "addExerciseActivity called")
-        val exerciseService = ExerciseService()
+        super.onCreate(savedInstanceState)
+        bindViews()
         val division_id = intent.getStringExtra("division_id")
-        // layouts
-        backButton = findViewById(R.id.back_button)
-        addExerciseToWorkoutButton = findViewById(R.id.add_exercise_to_workout)
+
         CoroutineScope(Dispatchers.IO).launch {
             division = exerciseService.getDivision(division_id)!!
         }
         runBlocking {
-            exerciseListMap = exerciseService.exerciseListToMap() ?: emptyMap()
+            exerciseListMap = exerciseService.exerciseListToMap()
         }
 
-        recyclerView = findViewById(R.id.recyclerView)
-        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, null, exerciseService, this)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = exerciseAdapter
+        setUpRecyclerView()
+        setUpOnClick()
 
+
+    }
+
+    private fun setUpOnClick() {
         backButton.setOnClickListener {
             finish()
         }
-
         addExerciseToWorkoutButton.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 if (division != null) {
                     val checkedItems = exerciseAdapter.getSelectedExercises()
-                    val newListExercises = (division!!.listOfExercises + checkedItems).distinct()
-                    division?.listOfExercises = newListExercises
-                    exerciseService.divisionService.updateDivisionObject(division!!)
+                    val newListExercises = (division.listOfExercises + checkedItems).distinct()
+                    division.listOfExercises = newListExercises
+                    exerciseService.divisionService.updateDivisionObject(division)
                 }
                 val resultIntent = Intent()
-                setResult(Codes.RESULT_CODE_EXERCISE_CREATED, resultIntent)
+                setResult(RESULT_CODE_EXERCISE_CREATED, resultIntent)
                 finish()
             }
 
         }
+    }
 
+    private fun setUpRecyclerView() {
+        exerciseAdapter = ExerciseAdapter(this, exerciseListMap, null, exerciseService, this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = exerciseAdapter
+    }
+
+    private fun bindViews() {
+        setContentView(R.layout.activity_add_exercise)
+        backButton = findViewById(R.id.back_button)
+        addExerciseToWorkoutButton = findViewById(R.id.add_exercise_to_workout)
+        recyclerView = findViewById(R.id.recyclerView)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

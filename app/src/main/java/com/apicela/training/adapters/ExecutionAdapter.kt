@@ -28,7 +28,7 @@ class ExecutionAdapter(
     private val exerciseId: String
 ) :
     RecyclerView.Adapter<ExecutionAdapter.ExecutionViewHolder>() {
-    val executionService = ExecutionService(HomeActivity.DATABASE)
+    val executionService = ExecutionService()
     var executionMap: Map<String, List<Execution>> = executionService.executionListToMap(exerciseId)
     private var isEditing = false
     private val observationService = ObservationService()
@@ -42,10 +42,10 @@ class ExecutionAdapter(
 //        Log.d("Execution", "onBind called position: $position")
         val key = executionMap.keys.elementAt(position)
         holder.date.text = key
-        var observation : Observation?
+        var observation: Observation?
         CoroutineScope(Dispatchers.IO).launch {
-             observation = observationService.getObservationByDate(key)
-            if(observation != null){
+            observation = observationService.getObservationByDate(key)
+            if (observation != null) {
                 holder.observationImage.visibility = View.VISIBLE
                 setOnClickObservation(holder.observationImage, observation!!.observation)
             }
@@ -56,31 +56,41 @@ class ExecutionAdapter(
 
         executions.forEach { execution ->
             val executionView = LayoutInflater.from(context).inflate(R.layout.item_execution, null)
-            val textViewRepetitions = executionView.findViewById<TextView>(R.id.textViewRepetitions)
-            val textViewWeight = executionView.findViewById<TextView>(R.id.textViewWeight)
-            val imageViewMinus = executionView.findViewById<ImageView>(R.id.imageViewMinus)
-            val imageViewEdit = executionView.findViewById<ImageView>(R.id.imageViewEdit)
-            textViewRepetitions.text = "${execution.repetitions}"
-            textViewWeight.text = "${execution.kg}"
-            imageViewMinus.visibility = if (isEditing) View.VISIBLE else View.GONE
-            imageViewEdit.visibility = if (isEditing) View.VISIBLE else View.GONE
-
-            imageViewEdit.setOnClickListener {
-                val dialog = RegisterExecutionDialog(execution.exercise_id, execution.id, context)
-                if (context is FragmentActivity) {
-                    dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
-                    dialog.onDismissListener = {
-                        refreshData(execution.exercise_id)
-                    }
-                }
-            }
-            imageViewMinus.setOnClickListener {
-                runBlocking {
-                    executionService.deleteById(execution.id)
-                    refreshData(execution.exercise_id)
-                }
-            }
+            bindExecutionView(executionView, execution)
             holder.linearLayoutExecutions.addView(executionView)
+        }
+    }
+
+    private fun bindExecutionView(executionView: View, execution: Execution) {
+        val textViewRepetitions = executionView.findViewById<TextView>(R.id.textViewRepetitions)
+        val textViewWeight = executionView.findViewById<TextView>(R.id.textViewWeight)
+        val imageViewMinus = executionView.findViewById<ImageView>(R.id.imageViewMinus)
+        val imageViewEdit = executionView.findViewById<ImageView>(R.id.imageViewEdit)
+
+        textViewRepetitions.text = "${execution.repetitions}"
+        textViewWeight.text = "${execution.kg}"
+
+        imageViewMinus.visibility = if (isEditing) View.VISIBLE else View.GONE
+        imageViewEdit.visibility = if (isEditing) View.VISIBLE else View.GONE
+
+        imageViewEdit.setOnClickListener { showEditDialog(execution) }
+        imageViewMinus.setOnClickListener { deleteExecution(execution) }
+    }
+
+    private fun showEditDialog(execution: Execution) {
+        val dialog = RegisterExecutionDialog(execution.exercise_id, execution.id, context)
+        if (context is FragmentActivity) {
+            dialog.show(context.supportFragmentManager, "RegistrarExercicioDialog")
+            dialog.onDismissListener = {
+                refreshData(execution.exercise_id)
+            }
+        }
+    }
+
+    private fun deleteExecution(execution: Execution) {
+        runBlocking {
+            executionService.deleteById(execution.id)
+            refreshData(execution.exercise_id)
         }
     }
 
@@ -88,18 +98,18 @@ class ExecutionAdapter(
 
     class ExecutionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.date)
-        val observationImage : ImageView = itemView.findViewById(R.id.observation)
+        val observationImage: ImageView = itemView.findViewById(R.id.observation)
         val linearLayoutExecutions: LinearLayout =
             itemView.findViewById(R.id.linearLayoutExecutions)
     }
 
-    fun setOnClickObservation(imageView: ImageView, observationText : String){
-        imageView.setOnClickListener{
+    fun setOnClickObservation(imageView: ImageView, observationText: String) {
+        imageView.setOnClickListener {
             Components.showPopUp(observationText, context)
         }
     }
 
-    fun refreshData(exerciseId : String){
+    fun refreshData(exerciseId: String) {
         executionMap = executionService.executionListToMap(exerciseId)
         notifyDataSetChanged()
     }

@@ -1,6 +1,7 @@
 package com.apicela.training.services
 
 import android.util.Log
+import com.apicela.training.HomeActivity
 import com.apicela.training.data.Database
 import com.apicela.training.models.Execution
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ExecutionService(private val db: Database) {
+class ExecutionService() {
+    private val db: Database = HomeActivity.DATABASE
     val exerciseService: ExerciseService = ExerciseService()
 
     suspend fun addExecutionToDatabase(execution: Execution) {

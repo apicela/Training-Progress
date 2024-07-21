@@ -5,8 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
@@ -28,19 +26,19 @@ class RegisterExecutionDialog(
     private val executionId: String?,
     private val context: Context
 ) : DialogFragment() {
-    val executionService: ExecutionService = ExecutionService(HomeActivity.DATABASE)
-    lateinit var editTextKG : EditText
-    lateinit var editTextRepeticoes : EditText
-    lateinit var editTextDate : EditText
+    val executionService: ExecutionService = ExecutionService()
+    lateinit var editTextKG: EditText
+    lateinit var editTextRepeticoes: EditText
+    lateinit var editTextDate: EditText
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
         val view = inflater.inflate(R.layout.register_exercise, null)
         builder.setView(view)
-         editTextKG = view.findViewById<EditText>(R.id.editTextKG)
+        editTextKG = view.findViewById<EditText>(R.id.editTextKG)
         editTextDate = view.findViewById<EditText>(R.id.editTextDate)
-         editTextRepeticoes = view.findViewById<EditText>(R.id.editTextRepeticoes)
+        editTextRepeticoes = view.findViewById<EditText>(R.id.editTextRepeticoes)
         val buttonConfirmar = view.findViewById<Button>(R.id.buttonConfirmar)
         val buttonCancelar = view.findViewById<Button>(R.id.buttonCancelar)
 
@@ -77,7 +75,7 @@ class RegisterExecutionDialog(
             val date = Components.formatDateWithCurrentTime(editTextAsDate)
             if (executionId == null) {
                 val execution = Execution(repetitions, kg, exerciseId, date)
-                runBlocking{ executionService.addExecutionToDatabase(execution) }
+                runBlocking { executionService.addExecutionToDatabase(execution) }
             } else {
                 val execution = Execution(executionId, repetitions, kg, exerciseId, date)
                 runBlocking {
@@ -101,9 +99,9 @@ class RegisterExecutionDialog(
 
     var onDismissListener: (() -> Unit)? = null
 
-    fun setOnClickClearInputField(field : Any){
-        if(field is EditText){
-            field.setOnClickListener{
+    fun setOnClickClearInputField(field: Any) {
+        if (field is EditText) {
+            field.setOnClickListener {
                 field.setText("")
             }
             // focusable
@@ -114,6 +112,7 @@ class RegisterExecutionDialog(
 //            }
         }
     }
+
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         onDismissListener?.invoke()

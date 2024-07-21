@@ -26,7 +26,7 @@ class DivisionAdapter(
     private val context: Context,
     private val workoutId: String
 ) : RecyclerView.Adapter<DivisionAdapter.MyViewHolder>() {
-    val workoutService = WorkoutService(HomeActivity.DATABASE)
+    val workoutService = WorkoutService()
     private var isEditing = false
     val workout = runBlocking { workoutService.getWorkoutById(workoutId) }
     var list = workout.listOfDivision as MutableList<Division>
@@ -44,6 +44,12 @@ class DivisionAdapter(
         val editButton = itemView.findViewById<ImageView>(R.id.imageViewEdit)
     }
 
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val division = list[position]
+        setUpViews(holder, division, position)
+        setVisibility(holder)
+        setOnClick(holder, division)
+    }
     fun refreshData() {
         notifyDataSetChanged()
     }
@@ -57,16 +63,19 @@ class DivisionAdapter(
         return list.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val division = list.get(position)
+
+
+    private fun setUpViews(holder: DivisionAdapter.MyViewHolder, division: Division, position: Int) {
+        holder.name.text = division.name
+        ImageHelper.setImage(context, holder.image, "number_${(position + 1)}", false)
+    }
+
+    private fun setOnClick(holder: MyViewHolder, division: Division) {
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ExerciseActivity::class.java)
             intent.putExtra("division_id", division.id)
             holder.itemView.context.startActivity(intent)
         }
-        holder.name.text = division.name
-        holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
-        holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
 
         holder.minusButton.setOnClickListener {
             list.remove(division)
@@ -96,6 +105,10 @@ class DivisionAdapter(
                 }
             }
         }
-        ImageHelper.setImage(context, holder.image, "number_${(position+1)}", false)
+    }
+
+    private fun setVisibility(holder: MyViewHolder) {
+        holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
+        holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
     }
 }

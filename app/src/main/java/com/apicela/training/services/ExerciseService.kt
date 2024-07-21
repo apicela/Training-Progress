@@ -28,6 +28,15 @@ class ExerciseService() {
         }
     }
 
+    suspend fun notifyListExercisesFromDivisionChanged(
+        divisionId: String,
+        listOfExercises: List<Exercise>
+    ) {
+        withContext(Dispatchers.IO) {
+            divisionService.updateListOfExercises(divisionId, listOfExercises)
+        }
+    }
+
     suspend fun addExerciseToDatabase(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             db.exerciseDao().insert(exercise)
@@ -64,14 +73,14 @@ class ExerciseService() {
 
     public fun getExerciseListFromDivision(divisionId: String?): List<Exercise> {
         val division = getDivision(divisionId)
-        return if(division != null && division.listOfExercises.isNotEmpty() ){
+        return if (division != null && division.listOfExercises.isNotEmpty()) {
             division.listOfExercises
         } else listOf()
     }
 
-     fun getDivision(divisionId : String?): Division? {
+    fun getDivision(divisionId: String?): Division? {
         return if (divisionId != null) {
-            runBlocking { divisionService.getDivisionById(divisionId)}
+            runBlocking { divisionService.getDivisionById(divisionId) }
         } else null
     }
 

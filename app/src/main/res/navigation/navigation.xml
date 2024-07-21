@@ -15,11 +15,11 @@
         android:name="com.apicela.training.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-        <activity
-            android:id="@+id/exercisesActivity"
-            android:name="com.apicela.training.ExerciseActivity"
-            android:label="calendar_activity"
-            tools:layout="@layout/activity_exercise" />
+    <activity
+        android:id="@+id/exercisesActivity"
+        android:name="com.apicela.training.ExerciseActivity"
+        android:label="calendar_activity"
+        tools:layout="@layout/activity_exercise" />
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.apicela.training.CalendarFragment"

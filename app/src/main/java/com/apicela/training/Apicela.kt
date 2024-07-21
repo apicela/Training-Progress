@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Apicela : Application() {
-    lateinit var exerciseService : ExerciseService
+    lateinit var exerciseService: ExerciseService
 
     override fun onCreate() {
         super.onCreate()
@@ -20,11 +20,11 @@ class Apicela : Application() {
 
     }
 
-    fun setUpFirstStart(){
+    fun setUpFirstStart() {
         CoroutineScope(Dispatchers.IO).launch {
             val sharedPreferencesHelper = SharedPreferencesHelper()
             sharedPreferencesHelper.initializeOnce(applicationContext)
-            val listExercises =  exerciseService.getAllExercises()
+            val listExercises = exerciseService.getAllExercises()
             val itemsToAdd =
                 Exercise.listaExercises.filter { obj -> listExercises.none { it.name == obj.name } }
 

@@ -29,34 +29,33 @@ class ExecutionActivity : AppCompatActivity() {
     private lateinit var edit: Button
     private lateinit var nameText: TextView
     private lateinit var imageExercise: ShapeableImageView
+    private lateinit var exerciseId : String
+    private lateinit var exerciseImage : String
+    var editMode = true;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("activity", "execution started")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_execution)
-        backButton = findViewById(R.id.back_button)
-        edit = findViewById(R.id.edit)
-        recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
-        plusButton = findViewById(R.id.plus_button)
-        nameText = findViewById(R.id.name)
-        imageExercise = findViewById(R.id.image)
+        bindView()
+        setUpViews()
+        setUpRecyclerView()
+        setUpOnClick()
+    }
 
-        var editMode = true;
-        val exercise_id = intent.getStringExtra("exercise_id") as String
+    private fun setUpViews() {
+        exerciseId = intent.getStringExtra("exercise_id") as String
         nameText.text = intent.getStringExtra("exercise_name") as String
-        val exercise_image = intent.getStringExtra("exercise_image") as String
+        exerciseImage  = intent.getStringExtra("exercise_image") as String
+        ImageHelper.setImage(this, imageExercise, exerciseImage, false)
+    }
 
-        ImageHelper.setImage(this, imageExercise, exercise_image, false)
-
-        executionAdapter = ExecutionAdapter(this, exercise_id)
-        recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
-        recyclerViewExecutions.adapter = executionAdapter
+    private fun setUpOnClick() {
         plusButton.setOnClickListener {
-            val dialog = RegisterExecutionDialog(exercise_id, null, this)
+            val dialog = RegisterExecutionDialog(exerciseId, null, this)
             dialog.show(supportFragmentManager, "RegistrarExercicioDialog")
             dialog.onDismissListener = {
-                executionAdapter.refreshData(exercise_id)
+                executionAdapter.refreshData(exerciseId)
             }
         }
         backButton.setOnClickListener {
@@ -66,6 +65,22 @@ class ExecutionActivity : AppCompatActivity() {
             executionAdapter.setEditing(editMode)
             editMode = !editMode
         }
+    }
+
+    private fun setUpRecyclerView() {
+        executionAdapter = ExecutionAdapter(this, exerciseId)
+        recyclerViewExecutions.layoutManager = LinearLayoutManager(this)
+        recyclerViewExecutions.adapter = executionAdapter
+    }
+
+    private fun bindView() {
+        setContentView(R.layout.activity_execution)
+        backButton = findViewById(R.id.back_button)
+        edit = findViewById(R.id.edit)
+        recyclerViewExecutions = findViewById(R.id.recyclerViewExecutions)
+        plusButton = findViewById(R.id.plus_button)
+        nameText = findViewById(R.id.name)
+        imageExercise = findViewById(R.id.image)
     }
 }
 

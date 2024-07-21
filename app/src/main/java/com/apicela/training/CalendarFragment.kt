@@ -17,13 +17,14 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
     private lateinit var calendarView: CalendarView
     private lateinit var listView: ListView
-    private lateinit var adapter : ArrayAdapter<String>
-    private val executionService: ExecutionService = ExecutionService(HomeActivity.DATABASE)
+    private lateinit var adapter: ArrayAdapter<String>
+    private val executionService: ExecutionService = ExecutionService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +61,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         listView.adapter = adapter
     }
 
-    private fun linkViewFields(v : View) {
+    private fun linkViewFields(v: View) {
         calendarView = v.findViewById(R.id.calendarView)
         listView = v.findViewById(R.id.listView)
     }

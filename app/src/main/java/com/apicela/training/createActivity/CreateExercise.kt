@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.apicela.training.HomeActivity
 import com.apicela.training.R
 import com.apicela.training.models.Exercise
 import com.apicela.training.models.Muscle

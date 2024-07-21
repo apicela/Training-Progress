@@ -1,11 +1,13 @@
 package com.apicela.training.services
 
+import com.apicela.training.HomeActivity
 import com.apicela.training.data.Database
 import com.apicela.training.models.Workout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WorkoutService(private val db: Database) {
+class WorkoutService() {
+    val db = HomeActivity.DATABASE
     val divisionService: DivisionService = DivisionService()
 
     suspend fun addWorkout(workoutName: String, descricao: String, image: String) {

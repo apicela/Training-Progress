@@ -1,7 +1,6 @@
 package com.apicela.training.preferences
 
 import android.content.Context
-import com.apicela.training.data.Database
 import com.apicela.training.models.Exercise
 import com.apicela.training.services.ExerciseService
 import kotlinx.coroutines.Dispatchers

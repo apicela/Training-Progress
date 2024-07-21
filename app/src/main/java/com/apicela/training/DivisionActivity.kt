@@ -21,30 +21,23 @@ class DivisionActivity : AppCompatActivity() {
     private lateinit var editButton: Button
     private lateinit var plusButton: ImageButton
     private lateinit var descriptionText: TextView
-    private lateinit var recyclerView: RecyclerView // Add this line
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DivisionAdapter
+
+    private val workoutService : WorkoutService = WorkoutService()
+    private var editMode = false;
+    private var workoutId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("activity", "division started")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_division)
-        val workoutService = WorkoutService(HomeActivity.DATABASE)
-        plusButton = findViewById(R.id.plus_button)
-        backButton = findViewById(R.id.back_button)
-        editButton = findViewById(R.id.edit)
-        var editMode = false;
+        bindViews()
+        initializeVariables()
+        setUpRecyclerView()
+        setUpOnClick()
+    }
 
-        descriptionText = findViewById(R.id.description_text)
-        val workoutId = intent.getStringExtra("workout_id")
-        val workoutDescription =
-            runBlocking { workoutService.getWorkoutById(workoutId!!).description }
-        descriptionText.text = workoutDescription
-
-        recyclerView = findViewById(R.id.recyclerView)
-        adapter = DivisionAdapter(this, workoutId!!)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-
+    private fun setUpOnClick() {
         backButton.setOnClickListener {
             finish()
         }
@@ -61,6 +54,29 @@ class DivisionActivity : AppCompatActivity() {
             intent.putExtra("workout_id", workoutId)
             startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
         }
+    }
+
+    private fun initializeVariables() {
+        workoutId = intent.getStringExtra("workout_id")
+        val workoutDescription =
+            runBlocking { workoutService.getWorkoutById(workoutId!!).description }
+        descriptionText.text = workoutDescription
+
+    }
+
+    private fun setUpRecyclerView() {
+        adapter = DivisionAdapter(this, workoutId!!)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+    }
+
+    private fun bindViews() {
+        setContentView(R.layout.activity_division)
+        plusButton = findViewById(R.id.plus_button)
+        backButton = findViewById(R.id.back_button)
+        editButton = findViewById(R.id.edit)
+        descriptionText = findViewById(R.id.description_text)
+        recyclerView = findViewById(R.id.recyclerView)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

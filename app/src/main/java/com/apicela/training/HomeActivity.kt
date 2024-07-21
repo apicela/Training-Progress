@@ -17,8 +17,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.navigation_bar)
-        val navController = Navigation.findNavController(this,R.id.frag_host)
-        NavigationUI.setupWithNavController(bottomNavigation,navController)
+        val navController = Navigation.findNavController(this, R.id.frag_host)
+        NavigationUI.setupWithNavController(bottomNavigation, navController)
 
 
     }

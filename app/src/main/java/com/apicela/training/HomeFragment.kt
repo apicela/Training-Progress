@@ -17,11 +17,11 @@ import com.apicela.training.utils.Codes
 import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    lateinit var newWorkoutButton : Button
+    lateinit var newWorkoutButton: Button
     lateinit var workoutAdapter: WorkoutAdapter
     lateinit var recyclerView: RecyclerView // Add this line
-    lateinit var workoutService : WorkoutService
-    lateinit var listOfWorkouts : List<Workout>
+    lateinit var listOfWorkouts: List<Workout>
+    private val workoutService: WorkoutService = WorkoutService()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,13 +34,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         linkViewFields(view)
         return view;
     }
 
     private fun setUpVariables() {
-        workoutService = WorkoutService(HomeActivity.DATABASE)
         listOfWorkouts = runBlocking { workoutService.getAllWorkouts() }
         workoutAdapter = WorkoutAdapter(requireContext(), listOfWorkouts, workoutService)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -51,10 +50,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         newWorkoutButton.setOnClickListener {
             val intent = Intent(requireContext(), CreateWorkout::class.java)
             startActivityForResult(intent, Codes.REQUEST_CODE_CREATED)
-        }    }
+        }
+    }
 
 
-    private fun linkViewFields(v : View) {
+    private fun linkViewFields(v: View) {
         newWorkoutButton = v.findViewById(R.id.buttonNewWorkout)
         recyclerView = v.findViewById(R.id.recyclerView)
     }

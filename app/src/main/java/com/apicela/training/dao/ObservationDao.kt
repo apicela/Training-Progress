@@ -16,7 +16,7 @@ interface ObservationDao {
     fun getObservationByDate(date: Long): Observation?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(observation : Observation)
+    fun insert(observation: Observation)
 
     @Update
     fun update(observation: Observation)

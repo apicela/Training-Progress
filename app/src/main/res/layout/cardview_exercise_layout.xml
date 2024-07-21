@@ -7,8 +7,8 @@
     android:layout_height="wrap_content"
     android:background="@color/light_black"
     android:orientation="vertical"
-    tools:context=".ExerciseActivity"
-    android:theme="@style/Theme.ApicelaTraining">
+    android:theme="@style/Theme.ApicelaTraining"
+    tools:context=".ExerciseActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/cardView">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewExercises"
             android:layout_width="match_parent"

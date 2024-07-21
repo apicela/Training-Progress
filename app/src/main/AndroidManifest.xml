@@ -39,10 +39,10 @@
         <activity
             android:name=".ExerciseActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".CalendarFragment"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.Training" />-->
+        <!--        <activity-->
+        <!--            android:name=".CalendarFragment"-->
+        <!--            android:exported="false"-->
+        <!--            android:theme="@style/Theme.Training" />-->
         <activity
             android:name=".HomeActivity"
             android:exported="true"
