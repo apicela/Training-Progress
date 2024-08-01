@@ -1,14 +1,17 @@
 package com.apicela.training.services
 
 import android.util.Log
+import com.apicela.training.ui.activitys.HomeActivity
 import com.apicela.training.data.Database
+import com.apicela.training.models.Division
 import com.apicela.training.models.Exercise
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class ExerciseService(private val db: Database) {
-    val divisionService = DivisionService(db)
+class ExerciseService() {
+    private val db: Database = HomeActivity.DATABASE
+    val divisionService = DivisionService()
 
 
     suspend fun removeExerciseFromDivision(division_id: String, exercise_id: String) {
@@ -22,6 +25,15 @@ class ExerciseService(private val db: Database) {
     suspend fun deleteExerciseById(id: String) {
         withContext(Dispatchers.IO) {
             db.exerciseDao().deleteById(id)
+        }
+    }
+
+    suspend fun notifyListExercisesFromDivisionChanged(
+        divisionId: String,
+        listOfExercises: List<Exercise>
+    ) {
+        withContext(Dispatchers.IO) {
+            divisionService.updateListOfExercises(divisionId, listOfExercises)
         }
     }
 
@@ -44,7 +56,7 @@ class ExerciseService(private val db: Database) {
         }
     }
 
-    suspend fun exerciseListToMap(division_id: String? = null): Map<String, List<Exercise>>? {
+    suspend fun exerciseListToMap(division_id: String? = null): Map<String, List<Exercise>> {
         val exerciseList = if (division_id == null) {
             runBlocking { getAllExercises() }
         } else {
@@ -56,9 +68,21 @@ class ExerciseService(private val db: Database) {
                 exercise.muscleType.toString()
             }
         }
-        return null
+        return emptyMap()
     }
 
+    public fun getExerciseListFromDivision(divisionId: String?): List<Exercise> {
+        val division = getDivision(divisionId)
+        return if (division != null && division.listOfExercises.isNotEmpty()) {
+            division.listOfExercises
+        } else listOf()
+    }
+
+    fun getDivision(divisionId: String?): Division? {
+        return if (divisionId != null) {
+            runBlocking { divisionService.getDivisionById(divisionId) }
+        } else null
+    }
 
 //    fun addExerciseToDivision(exerciseName: String, image: String, muscleType: Muscle) {
 //        val exerciseItem = Exercise(exerciseName, image, muscleType)

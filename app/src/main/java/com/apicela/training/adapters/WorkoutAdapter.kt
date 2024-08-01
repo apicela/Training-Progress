@@ -2,16 +2,15 @@ package com.apicela.training.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.DivisionActivity
+import com.apicela.training.ui.activitys.DivisionActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.DeleteItemDialog
+import com.apicela.training.ui.dialogs.DeleteItemDialog
 import com.apicela.training.models.Workout
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.ui.utils.ImageHelper
@@ -30,13 +29,12 @@ class WorkoutAdapter(
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var workout_name = itemView.findViewById<TextView>(R.id.workout_name)
-        var workout_image = itemView.findViewById<CircleImageView>(R.id.workout_image)
+        var workoutName = itemView.findViewById<TextView>(R.id.workout_name)
+        var workoutImage = itemView.findViewById<CircleImageView>(R.id.workout_image)
     }
 
-    fun updateData() {
+    fun refreshData() {
         listWorkouts = runBlocking { workoutService.getAllWorkouts() }
-        Log.d("adapter", "called updateData")
         notifyDataSetChanged()
     }
 
@@ -46,6 +44,15 @@ class WorkoutAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val workout = listWorkouts.get(position)
+        setOnClick(holder, workout)
+        setUpViews(holder, workout)
+    }
+
+    private fun setUpViews(holder: MyViewHolder, workout : Workout) {
+        holder.workoutName.text = workout.name
+        ImageHelper.setImage(context, holder.workoutImage, workout.image, false)
+    }
+    private fun setOnClick(holder: MyViewHolder, workout : Workout) {
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DivisionActivity::class.java)
             intent.putExtra("workout_id", (workout.id))
@@ -61,12 +68,10 @@ class WorkoutAdapter(
                     dialog.confirmed // Verifica se o diálogo foi cancelado (clique em "Cancelar")
                 if (confirmDelete) {
                     runBlocking { workoutService.deleteById(workout.id) }
-                    updateData()
+                    refreshData()
                 }
             }
             true
         }
-        holder.workout_name.text = workout.name
-        ImageHelper.setImage(context, holder.workout_image, workout.image, false)
     }
 }

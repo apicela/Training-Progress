@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/light_black"
     android:orientation="vertical"
-    android:theme="@style/Theme.Training"
-    tools:context=".createActivity.CreateExercise">
+    android:theme="@style/Theme.ApicelaTraining"
+    tools:context=".ui.activitys.CreateExercise">
 
     <LinearLayout
         android:id="@+id/backLinearLayout"

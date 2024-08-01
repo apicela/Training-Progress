@@ -1,6 +1,7 @@
 package com.apicela.training.services
 
 import android.util.Log
+import com.apicela.training.ui.activitys.HomeActivity
 import com.apicela.training.data.Database
 import com.apicela.training.models.Execution
 import kotlinx.coroutines.Dispatchers
@@ -10,8 +11,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ExecutionService(private val db: Database) {
-    val exerciseService: ExerciseService = ExerciseService(db)
+class ExecutionService() {
+    private val db: Database = HomeActivity.DATABASE
+    val exerciseService: ExerciseService = ExerciseService()
 
     suspend fun addExecutionToDatabase(execution: Execution) {
         withContext(Dispatchers.IO) {
@@ -33,12 +35,11 @@ class ExecutionService(private val db: Database) {
     }
 
     suspend fun findExecutionsListByDate(date: Date): List<Execution> {
-        date.hours = 0
-        date.minutes = 0
-        date.seconds = 0
-        val timestamp = date.time - (date.time % 1000)
+        val format = SimpleDateFormat("dd/MM/yyyy")
+        val formattedDate = format.format(date)
+        Log.d("Execution", "date: ${formattedDate}")
         return withContext(Dispatchers.IO) {
-            db.executionDao().getAllExecutionFromDate(timestamp)
+            db.executionDao().getAllExecutionFromDate(formattedDate.toString())
         }
     }
 
@@ -79,7 +80,6 @@ class ExecutionService(private val db: Database) {
     }
 
     suspend fun getLastInsertedExecution(id: String): Execution? {
-        Log.d("execution", "get last Inserted ")
         return withContext(Dispatchers.IO) {
             db.executionDao().getLastInsertedExecution(id)
         }

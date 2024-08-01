@@ -16,8 +16,7 @@ object DataManager {
                         Database::class.java,
                         "apicela_training"
                     )
-                        // Habilitar migração automática
-                        .fallbackToDestructiveMigration()
+                        .addMigrations(MIGRATION_3_4) // Adiciona a migração
                         .build()
                 }
             }

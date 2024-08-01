@@ -9,10 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.apicela.training.ExerciseActivity
-import com.apicela.training.HomeActivity
+import com.apicela.training.ui.activitys.ExerciseActivity
 import com.apicela.training.R
-import com.apicela.training.dialog.EditDivisionDialog
+import com.apicela.training.ui.dialogs.EditDivisionDialog
 import com.apicela.training.models.Division
 import com.apicela.training.services.WorkoutService
 import com.apicela.training.ui.utils.ImageHelper
@@ -26,7 +25,7 @@ class DivisionAdapter(
     private val context: Context,
     private val workoutId: String
 ) : RecyclerView.Adapter<DivisionAdapter.MyViewHolder>() {
-    val workoutService = WorkoutService(HomeActivity.database)
+    val workoutService = WorkoutService()
     private var isEditing = false
     val workout = runBlocking { workoutService.getWorkoutById(workoutId) }
     var list = workout.listOfDivision as MutableList<Division>
@@ -44,7 +43,13 @@ class DivisionAdapter(
         val editButton = itemView.findViewById<ImageView>(R.id.imageViewEdit)
     }
 
-    fun updateData() {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val division = list[position]
+        setUpViews(holder, division, position)
+        setVisibility(holder)
+        setOnClick(holder, division)
+    }
+    fun refreshData() {
         notifyDataSetChanged()
     }
 
@@ -57,20 +62,23 @@ class DivisionAdapter(
         return list.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val division = list.get(position)
+
+
+    private fun setUpViews(holder: DivisionAdapter.MyViewHolder, division: Division, position: Int) {
+        holder.name.text = division.name
+        ImageHelper.setImage(context, holder.image, "number_${(position + 1)}", false)
+    }
+
+    private fun setOnClick(holder: MyViewHolder, division: Division) {
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ExerciseActivity::class.java)
             intent.putExtra("division_id", division.id)
             holder.itemView.context.startActivity(intent)
         }
-        holder.name.text = division.name
-        holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
-        holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
 
         holder.minusButton.setOnClickListener {
             list.remove(division)
-            updateData()
+            refreshData()
             CoroutineScope(Dispatchers.Main).launch {
                 workoutService.divisionService.deleteDivisionById(division.id)
                 workoutService.updateWorkout(workout)
@@ -88,7 +96,7 @@ class DivisionAdapter(
                 if (confirmDelete) {
                     division.name = dialog.divisionName
                     division.image = dialog.image
-                    updateData()
+                    refreshData()
                     CoroutineScope(Dispatchers.IO).launch {
                         workoutService.divisionService.updateDivisionObject(division)
                         workoutService.updateWorkout(workout)
@@ -96,6 +104,10 @@ class DivisionAdapter(
                 }
             }
         }
-        ImageHelper.setImage(context, holder.image, division.image, false)
+    }
+
+    private fun setVisibility(holder: MyViewHolder) {
+        holder.minusButton.visibility = if (isEditing) View.VISIBLE else View.GONE
+        holder.editButton.visibility = if (isEditing) View.VISIBLE else View.GONE
     }
 }

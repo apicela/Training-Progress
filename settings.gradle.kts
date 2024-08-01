@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Training"
+rootProject.name = "ApicelaTraining"
 include(":app")
  

@@ -1,12 +1,13 @@
 package com.apicela.training.services
 
-import com.apicela.training.data.Database
+import com.apicela.training.ui.activitys.HomeActivity
 import com.apicela.training.models.Workout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WorkoutService(private val db: Database) {
-    val divisionService: DivisionService = DivisionService(db)
+class WorkoutService() {
+    val db = HomeActivity.DATABASE
+    val divisionService: DivisionService = DivisionService()
 
     suspend fun addWorkout(workoutName: String, descricao: String, image: String) {
         val workoutItem = Workout()
@@ -17,9 +18,9 @@ class WorkoutService(private val db: Database) {
         workoutItem.description = descricao
         workoutItem.image = image
         workoutItem.listOfDivision = listOf(
-            divisionService.createDivision(workoutItem.id, "A", "division_a"),
-            divisionService.createDivision(workoutItem.id, "B", "division_b"),
-            divisionService.createDivision(workoutItem.id, "C", "division_c"),
+            divisionService.createDivision(workoutItem.id, "A", "number_1"),
+            divisionService.createDivision(workoutItem.id, "B", "number_2"),
+            divisionService.createDivision(workoutItem.id, "C", "number_3"),
         )
 
         withContext(Dispatchers.IO) {
